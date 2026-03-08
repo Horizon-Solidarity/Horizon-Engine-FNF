@@ -1,0 +1,4 @@
+{
+    // "music": {"change": true or false, "musicPath": 置き換えるメニュー音楽のパス}
+    "music": {"change": false}
+}

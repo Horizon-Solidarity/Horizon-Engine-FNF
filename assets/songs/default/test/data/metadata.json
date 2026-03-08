@@ -1,0 +1,36 @@
+{
+    "version": "0.0.1",
+    "songName": "Test",
+    "songStuff": {"bpm": 160, "beat": [4, 4]},
+    "contributor": {
+        "music": "Unknown",
+        "chart": "unknown",
+        "art": "Phantom Arcade, Moawling",
+        "code": "Unknown"
+    },
+    "playData": {
+        "difficulties": ["normal"],
+        "variations": [],
+        "characters": {
+            "opponent": {
+                "id": "bf-pixel"
+            },
+            "center": {
+                "id": "gf"
+            },
+            "player": {
+                "id": "bf"
+            }
+        },
+        "audio": {
+            "splitVocals": false
+        },
+        "stage": "mainStage",
+        "songStartCamera": {
+            "zoom": 1.1,
+            "focus": "player"
+        },
+        "noteStyle": "funkin"
+    },
+    "generatedBy": "Youbadao (by hand)"
+}

@@ -1,0 +1,33 @@
+{
+    "modName": "Friday Night Funkin'",
+    "description": "A rhythm game made with HaxeFlixel. it's Base Game Port for Horizon Engine",
+    "iconPath": "",
+    "headerPath": "",
+    "contributor": [
+        {
+            "name": "Youbadao",
+            "about": "Porter",
+            "role": "Port work"
+        }
+    ],
+    "warningsStartSetting": {
+        "settingStateVisible": false,
+        "flashing": true,
+        "lowQuality": false,
+        "richPresence": false
+    },
+    "mod_version": "0.8.3",
+    "global": false,
+    "apiChanger": {
+        "windowTitle": "Friday Noght Funkin'",
+        "discordClientID": "",
+        "iconFilePath": ""
+    },
+
+    "dependencies": [
+        {"": "", "optional": false}
+    ],
+
+    "api_version": "0.0.1",
+    "license": ""
+}

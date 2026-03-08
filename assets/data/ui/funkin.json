@@ -1,0 +1,71 @@
+{
+    "name": "Funkin'",
+    "folderPath": "funkin",
+    "author": "PhantomArcade",
+    "color": {"enabled": false, "RGB": [null, null, null]},
+    "fallback": null,
+    "assets": {
+        "note": {
+            "assetPath": "notes/notes",
+            "scale": 0.7,
+            "data": {
+                "left": {"prefix": "noteLeft"},
+                "down": {"prefix": "noteDown"},
+                "up": {"prefix": "noteUp"},
+                "right": {"prefix": "noteRight"}
+            }
+        },
+        "noteStrumline": {
+            "assetPath": "notes/noteStrumline",
+            "scale": 0.7,
+            "offsets": [0, 0],
+            "data": {
+                "leftStatic": { "prefix": "staticLeft0" },
+                "leftPress": { "prefix": "pressLeft0" },
+                "leftConfirm": { "prefix": "confirmLeft0" },
+                "leftConfirmHold": { "prefix": "confirmLeft0" },
+                "downStatic": { "prefix": "staticDown0" },
+                "downPress": { "prefix": "pressDown0" },
+                "downConfirm": { "prefix": "confirmDown0" },
+                "downConfirmHold": { "prefix": "confirmDown0" },
+                "upStatic": { "prefix": "staticUp0" },
+                "upPress": { "prefix": "pressUp0" },
+                "upConfirm": { "prefix": "confirmUp0" },
+                "upConfirmHold": { "prefix": "confirmUp0" },
+                "rightStatic": { "prefix": "staticRight0" },
+                "rightPress": { "prefix": "pressRight0" },
+                "rightConfirm": { "prefix": "confirmRight0" },
+                "rightConfirmHold": { "prefix": "confirmRight0" }
+            }
+        },
+        "holdNote": {
+            "assetPath": "notes/NOTE_hold_assets"
+        },
+        "noteSplash": {
+            "assetPath": "shared:noteSplashes",
+            "alpha": 0.8,
+            "offsets": [25, -5],
+            "data": {
+                "enabled": true,
+                "leftSplashes": [
+                  { "prefix": "note impact 1 purple0" },
+                  { "prefix": "note impact 2 purple0" }
+                ],
+                "rightSplashes": [
+                  { "prefix": "note impact 1 red0" },
+                  { "prefix": "note impact 2 red0" }
+                ],
+                "upSplashes": [
+                  { "prefix": "note impact 1 green0" },
+                  { "prefix": "note impact 2 green0" }
+                ],
+                "downSplashes": [
+                  { "prefix": "note impact 1  blue0" },
+                  { "prefix": "note impact 2 blue0" }
+                ]
+            }
+        },
+        "holdNoteCover": {}
+    },
+    "generatedBy": "Youbadao (by hand)"
+}

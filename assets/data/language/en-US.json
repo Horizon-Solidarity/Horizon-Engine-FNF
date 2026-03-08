@@ -1,0 +1,28 @@
+{
+    "name": "English (United States of America)",
+    "fontsEnabled": false,
+    "gameplay": {
+        "scoreText": "Score: {1} | Misses: {2} | Rating: {3}",
+        "scoreText_missCount": "Score: {1} | Misses: {2} / {3} | Rating: {4}",
+        "botPlay": "BOTPLAY",
+    
+        "rating_suck": "You Suck!!!",
+        "rating_shit": "Shit",
+        "rating_bad": "Bad",
+        "rating_bruh": "Bruh",
+        "rating_meh": "Meh",
+        "rating_nice": "Nice",
+        "rating_good": "Good",
+        "rating_great": "Great",
+        "rating_sick": "Sick!",
+        "rating_perfect": "Perfect!!"
+    },
+    "dialogues": {
+        "dialogue_skip": "Press BACK to Skip"
+    },
+    "pause": {
+        "resume": "Resume",
+        "restart": "Restart Song",
+        "leave_charting_mode": "Charting Mode"
+    }
+}

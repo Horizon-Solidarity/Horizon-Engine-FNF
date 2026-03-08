@@ -1,0 +1,88 @@
+{
+    "songs": {
+        "scrollSpeed": 1.6,
+        "voicesPlaying": true,
+        "events": {},
+        "notes": [
+            {"TIME": 12800, "ID": 0, "LENGTH": 0, "DATA": ""},
+            {"TIME": 13200, "ID": 1, "LENGTH": 0, "DATA": ""},
+            {"TIME": 13600, "ID": 2, "LENGTH": 0, "DATA": ""},
+            {"TIME": 14000, "ID": 3, "LENGTH": 0, "DATA": ""},
+
+            {"TIME": 14400, "ID": 4, "LENGTH": 0, "DATA": ""},
+            {"TIME": 14800, "ID": 5, "LENGTH": 0, "DATA": ""},
+            {"TIME": 15200, "ID": 6, "LENGTH": 0, "DATA": ""},
+            {"TIME": 15600, "ID": 7, "LENGTH": 0, "DATA": ""},
+            
+            {"TIME": 16000, "ID": 0, "LENGTH": 0, "DATA": ""},
+            {"TIME": 16200, "ID": 0, "LENGTH": 0, "DATA": ""},
+            {"TIME": 16400, "ID": 1, "LENGTH": 0, "DATA": ""},
+            {"TIME": 16600, "ID": 1, "LENGTH": 0, "DATA": ""},
+            {"TIME": 16800, "ID": 2, "LENGTH": 0, "DATA": ""},
+            {"TIME": 17000, "ID": 2, "LENGTH": 0, "DATA": ""},
+            {"TIME": 17200, "ID": 3, "LENGTH": 0, "DATA": ""},
+            {"TIME": 17400, "ID": 3, "LENGTH": 0, "DATA": ""},
+            
+            {"TIME": 17600, "ID": 5, "LENGTH": 0, "DATA": ""},
+            {"TIME": 17800, "ID": 5, "LENGTH": 0, "DATA": ""},
+            {"TIME": 18000, "ID": 6, "LENGTH": 0, "DATA": ""},
+            {"TIME": 18200, "ID": 6, "LENGTH": 0, "DATA": ""},
+            {"TIME": 18400, "ID": 7, "LENGTH": 0, "DATA": ""},
+            {"TIME": 18600, "ID": 7, "LENGTH": 0, "DATA": ""},
+            {"TIME": 18800, "ID": 8, "LENGTH": 0, "DATA": ""},
+            {"TIME": 19000, "ID": 8, "LENGTH": 0, "DATA": ""},
+            
+            {"TIME": 19200, "ID": 0, "LENGTH": 300, "DATA": ""},
+            {"TIME": 19600, "ID": 1, "LENGTH": 300, "DATA": ""},
+            {"TIME": 20000, "ID": 2, "LENGTH": 300, "DATA": ""},
+            {"TIME": 20400, "ID": 3, "LENGTH": 300, "DATA": ""},
+            
+            {"TIME": 20800, "ID": 4, "LENGTH": 300, "DATA": ""},
+            {"TIME": 21200, "ID": 5, "LENGTH": 300, "DATA": ""},
+            {"TIME": 21600, "ID": 6, "LENGTH": 300, "DATA": ""},
+            {"TIME": 22000, "ID": 7, "LENGTH": 300, "DATA": ""},
+            
+            {"TIME": 22400, "ID": 0, "LENGTH": 700, "DATA": ""},
+            {"TIME": 22800, "ID": 1, "LENGTH": 300, "DATA": ""},
+            {"TIME": 23200, "ID": 2, "LENGTH": 700, "DATA": ""},
+            {"TIME": 23600, "ID": 3, "LENGTH": 300, "DATA": ""},
+            
+            {"TIME": 24000, "ID": 4, "LENGTH": 700, "DATA": ""},
+            {"TIME": 24400, "ID": 5, "LENGTH": 300, "DATA": ""},
+            {"TIME": 24800, "ID": 6, "LENGTH": 700, "DATA": ""},
+            {"TIME": 25200, "ID": 7, "LENGTH": 300, "DATA": ""},
+            
+            {"TIME": 25600, "ID": 0, "LENGTH": 700, "DATA": ""},
+            {"TIME": 25600, "ID": 1, "LENGTH": 300, "DATA": ""},
+            {"TIME": 26400, "ID": 3, "LENGTH": 700, "DATA": ""},
+            {"TIME": 26400, "ID": 2, "LENGTH": 300, "DATA": ""},
+            
+            {"TIME": 27200, "ID": 0, "LENGTH": 700, "DATA": ""},
+            {"TIME": 27200, "ID": 2, "LENGTH": 300, "DATA": ""},
+            {"TIME": 27600, "ID": 0, "LENGTH": 700, "DATA": ""},
+            {"TIME": 27600, "ID": 2, "LENGTH": 300, "DATA": ""},
+            {"TIME": 28000, "ID": 3, "LENGTH": 700, "DATA": ""},
+            {"TIME": 28000, "ID": 1, "LENGTH": 300, "DATA": ""},
+            {"TIME": 28200, "ID": 1, "LENGTH": 700, "DATA": ""},
+            {"TIME": 28200, "ID": 3, "LENGTH": 300, "DATA": ""},
+            {"TIME": 28400, "ID": 3, "LENGTH": 700, "DATA": ""},
+            {"TIME": 28400, "ID": 1, "LENGTH": 300, "DATA": ""},
+            
+            {"TIME": 28800, "ID": 4, "LENGTH": 700, "DATA": ""},
+            {"TIME": 28800, "ID": 5, "LENGTH": 300, "DATA": ""},
+            {"TIME": 29600, "ID": 7, "LENGTH": 700, "DATA": ""},
+            {"TIME": 29600, "ID": 6, "LENGTH": 300, "DATA": ""},
+            
+            {"TIME": 30400, "ID": 4, "LENGTH": 700, "DATA": ""},
+            {"TIME": 30400, "ID": 6, "LENGTH": 300, "DATA": ""},
+            {"TIME": 30800, "ID": 4, "LENGTH": 700, "DATA": ""},
+            {"TIME": 30800, "ID": 6, "LENGTH": 300, "DATA": ""},
+            {"TIME": 31200, "ID": 7, "LENGTH": 700, "DATA": ""},
+            {"TIME": 31200, "ID": 5, "LENGTH": 300, "DATA": ""},
+            {"TIME": 31400, "ID": 5, "LENGTH": 700, "DATA": ""},
+            {"TIME": 31400, "ID": 7, "LENGTH": 300, "DATA": ""},
+            {"TIME": 31600, "ID": 7, "LENGTH": 700, "DATA": ""},
+            {"TIME": 31600, "ID": 5, "LENGTH": 300, "DATA": ""}
+        ]
+    }
+}
