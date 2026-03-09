@@ -1,8 +1,8 @@
 {
     "songs": {
         "scrollSpeed": 1.6,
-        "voicesPlaying": true,
-        "events": {},
+        "vocalsEnabled": true,
+        "events": [{}],
         "notes": [
             {"TIME": 12800, "ID": 0, "LENGTH": 0, "DATA": ""},
             {"TIME": 13200, "ID": 1, "LENGTH": 0, "DATA": ""},

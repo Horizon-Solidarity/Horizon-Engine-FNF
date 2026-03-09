@@ -1,7 +1,7 @@
 {
     "version": "0.0.1",
     "songName": "Test",
-    "songStuff": {"bpm": 160, "beat": [4, 4]},
+    "bpm": 160,
     "contributor": {
         "music": "Unknown",
         "chart": "unknown",
@@ -27,10 +27,10 @@
         },
         "stage": "mainStage",
         "songStartCamera": {
-            "zoom": 1.1,
-            "focus": "player"
+            "focus": "player",
+            "zoom": 1.1
         },
-        "noteStyle": "funkin"
+        "uiStyle": "funkin"
     },
     "generatedBy": "Youbadao (by hand)"
 }

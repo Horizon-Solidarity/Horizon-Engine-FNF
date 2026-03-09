@@ -46,8 +46,7 @@ class TitleState extends MusicBeatState
 			FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
 
 		Conductor.bpm = musicBPM;
-        
-        initJson(Paths.json('data/states/title/title_metadata'));
+
     }
 
 	// JSON data
@@ -79,64 +78,5 @@ class TitleState extends MusicBeatState
 
     var isTextYee:Array<InitVisibleData>;
 
-    // ____________________________________________________________________________________
-
-    function initJson(json:InitMetadata)
-    {
-        var newGroundsImage = json.titleData.introImagePath;
-
-        associatedImage = Paths.image('states/titles/' + newGroundsImage);
-
-        // _______________________________________ Json Character Setting _______________________________________
-        jsonCharacters = json.titleData.characters;
-        for (i in 0...jsonCharacters.length)
-        {
-            if (jsonCharacters != null && jsonCharacters.length > 0)
-            {
-                var titleChar:TitleCharData = Json.parse(Assets.getText(Paths.json('data/states/title/chars/' + jsonCharacters[i])));
-
-                tCharVisible = titleChar.visible;
-
-                if (tCharVisible)
-                {
-                    tCharAssets = Paths.getSparrowAtlas('states/titles/' + titleChar.assetPath);
-                    tCharMain = new FlxSprite();
-                    tCharMain.antialiasing = true;
-                    tCharMain.frames = tCharAssets;
-                    tCharMain.offsets.set(titleChar.position[0], titleChar.position[1]);
-
-                    tCharAnimation = titleChar.animation;
-                    if (tCharAnimation != null && tCharAnimation.length > 0)
-                    {
-                        for (anim in tCharAnimation)
-                        {
-                            var animName:String = '' + anim.name;
-                            var animPref:String = '' + anim.prefix;
-                            var animFps:Int = anim.frameRate ?? 24;
-                            var animLoop:Bool = !!anim.looped;
-                            var animIndc:Array<Int> = anim.indices;
-
-                            if (animIndc != null && animIndc.length > 0)
-                            {
-                                tCharMain.animation.addByIndices(animName, animPref, animIndc, "", animFps, animLoop);
-                            }
-                            else
-                            {
-                                tCharMain.animation.addByPrefix(animName, animPref, animFps, animLoop);
-                            }
-
-                            if(tCharAnimName.startsWith('dance'))
-                                tCharMain.animation.play('danceRight');
-                            else
-                                tCharMain.animation.play('idle');
-                            
-                            tCharAnimName = animName;
-                        }
-                    }
-                }
-            }
-        }
-
-        isTextYee = json.initHandler;
-    }
+	// ____________________________________________________________________________________
 }

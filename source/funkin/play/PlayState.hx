@@ -5,11 +5,35 @@ import funkin.objects.Character;
 
 class PlayState extends MusicBeatState
 {
-	var player:Character;
+	var PLY_X:Float = 770;
+	var PLY_Y:Float = 100;
+
+	public var playerCameraOffsets:String;
+
+	var playerGroup:FlxSpriteGroup;
+	var player:Character = null;
+
+	var camGame:FlxCamera;
+	var camHUD:FlxCamera;
+	var camOther:FlxCamera;
 
 	override public function create()
 	{
 		super.create();
+		camGame = new FlxCamera();
+		camHUD = new FlxCamera();
+		camOther = new FlxCamera();
+		camHUD.bgColor.alpha = 0;
+		camOther.bgColor.alpha = 0;
+
+		FlxG.cameras.reset(camGame);
+		FlxG.cameras.add(camHUD, false);
+		FlxG.cameras.add(camOther, false);
+
+		FlxG.cameras.setDefaultDrawTarget(camGame, true);
+
+		playerGroup = new FlxSpriteGroup(PLY_X, PLY_Y);
+
 		var text = new FlxText(0, 0, 0, "Hello World", 64);
 		text.screenCenter();
 		add(text);

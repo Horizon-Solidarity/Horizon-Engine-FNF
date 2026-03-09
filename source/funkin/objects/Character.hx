@@ -7,6 +7,9 @@ class Character extends FlxSprite
 {
     public var curCharacter:String;
 
+	public var positionArray:Array<Float> = [0, 0];
+	public var cameraPosition:Array<Float> = [0, 0];
+
     var animSinging:Bool = false;
 
 	public function new(x:Float = 0, y:Float = 0)

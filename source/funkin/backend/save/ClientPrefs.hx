@@ -75,6 +75,7 @@ import flixel.util.FlxSave;
 	public var discordRPC:Bool = true;
 	public var loadingScreen:Bool = true;
 	public var language:String = 'en-US';
+	public var experimentalElements:Bool = false;
 }
 
 class ClientPrefs
