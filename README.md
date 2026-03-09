@@ -7,7 +7,7 @@
 __________________________
 __________________________
 # Friday Night Funkin': Horizon Engine
-![Logo](docs/english/img/Horizon%20logo.png)
+![Logo](docs/english/img/Horizon%20Engine.png)
 
 ## Contributor
 ### Horizon Engine
