@@ -1,34 +1,39 @@
 {
-    "modName": "Friday Night Funkin'",
-    "description": "A rhythm game made with HaxeFlixel. it's Base Game Port for Horizon Engine",
-    "iconPath": "",
-    "headerPath": "",
-    "contributor": [
+    "modName": "Your Mod name", // String
+    "description": "Description for the Mod", // String
+    "iconPath": "", // String
+    "headerPath": "", // String
+    "contributor": [ // Array<String>
         {
-            "name": "Youbadao",
-            "about": "Porter",
-            "role": "Port work"
+            "name": "Your Name",
+            "icons": "iconImagePath",
+            "about": "Section name",
+            "role": "Role",
+            "email": "Mail address",
+            "website": "URL",
+            "description": "Note"
         }
     ],
-    "warningsStartSetting": {
+    "warningsStartSetting": { // Bool
         "settingStateVisible": false,
         "flashing": true,
         "lowQuality": false,
         "richPresence": false
     },
-    "mod_version": "0.8.3",
-    "global": false,
-    "apiChanger": {
+    "mod_version": "0.8.3", // String (Semantic Versioning (SemVer) system)
+    "global": false, // Bool
+    "reload": false, // Bool
+    "apiChanger": { // String
         "windowTitle": "Friday Noght Funkin'",
         "discordClientID": "",
         "iconFilePath": ""
     },
 
-    "dependencies": [
+    "dependencies": [  // Map<Map<String, String (SemVer system)>, Bool>
         {"subModNameA": "1.0.0", "optional": false},
         {"subModNameA": "2.3.1", "optional": true}
     ],
 
-    "api_version": "0.0.1",
-    "license": ""
+    "api_version": "0.0.1", // String (SemVer system)
+    "license": "" // String
 }

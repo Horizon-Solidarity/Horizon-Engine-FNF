@@ -1,50 +1,47 @@
 {
-    "name": "Boyfriend",
-    "assetPath": "characters/BOYFRIEND",
+    "name": "Daddy Dearest",
+    "assetPath": "characters/DADDY_DEAREST",
     "renderType": "sparrow",
     "isPixel": false,
     "flipX": false,
-    "offsets": [17, 14],
-    "cameraOffsets": [-18, 36],
+    "offsets": [2, 16],
+    "cameraOffsets": [-2, 9],
     "idleBeat": 2,
     "singTime": 8.0,
     "sustainAnim": false,
     "ghostEffect": false,
     "healthIcon": {
-        "id": "bf",
+        "id": "dad",
         "splitable": {"enabledS": false},
         "win": {"enabled": false},
         "scale": 1,
         "angle": 0,
         "flipX": false
     },
-    "deathData": {
-        "cameraOffsets": [-73, 42]
-    },
     "animations": [
         {
             "name": "idle",
-            "prefix": "BF idle dance0",
+            "prefix": "Dad idle dance",
             "frameRate": 24
         },
         {
             "name": "singLeft",
-            "prefix": "BF NOTE LEFT0",
+            "prefix": "dad sing note right",
             "frameRate": 24
         },
         {
             "name": "singDown",
-            "prefix": "BF NOTE DOWN0",
+            "prefix": "Dad Sing Note DOWN",
             "frameRate": 24
         },
         {
             "name": "singUp",
-            "prefix": "BF NOTE UP0",
+            "prefix": "Dad Sing note UP",
             "frameRate": 24
         },
         {
             "name": "singRight",
-            "prefix": "BF NOTE RIGHT0",
+            "prefix": "Dad Sing Note LEFT",
             "frameRate": 24
         }
     ]
