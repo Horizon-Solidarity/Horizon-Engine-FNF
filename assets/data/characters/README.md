@@ -165,6 +165,7 @@ For example, specifying [0, 1, 2, 3] will make this animation only use the first
     - `default: [1, 1]`
 * `offsets`: Sprite position in Game to playing Animation.
     - `default: [0, 0]`
+* `looped`: if you enabled this, animation is Looping
 
 ### Anim Name
 #### Regular Name
