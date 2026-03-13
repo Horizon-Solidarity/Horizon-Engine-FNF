@@ -1,0 +1,14 @@
+{
+    "name": "DADDY DEAREST",
+    "titleAssetPath": "titles/week1",
+    "characters": [
+        {"id": "gf", "scale": 1.0, "offsets": [200, 80]},
+        {"id": "dad", "scale": 1.0, "offsets": [100, 60]},
+        {"id": "bf", "scale": 1.0, "offsets": [150, 80]}
+    ],
+    "bgColor": "F9CF51",
+    "allDifficulties": ["easy", "normal", "hard"],
+    "songs": [
+        {"songName": "Test", "secret": false, "difficulties": ["normal"]}
+    ]
+}

@@ -1,0 +1,10 @@
+{
+    "assetPath": "props/dad",
+    "animations": [
+        {
+            "name": "idle",
+            "prefix": "idle0",
+            "frameRate": 24
+        }
+    ]
+}

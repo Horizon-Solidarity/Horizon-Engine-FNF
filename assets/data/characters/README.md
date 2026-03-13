@@ -111,9 +111,10 @@ ___________________
 * `enabledS`: If the ID is the folder name, turn this true.
 
 #### Optionally
-`default: ""`
 * `normalPath`: Enter the path to the normal icon in the folder.
+    - `default: "normal"`
 * `missPath`: Enter the path to the miss icon in the folder.
+    - `default: "misses"`
 
 __________________________________
 ### Win Icon

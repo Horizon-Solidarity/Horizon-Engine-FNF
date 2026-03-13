@@ -1,13 +1,15 @@
 package funkin.ui.debug;
 
-class debugMenuSubstate
+class DebugMenuSubstate
 {
 	var options:Array<String> = [
+		'Test Editor',
+
 		'Chart Editor',
 		'Character Editor',
 		'Stage Editor',
 		'Week Editor',
-		'Menu Character Editor',
+		'Week Character Editor',
 		'Dialogue Editor',
 		'Dialogue Portrait Editor',
 		'Note Splash Editor'

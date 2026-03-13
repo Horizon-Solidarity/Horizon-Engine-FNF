@@ -1,0 +1,14 @@
+{
+    "assetPath": "props/bf",
+    "animations": [
+        {
+            "name": "idle",
+            "prefix": "idle0"
+        },
+        {
+            "name": "confirm",
+            "prefix": "confirm0",
+            "frameRate": 24
+        }
+    ]
+}
