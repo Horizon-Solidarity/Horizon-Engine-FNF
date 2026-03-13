@@ -1,13 +1,5 @@
 {
     "initHandler": [
-        // {"sickBeat": Beatの数字, "data": [種類, 中身, 値(必要であれば)]}
-        // "data"の種類: playMusic, coolText, text, images, 空白またはDelete, skipIntro
-        // playMusicは、["playMusic", musicフォルダ内の音楽ファイルの名前, フェードインの時間(もちろん0も可能)]
-        // coolTextは、["coolText", [タイトルで表示する文字, 配列なので二つ目以降も追加できる, wackeyの場合dataフォルダにあるランダムな奴.txtを使える], x座標(なしも可)]
-        // textは、["text", タイトルで表示する文字(配列では無い), x座標(なしも可)]
-        // imagesは、["images", titleDataのintroImagePathで指定した画像を表示するかどうか, x座標(なしも可)]
-        // Delete系は、["delete"] で文字が消える
-        // skipIotroは、["skipIntro"] でタイトルメニューに変わる
         {"sickBeat": 1, "data": ["playMusic", "freakyMenu", 0.4]},
         {"sickBeat": 2, "data": ["coolText", ["Horizon Engine by"], 40]},
         {"sickBeat": 4, "data": ["text", "Youbadao", 40]},
@@ -33,20 +25,20 @@
         {"sickBeat": 9, "data": ["skipIntro"]}
     ],
     "titleData": {
-        "introImagePath": "newgrounds_logo", // イントロで表示する画像(newgrounds等)
-        "characters": ["gfTitle"], // このフォルダにあるcharsフォルダ内のjson名を参照
-        "logo": { // ロゴの設定
+        "introImagePath": "newgrounds_logo",
+        "characters": ["gfTitle"],
+        "logo": {
             "normal": {
                 "assetPath": "logoBumpin",
                 "animation": {
                     "name": "idle",
                     "prefix": "logo bumpin",
-                    "looped": true // これをfalseにすると、beatHitでアニメーションが再生される
+                    "looped": true
                 },
                 "position": [-150, -100]
             }
         },
-        "start": { // Press Enter Keyなんとかかんとかなどの画像の設定
+        "start": {
             "assetPath": "",
             "animation": [
                 {
@@ -61,12 +53,11 @@
                 }
             ],
             "position": [100, 576],
-            // "nextState": [package, stateClass]
             "nextState": ["funkin.play", "MainMenuState"]
         },
-        "bpm": 102 // テンポ。これでイントロの速さ等が決まる
+        "bpm": 102
     },
-    "easterEgg": false, // イースターエッグ要素を入れるかどうか
+    "easterEgg": false,
 
     "author": "Youbadao"
 }

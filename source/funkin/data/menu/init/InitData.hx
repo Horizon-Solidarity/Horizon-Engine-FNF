@@ -2,7 +2,7 @@ package funkin.data.menu.init;
 
 typedef InitMetadata =
 {
-    var initHandler:Array<InitVisibleData>;
+	var initHandler:Array<InitVisibleData>;
     var titleData:TitleData;
     @:optional var easterEgg:Bool;
 }
