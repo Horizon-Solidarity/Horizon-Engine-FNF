@@ -24,7 +24,7 @@
     "global": false, // Bool
     "reload": false, // Bool
     "apiChanger": { // String
-        "windowTitle": "Friday Noght Funkin'",
+        "windowTitle": "Friday Night Funkin'",
         "discordClientID": "",
         "iconFilePath": ""
     },
