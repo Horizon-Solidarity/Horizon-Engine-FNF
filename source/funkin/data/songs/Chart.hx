@@ -7,14 +7,14 @@ import lime.utils.Assets;
 
 enum abstract ChartFormat(String) to String
 {
-	var Vslice = "Friday Night Funkin' - v0.8.3";
-	var Psych = 'Psych_1.0';
-	var PELegacy = 'Psych_0.6.3';
-	var Psychness = 'Psychness_0.5.1';
-	var Codename = 'CODENAME_1.0.1';
-	var Nightmare = 'NightmareVision_develop';
-	var FPSPlus = "FPSPlus_8.2.0";
-	var Horizon = "Funkin': Horizon Engine alpha - Chart Editor";
+	var Vslice = "Friday Night Funkin' - 0.8.3";
+	var Psych = 'Psych Engine - 1.0';
+	var PELegacy = 'Psych Engine - 0.6.3';
+	var Psychness = 'Psychness Engine - 0.5.1';
+	var Codename = 'CODENAME - 1.0.1';
+	var Nightmare = 'NightmareVision - develop';
+	var FPSPlus = "FPSPlus - 8.2.0";
+	var Horizon = "Funkin': Horizon Engine (alpha) - Chart Editor";
 }
 
 class Chart
@@ -33,7 +33,7 @@ class Chart
 	public var format:ChartFormat = DEFAULT_CHART_FORMAT;
 
 	public static final DEFAULT_CHART_FORMAT:ChartFormat = ChartFormat.Horizon;
-	public static final HORIZON_CONVERTED:String = " - Converted by: Horizon Engine - Chart Editor";
+	public static final HORIZON_CONVERTED:String = " - Converted by: Horizon Engine (alpha) - Chart Editor";
 
     public function new()
     {
