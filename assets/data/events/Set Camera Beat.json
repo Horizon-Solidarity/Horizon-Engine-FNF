@@ -15,7 +15,7 @@
             "defaultValue": "0.03"
         },
         {
-            "valueName": "Step Setting",
+            "valueName": "Speed with Step",
             "type":"Int(0, 16, 1)",
             "defaultValue": "16"
         }

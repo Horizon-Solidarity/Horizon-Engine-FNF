@@ -1,1 +1,0 @@
-add_camera_zoom: "Camera Zoom Event. \nValue:\n1.Stage Zoom Mult. default: 0.015 \n2.HUD Zoom Mult. default: 0.03"
