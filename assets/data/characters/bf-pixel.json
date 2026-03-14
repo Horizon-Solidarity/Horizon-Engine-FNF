@@ -1,0 +1,50 @@
+{
+    "name": "Boyfriend (Pixel)",
+    "assetPath": "characters/bfPixel",
+    "renderType": "sparrow",
+    "isPixel": true,
+    "flipX": false,
+    "idleBeat": 2,
+    "singTime": 8.0,
+    "sustainAnim": false,
+    "ghostEffect": false,
+    "healthIcon": {
+        "id": "bf",
+        "splitable": {"enabledS": false},
+        "win": {"enabled": false},
+        "scale": 1,
+        "angle": 0,
+        "flipX": false,
+        "isPixel": true
+    },
+    "deathData": {
+        "cameraOffsets": [0, 0]
+    },
+    "animations": [
+        {
+            "name": "idle",
+            "prefix": "BF IDLE instance 10",
+            "frameRate": 24
+        },
+        {
+            "name": "singLeft",
+            "prefix": "BF LEFT NOTE instance 10",
+            "frameRate": 24
+        },
+        {
+            "name": "singDown",
+            "prefix": "BF DOWN NOTE instance 10",
+            "frameRate": 24
+        },
+        {
+            "name": "singUp",
+            "prefix": "BF UP NOTE instance 10",
+            "frameRate": 24
+        },
+        {
+            "name": "singRight",
+            "prefix": "BF RIGHT NOTE instance 10",
+            "frameRate": 24
+        }
+    ]
+}

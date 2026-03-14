@@ -121,6 +121,10 @@ typedef HealthIconData =
      * @default [[0.0,0.0]]
      */
     @:optional var offsets:Array<Float>;
+	/**
+	 * @default [false]
+	 */
+	@:optional var isPixel:Bool;
 }
 
 typedef SplitableIconData =
