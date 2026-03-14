@@ -6,6 +6,7 @@ import flixel.util.FlxSave;
 
 @:structInit class SaveVariables
 {
+	public var checkForUpdates:Bool = true;
 	public var downScroll:Bool = false;
 	public var middleScroll:Bool = false;
 	public var opponentStrums:Bool = true;
@@ -41,7 +42,6 @@ import flixel.util.FlxSave;
 	public var healthBarAlpha:Float = 1;
 	public var hitsoundVolume:Float = 0;
 	public var pauseMusic:String = 'Tea Time';
-	public var checkForUpdates:Bool = true;
 	public var comboStacking:Bool = true;
 	public var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
@@ -74,8 +74,19 @@ import flixel.util.FlxSave;
 	public var guitarHeroSustains:Bool = true;
 	public var discordRPC:Bool = true;
 	public var loadingScreen:Bool = true;
-	public var language:String = 'en-US';
 	public var experimentalElements:Bool = false;
+	public var language:String = 'en-US';
+
+	// ___________________________ Modder Settings ___________________________
+
+	/**
+	 * If enabled, you can select [Developers] setting
+	 */
+	public var developerMode:Bool = false;
+
+	// ___________ Developers Setting ___________
+	public var experimental:Bool = false;
+	public var greatDebugUI:Bool = false;
 }
 
 class ClientPrefs

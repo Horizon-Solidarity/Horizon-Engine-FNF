@@ -18,7 +18,8 @@
         "settingStateVisible": false,
         "flashing": true,
         "lowQuality": false,
-        "richPresence": false
+        "richPresence": false,
+        "language": "en-US"
     },
     "mod_version": "0.8.3", // String (Semantic Versioning (SemVer) system)
     "global": false, // Bool
