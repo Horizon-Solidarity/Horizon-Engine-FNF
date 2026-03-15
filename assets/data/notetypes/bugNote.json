@@ -1,0 +1,7 @@
+{
+    "value": {
+        "name": "Return Note with Step",
+        "type": "Int(1, 16, 1)",
+        "defaultValue": "1"
+    }
+}
