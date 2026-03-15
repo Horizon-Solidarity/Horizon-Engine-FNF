@@ -1,0 +1,13 @@
+{
+    "characterSelect": true,
+    "playableCharacter": [
+        {
+            "name": "bf",
+            "categories": ["easy", "normal", "hard", "erect", "nightmare"]
+        },
+        {
+            "name": "pico",
+            "categories": ["easy", "normal", "hard", "erect", "nightmare"]
+        }
+    ]
+}

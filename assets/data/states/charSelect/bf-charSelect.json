@@ -1,0 +1,19 @@
+{
+    "NOTE": [
+        "selectPosition's number: 0 ~ 8"
+    ],
+    "selectPosition": 4,
+    "nameTag": "boyfriendNametag",
+    "sprite": {
+        "assetPath": "bfChill",
+        "renderType": "animateatlas",
+        "position": [0, 0],
+        "animations": [
+            {
+                "name": "slidein",
+                "prefix": ""
+            }
+        ]
+    },
+    "partner": {}
+}

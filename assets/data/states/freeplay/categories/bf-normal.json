@@ -1,0 +1,11 @@
+{
+    "categoryName": "Boyfriend Normal Song",
+    "difficulty": ["normal"],
+    "songs": [
+        {
+            "id": "test",
+            "includeDiffs": ["normal"],
+            "rating": [0]
+        }
+    ]
+}

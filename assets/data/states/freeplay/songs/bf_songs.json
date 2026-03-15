@@ -1,9 +1,0 @@
-{
-    "songs": [
-        {
-            "id": "test",
-            "includeDiffs": ["normal"],
-            "rating": [0]
-        }
-    ]
-}
