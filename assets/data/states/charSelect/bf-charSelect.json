@@ -1,5 +1,5 @@
 {
-    "NOTE": [
+    "COMMENTS": [
         "selectPosition's number: 0 ~ 8"
     ],
     "selectPosition": 4,
@@ -15,5 +15,7 @@
             }
         ]
     },
-    "partner": {}
+    "partner": {
+        "assetPath": "gfChill"
+    }
 }
