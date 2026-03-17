@@ -5,6 +5,8 @@ typedef SoundTrackMetadata =
     var name:String;
     var artist:String;
     var songData:AudioSetting;
+	var preview:AudioPreviewData;
+	var album:TrackAlbumData;
 }
 
 typedef AudioSetting =
@@ -13,4 +15,16 @@ typedef AudioSetting =
     var songTime:Float;
     var step:Int;
     var beat:Int;
+}
+typedef AudioPreviewData =
+{
+	var start:Float;
+	var end:Float;
+}
+
+typedef TrackAlbumData =
+{
+	var assetPath:String;
+	var text:String;
+	var fonts:Array<Dynamic>;
 }
