@@ -1,7 +1,7 @@
 package funkin.data.songs;
 
 import funkin.data.songs.SongData;
-import funkin.data.songs.SongMetadata;
+import funkin.data.songs.SongMeta;
 import haxe.Json;
 import lime.utils.Assets;
 

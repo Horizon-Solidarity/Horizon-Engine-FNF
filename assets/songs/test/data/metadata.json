@@ -1,0 +1,27 @@
+{
+    "version": "0.0.1",
+    "songName": "Test",
+    "contributor": {
+        "music": "Kawai Sprite (feat.MtH)",
+        "chart": "unknown",
+        "art": "Phantom Arcade, Moawling",
+        "code": "Unknown"
+    },
+    "playData": {
+        "difficulties": ["normal"],
+        "variations": {
+            "charMixes": ["bf"],
+            "extraDiffs": []
+        },
+        "audio": {
+            "splitVocals": false
+        },
+        "stage": "mainStage",
+        "songStartCamera": {
+            "focus": {"opponent": 0},
+            "zoom": 1.1
+        },
+        "uiStyle": "funkin"
+    },
+    "generatedBy": "Youbadao (by hand)"
+}

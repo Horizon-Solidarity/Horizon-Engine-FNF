@@ -1,0 +1,63 @@
+{
+    "songs": {
+        "scrollSpeed": 1.6,
+        "vocalsEnabled": true,
+        "localEvents": [{}],
+        "gameplayData": [
+            {
+                "characters": [
+                    {
+                        "id": "bf-pixel",
+                        "position": [989.5, 885],
+                        "zIndex": 1,
+                        "vocalSuffix": "bf-pixel",
+                        "strumLine": {
+                            "visible": true,
+                            "keys": 4,
+                            "scale": 1,
+                            "distance": 1,
+                            "offsets": [0, 50]
+                        }
+                    }
+                ],
+                "notes": [
+                    {"TIME": 12800, "ID": 0, "LENGTH": 0, "DATA": ""},
+                    {"TIME": 13200, "ID": 1, "LENGTH": 0, "DATA": ""},
+                    {"TIME": 13600, "ID": 2, "LENGTH": 0, "DATA": ""},
+                    {"TIME": 14000, "ID": 3, "LENGTH": 0, "DATA": ""}
+                ]
+            },
+            {
+                "characters": [
+                    {
+                        "id": "bf",
+                        "position": [989.5, 885],
+                        "zIndex": 1,
+                        "vocalSuffix": "bf",
+                        "strumLine": {
+                            "visible": true,
+                            "keys": 4,
+                            "scale": 1,
+                            "distance": 1,
+                            "offsets": [0, 50]
+                        }
+                    }
+                ],
+                "notes": []
+            },
+            {
+                "characters": [
+                    {
+                        "id": "gf",
+                        "position": [989.5, 885],
+                        "zIndex": 0,
+                        "strumLine": {
+                            "visible": false
+                        }
+                    }
+                ],
+                "notes": []
+            }
+        ]
+    }
+}

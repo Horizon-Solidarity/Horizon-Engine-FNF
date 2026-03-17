@@ -172,3 +172,9 @@ typedef SongStrumLineData =
     var enabled:Bool;
     var offsets:Array<Float>;
 }
+
+typedef SongStartCamera =
+{
+    var focus:String;
+    var zoom:Float;
+}

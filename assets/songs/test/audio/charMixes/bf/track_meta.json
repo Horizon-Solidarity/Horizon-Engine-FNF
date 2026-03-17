@@ -1,0 +1,11 @@
+{
+    "name": "Test",
+    "artist": "Kawai Sprite (feat.MtH)",
+    "songData": {"bpm": 160, "songTime": 1.43, "step": 4, "beat": 4},
+    "preview": {"start": 0, "end": 15000},
+    "album": {
+        "assetPath": "albumRoll/volume1",
+        "text": "volume1-text",
+        "fonts": [false]
+    }
+}
