@@ -1,6 +1,7 @@
 package funkin.objects;
 
 import funkin.data.character.CharacterData;
+import funkin.data.character.HealthIconMeta;
 import funkin.objects.icontype.DefaultIcon;
 import funkin.objects.icontype.SplitableIcon;
 
@@ -9,10 +10,12 @@ class HealthIcon
     public var splitIcon:SplitableIcon;
     public var defaultIcon:DefaultIcon;
 
-    public var iconImage:String = '';
+	public var iconData:String = '';
+    
+	public var iconImage:String = '';
 
     public var split:SplitableIconData;
-    public var win:WinningIconData;
+	public var winEnabled:Bool;
 
     public var iconScale:Array<Float> = [1, 1];
     public var iconAngle:Float = 0;
@@ -21,7 +24,9 @@ class HealthIcon
     public var iconOffsets:Array<Float> = [0, 0];
 
     public var splitEnabled:Bool = false;
-    public var winEnabled:Bool = false;
+	public var normalEnabled:Bool = false;
+	public var missesEnabled:Bool = false;
+	public var winningEnabled:Bool = false;
 
     public var normalImage:String = 'normal';
     public var missesImage:String = 'misses';
@@ -39,7 +44,7 @@ class HealthIcon
     })
     defaultIcon = new SplitableIcon({
         posit = iconOffsets,
-        icon = iconImage,
+						icon = iconImage,
         winStuff = [winEnabled, winningImage]
     })
     */

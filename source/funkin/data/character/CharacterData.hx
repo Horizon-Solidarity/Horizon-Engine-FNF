@@ -42,7 +42,7 @@ typedef CharacterMetadata =
     var renderType:CharacterRenderType;
     var offsets:Array<Float>;
     var cameraOffsets:Array<Float>;
-    var healthIcon:HealthIconData;
+	var healthData:HealthData;
     var animations:Array<NamedAnimationData>;
 
     /**
@@ -91,65 +91,16 @@ typedef CharacterMetadata =
     @:optional var deathData:CharacterDeathData;
 }
 
-typedef HealthIconData =
+typedef HealthData =
 {
-    var id:String;
-    var splitable:SplitableIconData;
-    var win:WinningIconData;
-
-    /**
-     * @default [[1.0,1.0]]
-     */
-    @:optional var scale:Array<Float>;
-
-    /**
-     * @default [0.0]
-     */
-    @:optional var angle:Float;
-
-    /**
-     * @default [false]
-     */
-    @:optional var flipX:Bool;
-
-    /**
-     * @default [false]
-     */
-    @:optional var flipY:Bool;
-
-    /**
-     * @default [[0.0,0.0]]
-     */
-    @:optional var offsets:Array<Float>;
-	/**
-	 * @default [false]
-	 */
-	@:optional var isPixel:Bool;
+	var iconData:String;
+	var bar:HealthBarData;
 }
 
-typedef SplitableIconData =
+typedef HealthBarData =
 {
-    var enabledS:Bool;
-
-    /**
-     * @default [""]
-     */
-    @:optional var normalPath:String;
-
-    /**
-     * @default [""]
-     */
-    @:optional var missPath:String;
-}
-
-typedef WinningIconData =
-{
-    var enabledW:Bool;
-
-    /**
-     * @default [""]
-     */
-    @:optional var winAssetPath:String;
+	var colored:Bool;
+	@:optional var color:Array<Int>;
 }
 
 typedef CharacterDeathData =

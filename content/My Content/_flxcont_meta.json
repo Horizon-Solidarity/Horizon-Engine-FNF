@@ -1,0 +1,35 @@
+{
+    "modName": "Your Mod name",
+    "description": "Description for the Mod",
+    "iconPath": "",
+    "headerPath": "",
+    "contributor": [
+        {
+            "name": "Your Name",
+            "icons": "iconImagePath",
+            "about": "Section name",
+            "role": "Role",
+            "email": "Mail address",
+            "website": "URL",
+            "description": "Note"
+        }
+    ],
+    "warningsStartSetting": {
+        "settingStateVisible": false,
+        "flashing": true,
+        "lowQuality": false,
+        "richPresence": false,
+        "language": "en-US"
+    },
+    "mod_version": "0.8.3",
+    "global": false,
+    "reload": false,
+
+    "dependencies": [
+        {"subModNameA": "1.0.0", "optional": false},
+        {"subModNameA": "2.3.1", "optional": true}
+    ],
+
+    "api_version": "0.0.1",
+    "license": ""
+}

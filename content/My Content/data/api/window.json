@@ -1,0 +1,10 @@
+{
+    "title": {
+        "modsName": "Template",
+        "mainMenu": [false],
+        "storyMenu": [false],
+        "creditsMenu": [false],
+        "optionsMenu": [false],
+        "playState": [true, "toString"]
+    }
+}

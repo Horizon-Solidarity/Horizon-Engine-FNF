@@ -7,8 +7,7 @@ typedef ChartDataInfo =
 
 typedef ChartDataMain =
 {
-    var scrolSpeed:Float;
-    var vocalsEnabled:Bool;
+	var scrolSpeed:Float;
     var gameplayData:Array<SongCharacterMetadata>;
 }
 
@@ -24,8 +23,7 @@ typedef SongCharacterData =
     var id:String;
     // var strumLine:Array<SongStrumLineData>;
     // var color:SongCharColorData;
-    var position:Array<Float>;
-    var zIndex:Int;
+	var position:Array<Float>;
     var vocalSuffix:String;
     var strumLine:StrumLinedata;
 }
@@ -37,6 +35,7 @@ typedef StrumLinedata =
     var scale:Float;
     var distance:Float;
     var offsets:Array<Float>;
+	var visible:Bool;
 }
 
 typedef ChartNotesData =

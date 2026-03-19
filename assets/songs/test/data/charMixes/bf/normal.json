@@ -1,7 +1,6 @@
 {
     "songs": {
         "scrollSpeed": 1.6,
-        "vocalsEnabled": true,
         "localEvents": [{}],
         "gameplayData": [
             {
@@ -9,14 +8,13 @@
                     {
                         "id": "bf-pixel",
                         "position": [989.5, 885],
-                        "zIndex": 1,
                         "vocalSuffix": "bf-pixel",
                         "strumLine": {
-                            "visible": true,
                             "keys": 4,
                             "scale": 1,
                             "distance": 1,
-                            "offsets": [0, 50]
+                            "offsets": [0, 50],
+                            "visible": true
                         }
                     }
                 ],
@@ -32,14 +30,13 @@
                     {
                         "id": "bf",
                         "position": [989.5, 885],
-                        "zIndex": 1,
                         "vocalSuffix": "bf",
                         "strumLine": {
-                            "visible": true,
                             "keys": 4,
                             "scale": 1,
                             "distance": 1,
-                            "offsets": [0, 50]
+                            "offsets": [0, 50],
+                            "visible": true
                         }
                     }
                 ],
@@ -50,8 +47,11 @@
                     {
                         "id": "gf",
                         "position": [989.5, 885],
-                        "zIndex": 0,
                         "strumLine": {
+                            "keys": 4,
+                            "scale": 1,
+                            "distance": 1,
+                            "offsets": [0, 50],
                             "visible": false
                         }
                     }

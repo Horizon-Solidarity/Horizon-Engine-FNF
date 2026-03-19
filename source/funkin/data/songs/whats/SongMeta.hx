@@ -4,7 +4,7 @@ typedef SongMetadata =
 {
     var version:String;
 
-    var songName:String;
+	var songName:String;
 
     var bpm:Float;
     
@@ -19,8 +19,6 @@ typedef SongMetadata =
 
 typedef SongCredits =
 {
-    var music:String;
-
     var chart:String;
 
     @:optional var art:String;
@@ -36,19 +34,13 @@ typedef SongPlayData =
 
     @:optional var variations:Array<SongVariationData>;
 
-    var audio:SongAudioData;
+	// var audio:SongAudioData;
 
     var stage:String;
 
     var songStartCamera:SongStartCamera;
 
     @:optional var uiStyle:String;
-}
-
-typedef SongAudioData =
-{
-    var splitVocals:Bool;
-    // var altInst:Array<String>;
 }
 
 // ___________________________________ Work In Progress ___________________________________
@@ -67,6 +59,6 @@ typedef SongVariationData =
 
 typedef SongStartCamera =
 {
-    var focus:Map<String, Int>;
+	var focus:Int;
     var zoom:Float;
 }

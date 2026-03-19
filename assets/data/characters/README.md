@@ -91,38 +91,7 @@ ___________________
 
 ## Health Icon data
 * `id`: Health Icon Name (in `images/states/play/charIcons` folder).
-* `splitable`: Read `Splitable` parts.
-* `win`: Read `Win Icon` parts.
 
-### Optionally Settings
-* `scale`: icon scale.
-    - `default: [1.0, 1.0]`
-* `angle`: icon angle.
-    - `default: 1.0`
-* `flipX`: icon Xflipping.
-    - `default: false`
-* `flipY`: icon Yflipping.
-    - `default: false`
-* `offsets`: Icon position in Game.
-    - `default: [0, 0]`
-
-___________________
-### Splitable
-* `enabledS`: If the ID is the folder name, turn this true.
-
-#### Optionally
-* `normalPath`: Enter the path to the normal icon in the folder.
-    - `default: "normal"`
-* `missPath`: Enter the path to the miss icon in the folder.
-    - `default: "misses"`
-
-__________________________________
-### Win Icon
-* `enabledW`: If add win icon, turn this true.
-
-#### Optionally
-`default: ""`
-* `path`: Win Icon Name (in `images/states/play/charIcons/win` folder).
 __________________________
 
 ## Death data

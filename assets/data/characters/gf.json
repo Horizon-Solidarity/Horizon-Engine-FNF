@@ -11,12 +11,10 @@
     "sustainAnim": false,
     "ghostEffect": false,
     "healthIcon": {
-        "id": "gf",
-        "splitable": {"enabledS": false},
-        "win": {"enabled": false},
-        "scale": 1,
-        "angle": 0,
-        "flipX": false
+        "iconID": "gf",
+        "bar": {
+            "colored": false
+        }
     },
     "animations": [
         {

@@ -10,13 +10,11 @@
     "singTime": 8.0,
     "sustainAnim": false,
     "ghostEffect": false,
-    "healthIcon": {
-        "id": "bf",
-        "splitable": {"enabledS": false},
-        "win": {"enabled": false},
-        "scale": 1,
-        "angle": 0,
-        "flipX": false
+    "healthData": {
+        "iconID": "bf",
+        "bar": {
+            "colored": false
+        }
     },
     "deathData": {
         "cameraOffsets": [-73, 42]
