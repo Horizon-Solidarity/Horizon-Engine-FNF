@@ -155,7 +155,7 @@ class Character extends FlxSprite
 	public function addAnimByIndices(animName:String, prefix:String, indices:Array<Int>, fps:Int = 24, looped:Bool = false, ?flipX:Bool = false,
 			?flipY:Bool = false)
 	{
-		animation.addByIndices(animName, prefix, indices, fps, looped, flipX, flipY);
+		animation.addByIndices(animName, prefix, indices, '', fps, looped, flipX, flipY);
 	}
 
 	public function addOffset(anim:String, x:Float = 0, y:Float = 0):Void
