@@ -8,7 +8,7 @@
     "playData": {
         "difficulties": ["normal"],
         "variations": {
-            "charMixes": ["bf"],
+            "normalRemixes": ["bf"],
             "extraDiffs": []
         },
         "stage": "mainStage",

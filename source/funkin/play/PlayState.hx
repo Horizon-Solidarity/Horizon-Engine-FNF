@@ -2,6 +2,7 @@ package funkin.play;
 
 import flixel.FlxState;
 import funkin.objects.Character;
+import funkin.play.ui.UI;
 
 class PlayState extends MusicBeatState
 {
@@ -16,6 +17,8 @@ class PlayState extends MusicBeatState
 	var camGame:FlxCamera;
 	var camHUD:FlxCamera;
 	var camOther:FlxCamera;
+
+	var _hud:UI;
 
 	override public function create()
 	{
@@ -38,7 +41,7 @@ class PlayState extends MusicBeatState
 		text.screenCenter();
 		add(text);
 
-		player = new Character(20, 20);
+		player = new Character(20, 20, 'bf');
 		add(player);
 	}
 
