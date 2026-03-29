@@ -3,9 +3,13 @@ package funkin.objects;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.graphics.frames.FlxFramesCollection;
 import flixel.util.FlxColor;
+import flixel.util.FlxDestroyUtil;
+import flixel.util.FlxSort;
 import funkin.data.animation.AnimationData;
 import funkin.data.character.CharacterData;
 import haxe.Json;
+import openfl.utils.AssetType;
+import openfl.utils.Assets;
 
 class Character extends FlxSprite
 {
@@ -143,15 +147,15 @@ class Character extends FlxSprite
         animation.play(isAnimName, isForce, isReversed, isFrame);
         _lastPlayedAnimation = isAnimName;
     }
-	public function addAnimByPrefix(animName:String, prefix:String, frameRate:Int = 24, looped:Bool = false, ?flipX:Bool = false, ?flipY:Bool = false)
+	public function addAnimByPrefix(animName:String, prefix:String, fps:Int = 24, looped:Bool = false, ?flipX:Bool = false, ?flipY:Bool = false)
 	{
-		animation.addByPrefix(animName, prefix, frameRate, looped, flipX, flipY);
+		animation.addByPrefix(animName, prefix, fps, looped, flipX, flipY);
 	}
 
-	public function addAnimByIndices(animName:String, prefix:String, indices:Array<Int>, frameRate:Int = 24, looped:Bool = false, ?flipX:Bool = false,
+	public function addAnimByIndices(animName:String, prefix:String, indices:Array<Int>, fps:Int = 24, looped:Bool = false, ?flipX:Bool = false,
 			?flipY:Bool = false)
 	{
-		animation.addByIndices(animName, prefix, indices, frameRate, looped, flipX, flipY);
+		animation.addByIndices(animName, prefix, indices, fps, looped, flipX, flipY);
 	}
 
 	public function addOffset(anim:String, x:Float = 0, y:Float = 0):Void
