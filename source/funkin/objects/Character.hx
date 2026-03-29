@@ -5,6 +5,7 @@ import flixel.graphics.frames.FlxFramesCollection;
 import flixel.util.FlxColor;
 import funkin.data.animation.AnimationData;
 import funkin.data.character.CharacterData;
+import haxe.Json;
 
 class Character extends FlxSprite
 {
@@ -18,8 +19,8 @@ class Character extends FlxSprite
 
 	public var sprScale:Array<Float> = [1, 1];
 
-	public var flipX:Bool = false;
-	public var flipY:Bool = false;
+	public var sprFlipX:Bool = false;
+	public var sprFlipY:Bool = false;
 
 	public var sprPosition:Array<Float> = [0, 0];
 	public var camPosition:Array<Float> = [0, 0];
@@ -103,7 +104,7 @@ class Character extends FlxSprite
 			{
 				final animName:String = '' + anim.name;
 				final animPrefix:String = '' + anim.prefix;
-				final animFps:Int = anim.framerate ?? 24;
+				final animFps:Int = anim.frameRate ?? 24;
 				final animLoop:Bool = !!anim.looped;
 				final animIndices:Array<Int> = anim.indices ?? [];
 

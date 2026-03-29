@@ -23,6 +23,7 @@ class PlayState extends MusicBeatState
 	override public function create()
 	{
 		super.create();
+
 		camGame = new FlxCamera();
 		camHUD = new FlxCamera();
 		camOther = new FlxCamera();
