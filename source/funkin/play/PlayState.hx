@@ -6,19 +6,23 @@ import funkin.play.ui.UI;
 
 class PlayState extends MusicBeatState
 {
-	var PLY_X:Float = 770;
-	var PLY_Y:Float = 100;
+	// ___________________ Character Stuff ___________________
+	public var PLY_X:Float = 770;
+	public var PLY_Y:Float = 100;
 
 	public var playerCameraOffsets:String;
 
-	var playerGroup:FlxSpriteGroup;
-	var player:Character = null;
+	public var playerGroup:FlxSpriteGroup;
+	public var player:Character = null;
 
-	var camGame:FlxCamera;
-	var camHUD:FlxCamera;
-	var camOther:FlxCamera;
+	// ___________________ Camera Stuff ___________________
+	public var camGame:FlxCamera;
+	public var camHUD:FlxCamera;
+	public var camOther:FlxCamera;
+	public var _hud:UI;
 
-	var _hud:UI;
+	// ___________________ Gameplay Stuff ___________________
+	public var skipCountdown:Bool = false;
 
 	override public function create()
 	{
@@ -36,14 +40,22 @@ class PlayState extends MusicBeatState
 
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
 
-		playerGroup = new FlxSpriteGroup(PLY_X, PLY_Y);
-
 		var text = new FlxText(0, 0, 0, "Hello World", 64);
 		text.screenCenter();
 		add(text);
 
+		setupCharacter();
+	}
+
+	function setupCharacter()
+	{
 		player = new Character(20, 20, 'bf');
 		add(player);
+		PLY_X = 770 + player.sprPosition[0];
+		PLY_Y = 100 + player.sprPosition[1];
+
+		playerGroup = new FlxSpriteGroup(PLY_X, PLY_Y);
+		playerGroup.add(player);
 	}
 
     override public function update(elapsed:Float)

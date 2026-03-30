@@ -28,22 +28,26 @@
         {
             "name": "singLeft",
             "prefix": "BF NOTE LEFT0",
-            "frameRate": 24
+            "frameRate": 24,
+			"offsets": [5, -6]
         },
         {
             "name": "singDown",
             "prefix": "BF NOTE DOWN0",
-            "frameRate": 24
+            "frameRate": 24,
+			"offsets": [-20, -51]
         },
         {
             "name": "singUp",
             "prefix": "BF NOTE UP0",
-            "frameRate": 24
+            "frameRate": 24,
+			"offsets": [-46, 27]
         },
         {
             "name": "singRight",
             "prefix": "BF NOTE RIGHT0",
-            "frameRate": 24
+            "frameRate": 24,
+			"offsets": [-48, -7]
         }
     ]
 }
