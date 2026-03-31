@@ -7,5 +7,6 @@ echo This might take a few moments depending on your internet speed.
 haxelib install hxpkg
 haxelib run hxpkg uninstall
 haxelib run hxpkg install
+haxelib run lime rebuild windows
 echo Finished!
 pause
