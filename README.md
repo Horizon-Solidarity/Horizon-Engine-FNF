@@ -11,5 +11,6 @@ __________________________
 
 ## Contributor
 ### Horizon Engine
-* Youbadao
-
+* Youbadao - Project leader and coder.
+* MohammadDev - Artist.
+* T.R - Artist.
