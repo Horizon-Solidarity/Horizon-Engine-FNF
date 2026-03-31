@@ -3,7 +3,7 @@
 
 -- この例では、カスタムResultStateを呼び出すことにします
 
--- ../data/scripts/resultCallbackHandler.lua
+-- ../scripts/resultCallbackHandler.lua
 function onLoadGame()
     classImport('custom.results.CustomResultState')
 end
@@ -18,7 +18,7 @@ function onEndSong()
     end
 end
 
--- ../data/scripts/states/custom/CustomResultState.lua
+-- ../scripts/states/custom/CustomResultState.lua
 function onLoadGame()
     -- setClassPackage(CustomPackageNamehere, 'ClassNameHere')
     -- For example:

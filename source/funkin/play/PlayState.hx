@@ -5,6 +5,8 @@ import funkin.backend.game.system.IMusicBeatSystem;
 import funkin.objects.Character;
 import funkin.play.ui.UI;
 
+import funkin.api.scripting.ScriptManager;
+
 class PlayState extends MusicBeatState
 {
 	// ___________________ Character Stuff ___________________
@@ -24,6 +26,9 @@ class PlayState extends MusicBeatState
 
 	// ___________________ Gameplay Stuff ___________________
 	public var skipCountdown:Bool = false;
+	
+	// ___________________ Script Stuff ___________________
+	public var scripts:ScriptManager;
 
 	override public function create()
 	{
@@ -44,6 +49,10 @@ class PlayState extends MusicBeatState
 		var text = new FlxText(0, 0, 0, "Hello World", 64);
 		text.screenCenter();
 		add(text);
+
+		scripts = new ScriptManager();
+		scripts.loadFromFolder("scripts/play/", true);
+
 
 		setupCharacter();
 	}
