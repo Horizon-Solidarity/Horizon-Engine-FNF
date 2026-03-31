@@ -18,8 +18,8 @@ class FunkinAssets
 		return FlxAtlasFrames.fromSparrow(Paths.image(key), Paths.xml(key));
 	}
 
-    public static inline function getText(file:String):String
+    public static inline function getText(key:String):String
     {
-        return sys.io.File.getContent(file);
+        return sys.io.File.getContent(Paths.getPath(key));
     }
 }

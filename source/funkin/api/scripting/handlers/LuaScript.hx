@@ -9,7 +9,7 @@ class LuaScript extends LScript implements IScriptHandler
 
     public static function fromFile(path:String):IScriptHandler
     {
-        return new LuaScript(FunkinAssets.getText(path), '$path: ');
+        return new LuaScript(sys.io.File.getContent(path), '$path: ');
     }
 
     public static function fromString(code:String):IScriptHandler

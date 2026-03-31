@@ -9,7 +9,7 @@ class HScript extends RuleScript implements IScriptHandler
 
     public static function fromFile(path:String):IScriptHandler
     {
-        return fromString(FunkinAssets.getText(path));
+        return fromString(sys.io.File.getContent(path));
     }
 
     public static function fromString(code:String):IScriptHandler
