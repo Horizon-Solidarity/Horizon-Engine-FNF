@@ -4,9 +4,9 @@ cd ..
 @echo on
 echo Installing dependencies...
 echo This might take a few moments depending on your internet speed.
-haxelib install flixel
 
-haxelib git flixel-addons https://github.com/FunkinCrew/flixel-addons 6fa30b3f5209146c852c25f3d1003e08898083e2
+haxelib install flixel
+haxelib install flixel-addons
 
 haxelib git haxeui-core https://github.com/haxeui/haxeui-core 99d5d035e7120ce027256b117a25625c53b488dc
 haxelib git haxeui-flixel https://github.com/haxeui/haxeui-flixel b899a4c7d7318c5ff2b1bb645fbc73728fad1ac9
