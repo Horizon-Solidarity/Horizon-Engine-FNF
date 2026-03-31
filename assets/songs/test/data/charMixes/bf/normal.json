@@ -7,9 +7,11 @@
                 "characters": [
                     {
                         "id": "bf-pixel",
+                        "type": "opponent",
                         "position": [989.5, 885],
                         "vocalSuffix": "bf-pixel",
                         "strumLine": {
+                            "type": "opponent",
                             "keys": 4,
                             "scale": 1,
                             "distance": 1,
@@ -29,9 +31,11 @@
                 "characters": [
                     {
                         "id": "bf",
+                        "type": "player",
                         "position": [989.5, 885],
                         "vocalSuffix": "bf",
                         "strumLine": {
+                            "type": "player",
                             "keys": 4,
                             "scale": 1,
                             "distance": 1,
@@ -46,8 +50,10 @@
                 "characters": [
                     {
                         "id": "gf",
+                        "type": "center",
                         "position": [989.5, 885],
                         "strumLine": {
+                            "type": "opponent",
                             "keys": 4,
                             "scale": 1,
                             "distance": 1,

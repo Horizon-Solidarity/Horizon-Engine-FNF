@@ -1,7 +1,4 @@
-package funkin.backend.game;
-
-import backend.Song;
-import objects.Note;
+package funkin.backend.game.system;
 
 typedef BPMChangeEvent =
 {
@@ -24,6 +21,7 @@ class IMusicBeatSystem
 
 	public static var bpmChangeMap:Array<BPMChangeEvent> = [];
 
+	/*
 	public static function judgeNote(arr:Array<Rating>, diff:Float=0):Rating // die
 	{
 		var data:Array<Rating> = arr;
@@ -33,6 +31,7 @@ class IMusicBeatSystem
 
 		return data[data.length - 1];
 	}
+	 */
 
 	public static function getCrotchetAtTime(time:Float){
 		var lastChange = getBPMFromSeconds(time);

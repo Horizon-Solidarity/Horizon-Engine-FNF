@@ -1,4 +1,4 @@
-package funkin.data.songs.whats;
+package funkin.data.songs;
 
 typedef SoundTrackMetadata =
 {

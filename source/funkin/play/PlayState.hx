@@ -1,6 +1,7 @@
 package funkin.play;
 
 import flixel.FlxState;
+import funkin.backend.game.system.IMusicBeatSystem;
 import funkin.objects.Character;
 import funkin.play.ui.UI;
 
@@ -62,11 +63,55 @@ class PlayState extends MusicBeatState
     {
         super.update(elapsed);
 
-		if (!player.getAnimationName().startsWith('sing'))
-        	player.playAnim('idle');
-
 		notePress();
-    }
+
+		// playerDance();
+	}
+
+	var lastStepHit:Int = -1;
+
+	override function stepHit()
+	{
+		super.stepHit();
+
+		if (curStep == lastStepHit)
+		{
+			return;
+		}
+
+		lastStepHit = curStep;
+	}
+
+	var lastBeatHit:Int = -1;
+
+	override function beatHit()
+	{
+		if (lastBeatHit >= curBeat)
+		{
+			trace('BEAT HIT: ' + curBeat + ', LAST HIT: ' + lastBeatHit);
+			return;
+		}
+
+		charBopping(curBeat);
+
+		super.beatHit();
+		lastBeatHit = curBeat;
+	}
+
+	public function charBopping(beat:Int):Void
+	{
+		if (player != null && beat % player.charIdleBeat == 0 && !player.getAnimationName().startsWith('sing') && !player.stunned)
+			player.dance();
+	}
+    
+	public function playerDance():Void
+	{
+		var anim:String = player.getAnimationName();
+		if (player.holdTimer > IMusicBeatSystem.stepCrochet * (0.0011 #if FLX_PITCH / FlxG.sound.music.pitch #end) * player.charSingingTime
+			&& anim.startsWith('sing') && !anim.endsWith('miss'))
+			player.dance();
+	}
+
 
 	function notePress()
 	{

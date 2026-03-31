@@ -7,17 +7,37 @@ typedef ChartDataInfo =
 
 typedef ChartDataMain =
 {
-    var scrolSpeed:Float;
-    var vocalsEnabled:Bool;
-    var events:Array<ChartEventsData>;
+	var scrolSpeed:Float;
+	var gameplayData:Array<SongCharacterMetadata>;
+}
+
+typedef SongCharacterMetadata =
+{
+	var characters:Array<SongCharacterData>;
+	var localEvents:Array<ChartEventsData>;
     var notes:Array<ChartNotesData>;
 }
 
-typedef ChartEventsData =
+typedef SongCharacterData =
 {
-    var TIME:Float;
-    var NAME:String;
-    var DATA:Array<Dynamic>;
+	var id:String;
+	// var strumLine:Array<SongStrumLineData>;
+	// var color:SongCharColorData;
+	var type:String;
+	var position:Array<Float>;
+	var vocalSuffix:String;
+	var strumLine:StrumLinedata;
+}
+
+typedef StrumLinedata =
+{
+	var type:String;
+	var visible:Bool;
+	var keys:Int;
+	var scale:Float;
+	var distance:Float;
+	var offsets:Array<Float>;
+	var visible:Bool;
 }
 
 typedef ChartNotesData =
@@ -25,5 +45,18 @@ typedef ChartNotesData =
     var TIME:Float;
     var ID:Int;
     var LENGTH:Float;
-    var DATA:String;
+	var DATA:Array<Dynamic>;
+}
+
+// __________________________________________ Events _______________________________________________
+typedef SongEvents =
+{
+	var globalEvents:Array<ChartEventsData>;
+}
+
+typedef ChartEventsData =
+{
+	var TIME:Float;
+	var NAME:String;
+	var DATA:Array<Dynamic>;
 }

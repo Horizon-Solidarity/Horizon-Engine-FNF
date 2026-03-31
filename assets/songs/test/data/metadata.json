@@ -6,9 +6,9 @@
         "art": "Phantom Arcade, Moawling"
     },
     "playData": {
-        "difficulties": ["normal"],
+        "difficulties": ["Normal"],
         "variations": {
-            "normalRemixes": ["bf"],
+            "coverMixes": ["bf"],
             "extraDiffs": []
         },
         "stage": "mainStage",
