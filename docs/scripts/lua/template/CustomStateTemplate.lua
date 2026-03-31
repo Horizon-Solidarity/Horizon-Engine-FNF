@@ -3,7 +3,7 @@
 
 -- この例では、カスタムResultStateを呼び出すことにします
 
--- ../scripts/resultCallbackHandler.lua
+-- ../scripts/play/resultCallbackHandler.lua
 function onLoadGame()
     classImport('custom.results.CustomResultState')
 end
