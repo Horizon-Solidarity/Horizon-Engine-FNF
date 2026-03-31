@@ -4,10 +4,7 @@ cd ..
 @echo on
 echo Installing dependencies...
 echo This might take a few moments depending on your internet speed.
-haxelib git hxcpp https://github.com/FunkinCrew/hxcpp 5932340d095a7eea8635fe4d1355f1c0efd0b3c2
-haxelib git flixel https://github.com/FunkinCrew/flixel c8e79d2a42f9c11c639519ef2a6fd7ef2379a8aa
-haxelib git openfl https://github.com/FunkinCrew/openfl 5399946b68fd98f345d6b3e52b95ed6b78bf427c
-haxelib git lime https://github.com/FunkinCrew/lime cae0c0bc10915f6281625d07e5527f3cecb4347f
+haxelib install flixel
 
 haxelib git flixel-addons https://github.com/FunkinCrew/flixel-addons 6fa30b3f5209146c852c25f3d1003e08898083e2
 
