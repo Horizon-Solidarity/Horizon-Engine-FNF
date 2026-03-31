@@ -33,7 +33,7 @@ ____
 
 # 貢献者
 ## Horizon Engine
-Youbadao - プロジェクトリーダー兼コーダー。
+* Youbadao - プロジェクトリーダー兼コーダー。
 * MohammadDev - アーティスト。
 * T.R - アーティスト。
 
