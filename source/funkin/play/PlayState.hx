@@ -8,6 +8,8 @@ import funkin.play.ui.UI;
 
 class PlayState extends MusicBeatState
 {
+	public static var instance:PlayState;
+
 	// ___________________ Character Stuff ___________________
 	public var OPP_X:Float = 100;
 	public var OPP_Y:Float = 100;
@@ -32,9 +34,11 @@ class PlayState extends MusicBeatState
 	public var camGame:FlxCamera;
 	public var camHUD:FlxCamera;
 	public var camOther:FlxCamera;
-	public var _hud:UI;
+	public var ui:UI;
 
 	// ___________________ Gameplay Stuff ___________________
+	public var song:Song;
+
 	public var skipCountdown:Bool = false;
 	
 	// ___________________ Script Stuff ___________________
@@ -43,6 +47,10 @@ class PlayState extends MusicBeatState
 	override public function create()
 	{
 		super.create();
+		instance = this;
+
+		if (song == null)
+			song = Song.fromId("ugh");
 
 		camGame = new FlxCamera();
 		camHUD = new FlxCamera();
@@ -50,15 +58,16 @@ class PlayState extends MusicBeatState
 		camHUD.bgColor.alpha = 0;
 		camOther.bgColor.alpha = 0;
 
+		ui = new UI("funkin");
+		ui.cameras = [camHUD];
+		ui.scrollFactor.set();
+		add(ui);
+
 		FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camHUD, false);
 		FlxG.cameras.add(camOther, false);
 
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
-
-		var text = new FlxText(0, 0, 0, "Hello World", 64);
-		text.screenCenter();
-		add(text);
 
 		scripts = new ScriptManager();
 		scripts.loadFromFolder("scripts/play/", true);

@@ -48,6 +48,9 @@
 	<haxelib name="linc_luajit" />
 	<haxelib name="lscript" />
 
+	<haxelib name="flixel-animate" />
+	<haxelib name="json2object" />
+
 	<!--Needed for better error reporting with hscript-->
 	<define name="hscriptPos"/>
 

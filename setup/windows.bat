@@ -19,6 +19,8 @@ haxelib git lscript https://github.com/SrtHero278/lscript 778712861e0ffb27712c15
 haxelib install hscript
 haxelib git rulescript https://github.com/Kriptel/RuleScript dev
 
+haxelib git json2object https://github.com/FunkinCrew/json2object
+
 haxelib install tjson
 haxelib install hxjsonast
 haxelib install json5hx

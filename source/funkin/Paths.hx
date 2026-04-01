@@ -5,34 +5,34 @@ import sys.io.File;
 
 class Paths
 {
-	public static inline function image(key:String):String
+	public static inline function image(key:String, folder:String = "images"):String
 	{
-		return getPath('images/$key.png');
+		return getPath('$folder/$key.png');
 	}
 
-	public static inline function xml(key:String):String
+	public static inline function xml(key:String, folder:String = "images"):String
 	{
-		return getPath('images/$key.xml');
+		return getPath('$folder/$key.xml');
 	}
 
-	public static inline function sound(key:String):String
+	public static inline function sound(key:String, folder:String = "sounds"):String
 	{
-		return getPath('sounds/$key.ogg');
+		return getPath('$folder/$key.ogg');
 	}
 
-	public static inline function music(key:String):String
+	public static inline function music(key:String, folder:String = "music"):String
 	{
-		return getPath('music/$key.ogg');
+		return getPath('$folder/$key.ogg');
 	}
 
-	public static inline function font(key:String, ext:String = "ttf"):String
+	public static inline function font(key:String, ext:String = "ttf", folder:String = "fonts"):String
 	{
-		return getPath('fonts/$key.$ext');
+		return getPath('$folder/$key.$ext');
 	}
 
-	public static inline function json(key:String):String
+	public static inline function json(key:String, folder:String = "data"):String
 	{
-		return getPath('data/$key.json');
+		return getPath('$folder/$key.json');
 	}
 
 	public static inline function getPath(key:String, ?content:String):String

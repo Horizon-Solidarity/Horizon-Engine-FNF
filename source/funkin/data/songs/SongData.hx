@@ -1,62 +1,67 @@
 package funkin.data.songs;
 
-typedef ChartDataInfo =
+typedef SongChartData =
 {
-    var songs:ChartDataMain;
-}
-
-typedef ChartDataMain =
-{
-	var scrolSpeed:Float;
-	var gameplayData:Array<SongCharacterMetadata>;
-}
-
-typedef SongCharacterMetadata =
-{
+	@:default(1)
+	var scrollSpeed:Float;
+	@:default([])
+	var events:Array<ChartEventsData>;
+	@:default([])
 	var characters:Array<SongCharacterData>;
-	var localEvents:Array<ChartEventsData>;
-    var notes:Array<ChartNotesData>;
+
+	@:default("stage")
+	var stage:String;
+	@:default("funkin")
+	var uiStyle:String;
 }
 
 typedef SongCharacterData =
 {
 	var id:String;
-	// var strumLine:Array<SongStrumLineData>;
-	// var color:SongCharColorData;
-	var type:String;
+	@:default(CharacterType.PLAYER)
+	var type:CharacterType;
+	@:default([0, 0])
 	var position:Array<Float>;
+	@:default("")
 	var vocalSuffix:String;
 	var strumLine:StrumLinedata;
 }
 
 typedef StrumLinedata =
 {
-	var type:String;
+	@:default(true)
 	var visible:Bool;
+	@:default(4)
 	var keys:Int;
+	@:default(1)
 	var scale:Float;
-	var distance:Float;
+	@:default([0, 0])
 	var offsets:Array<Float>;
-	var visible:Bool;
+	@:default([])
+	var notes:Array<ChartNotesData>;
 }
 
 typedef ChartNotesData =
 {
-    var TIME:Float;
-    var ID:Int;
-    var LENGTH:Float;
-	var DATA:Array<Dynamic>;
-}
-
-// __________________________________________ Events _______________________________________________
-typedef SongEvents =
-{
-	var globalEvents:Array<ChartEventsData>;
+    var time:Float;
+    var lane:Int;
+	@:default(0)
+    var length:Float;
+	@:default("")
+	var type:String;
 }
 
 typedef ChartEventsData =
 {
-	var TIME:Float;
-	var NAME:String;
-	var DATA:Array<Dynamic>;
+	var time:Float;
+	var name:String;
+	@:default([])
+	var data:Map<String, Dynamic>;
+}
+
+enum abstract CharacterType(String) to String
+{
+	var OPPONENT = 'opponent';
+	var SPECTATOR = 'spectator';
+	var PLAYER = 'player';
 }

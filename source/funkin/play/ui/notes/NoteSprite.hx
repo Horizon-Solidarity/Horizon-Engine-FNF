@@ -1,10 +1,14 @@
 package funkin.play.ui.notes;
 
-class NoteSprite
-{
-	public static final DEFAULT_SKIN:String = 'notes/notes';
+import funkin.data.songs.SongData;
+import funkin.objects.FunkinSprite;
 
-	public function new(pushTime:Float, noteID:Int, strumLength:Float, noteType:String) {
+class NoteSprite extends FunkinSprite
+{
+	public var data:ChartNotesData;
+
+	public function new(data:ChartNotesData)
+	{
 
     }
 }
