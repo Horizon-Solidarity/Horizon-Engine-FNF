@@ -35,8 +35,6 @@ class Song
 
     public var charter(get, default):String;
     function get_charter() return _metadata.contributor.charter;
-    public var musician(get, default):String;
-    function get_songName() return _metadata.contributor.musician;
     public var animator(get, default):String;
     function get_animator() return _metadata.contributor.animator;
     public var coder(get, default):String;

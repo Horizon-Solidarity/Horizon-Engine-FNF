@@ -20,8 +20,6 @@ typedef SongCharacterData =
 	var id:String;
 	@:default(CharacterType.PLAYER)
 	var type:CharacterType;
-	@:default([0, 0])
-	var position:Array<Float>;
 	@:default("")
 	var vocalSuffix:String;
 	var strumLine:StrumLinedata;
