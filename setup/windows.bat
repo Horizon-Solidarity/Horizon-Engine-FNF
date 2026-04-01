@@ -4,28 +4,28 @@ cd ..
 @echo on
 echo Installing dependencies...
 echo This might take a few moments depending on your internet speed.
-haxelib install lime 8.3.0
-haxelib install openfl 9.5.0
-haxelib install flixel 6.1.2
-haxelib install flixel-addons 4.0.1
-haxelib install flixel-tools 1.5.1
-haxelib install flixel-animate 1.4.0
-haxelib install hscript-iris 1.1.3
-haxelib install hscript 2.7.0
-haxelib install haxeui-core 1.7.0
-haxelib install haxeui-flixel 1.7.0
-haxelib install tjson 1.4.0
-haxelib install hxjsonast 1.1.0
-haxelib install json5hx 1.0.2
-haxelib install hxdiscord_rpc 1.3.0
-haxelib install hxvlc 2.2.5 --skip-dependencies
-haxelib install thx.core 0.44.0
-haxelib install thx.semver 0.2.2
-haxelib install tink_core 2.1.1
-haxelib set lime 8.3.0
-haxelib set openfl 9.5.0
-haxelib git linc_luajit https://github.com/superpowers04/linc_luajit 1906c4a96f6bb6df66562b3f24c62f4c5bba14a7
-haxelib git funkin.vis https://github.com/FunkinCrew/funkVis 22b1ce089dd924f15cdc4632397ef3504d464e90
-haxelib git grig.audio https://gitlab.com/haxe-grig/grig.audio.git cbf91e2180fd2e374924fe74844086aab7891666
+
+haxelib install flixel
+haxelib install flixel-addons
+
+haxelib git haxeui-core https://github.com/haxeui/haxeui-core 99d5d035e7120ce027256b117a25625c53b488dc
+haxelib git haxeui-flixel https://github.com/haxeui/haxeui-flixel b899a4c7d7318c5ff2b1bb645fbc73728fad1ac9
+
+haxelib git flixel-animate https://github.com/MaybeMaru/flixel-animate c5e3393c70b71a191f20fa902114cea92042e486
+
+haxelib git linc_luajit https://github.com/superpowers04/linc_luajit
+haxelib git lscript https://github.com/SrtHero278/lscript 778712861e0ffb27712c154eb180d20931701a68
+
+haxelib install hscript
+haxelib git rulescript https://github.com/Kriptel/RuleScript dev
+
+haxelib install tjson
+haxelib install hxjsonast
+haxelib install json5hx
+haxelib install hxdiscord_rpc
+haxelib install hxvlc --skip-dependencies
+haxelib install thx.core
+haxelib install thx.semver
+haxelib install tink_core
 echo Finished!
 pause
