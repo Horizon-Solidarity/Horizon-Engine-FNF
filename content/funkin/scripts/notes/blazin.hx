@@ -6,7 +6,7 @@ class BlazinPunchHighNote extends ScriptedNote
 {
     public function new(note:Int)
     {
-        super("Punch High (Blazin')", "weekend-1-punchhigh");
+		super("Punch High", "weekend-1-punchhigh");
     }
 }
 
@@ -14,6 +14,6 @@ class BlazinPunchHighDodgedNote extends ScriptedNote
 {
     public function new(note:Int)
     {
-        super("Punch High (Dodge) (Blazin')", "weekend-1-punchhighdodged");
+		super("Punch High (Dodge)", "weekend-1-punchhighdodged");
     }
 }
