@@ -11,7 +11,7 @@ end
 function onEndSong()
     return Function_Stop;
 
-    callNextState('ResultState')
+    callNextState('CustomResultState', [true, songName, charId, newHighscore, practice])
 
     if getVariable('public', 'ResultEnds', 1)
         return Function_Continue;
@@ -26,6 +26,6 @@ function onLoadGame()
     setVariable('public', 'ResultEnds', 0)
 end
 
-function callNew(storyMode, title, songId, charId, newHighscore, practice)
+function callNew(storyMode, title, charId, newHighscore, practice)
     
 end
