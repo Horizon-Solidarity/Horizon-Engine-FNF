@@ -1,6 +1,8 @@
 package funkin.play.ui.notes;
 
 import funkin.data.ui.NoteskinData;
+import funkin.data.songs.SongData;
+
 import flixel.util.FlxSignal;
 import sys.io.File;
 import haxe.io.Path;
@@ -16,11 +18,16 @@ class Strumline extends FlxTypedSpriteGroup<Receptor>
 	public var mania(set, default):Int;
 	public var noteSpawnDistance:Float = 3000;
 
+	public var inputs:Array<String> = ["note_left", "note_down", "note_up", "note_right"];
+
 	public var botplay:Bool;
 	public var downscroll:Bool;
 	public var speed:Float;
 
 	public var receptors:Array<Receptor> = [];
+	public var notes:Array<Note> = [];
+
+	public var noteQueue:Array<ChartNoteData> = [];
 
 	public var onNoteHit:FlxTypedSignal<Note->Void> = new FlxTypedSignal()<Note->Void>;
 	public var onNoteMiss:FlxTypedSignal<Note->Void> = new FlxTypedSignal()<Note->Void>;
@@ -36,6 +43,23 @@ class Strumline extends FlxTypedSpriteGroup<Receptor>
 		this.speed = speed;
 
 		mania = 4;
+	}
+
+	public function addNoteQueue(queue:ChartNoteData):Void
+	{
+		noteQueue.push(queue);
+		noteQueue.sort(function(i, a, b)
+		{
+			if (a.time > b.time)
+				return -1;
+			else
+				return 1;
+		});
+	}
+
+	public function update(elapsed:Float)
+	{
+		super.update(elapsed);
 	}
 
 	function set_skinId(value:String):String
@@ -54,9 +78,9 @@ class Strumline extends FlxTypedSpriteGroup<Receptor>
 			return mania;
 		mania = value;
 		
-		forEach(function(receptor:Receptor){
+		for (receptor in receptors)
 			receptor.destroy();
-		});
+		receptors = [];
 
 		for (i in 0...mania)
 		{
@@ -73,6 +97,9 @@ class Strumline extends FlxTypedSpriteGroup<Receptor>
 			receptor.addAnimationData("confirm", skin.strumline.animations.get(directions[i] + "Confirm")[0]);
 
 			receptor.playAnimation("static");
+
+			receptors.push(receptor);
+			add(receptor);
 		}
 
 		return mania;

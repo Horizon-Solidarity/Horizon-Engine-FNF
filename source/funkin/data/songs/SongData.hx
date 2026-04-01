@@ -22,10 +22,10 @@ typedef SongCharacterData =
 	var type:CharacterType;
 	@:default("")
 	var vocalSuffix:String;
-	var strumLine:StrumLinedata;
+	var strumline:Strumlinedata;
 }
 
-typedef StrumLinedata =
+typedef Strumlinedata =
 {
 	@:default(true)
 	var visible:Bool;
@@ -34,12 +34,12 @@ typedef StrumLinedata =
 	@:default(1)
 	var scale:Float;
 	@:default([0, 0])
-	var offsets:Array<Float>;
+	var offset:Array<Float>;
 	@:default([])
-	var notes:Array<ChartNotesData>;
+	var notes:Array<ChartNoteData>;
 }
 
-typedef ChartNotesData =
+typedef ChartNoteData =
 {
     var time:Float;
     var lane:Int;

@@ -1,0 +1,9 @@
+{
+    "artist": "Kawai Sprite",
+    "preview": {"start": 0, "end": 15000},
+    "album": {
+        "assetPath": "albumRoll/volume4",
+        "text": "volume4-text",
+        "fonts": [false]
+    }
+}

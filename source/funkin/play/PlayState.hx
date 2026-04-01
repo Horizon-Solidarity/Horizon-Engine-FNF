@@ -34,10 +34,13 @@ class PlayState extends MusicBeatState
 	public var camGame:FlxCamera;
 	public var camHUD:FlxCamera;
 	public var camOther:FlxCamera;
-	public var ui:UI;
 
 	// ___________________ Gameplay Stuff ___________________
 	public var song:Song;
+
+	public var ui:UI;
+
+	public var strumlines:Array<Strumline> = [];
 
 	public var skipCountdown:Bool = false;
 	
@@ -50,7 +53,7 @@ class PlayState extends MusicBeatState
 		instance = this;
 
 		if (song == null)
-			song = Song.fromId("ugh");
+			song = Song.fromId("ugh", "hard", "pico");
 
 		camGame = new FlxCamera();
 		camHUD = new FlxCamera();
@@ -58,16 +61,43 @@ class PlayState extends MusicBeatState
 		camHUD.bgColor.alpha = 0;
 		camOther.bgColor.alpha = 0;
 
-		ui = new UI("funkin");
-		ui.cameras = [camHUD];
-		ui.scrollFactor.set();
-		add(ui);
-
 		FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camHUD, false);
 		FlxG.cameras.add(camOther, false);
 
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
+
+		ui = new UI();
+		ui.cameras = [camHUD];
+		ui.scrollFactor.set();
+		add(ui);
+
+		for (character in song.characters)
+		{
+			var strumY:Float = 40;
+			// TODO: Check downscroll option
+
+			var strumline = new Strumline(character.strumline.offset[0], strumY + character.strumline.offset[1], song.uiStyle, true, false, song.scrollSpeed);
+			strumline.scrollFactor.set();
+			strumline.cameras = [camHUD];
+			add(strumline);
+
+			strumline.scale.set(character.strumline.scale, character.strumline.scale);
+			strumline.visible = character.strumline.visible;
+			strumline.mania = character.strumline.keys;
+
+			for (note in character.strumline.notes)
+				strumline.addNoteQueue(note);
+			
+			// TODO: setup actual characters here
+
+
+			if (character == song.player)
+			{
+				strumline.x += (FlxG.width / 2) + 50;
+				strumline.botplay = false;
+			}
+		}
 
 		scripts = new ScriptManager();
 		scripts.loadFromFolder("scripts/play/", true);

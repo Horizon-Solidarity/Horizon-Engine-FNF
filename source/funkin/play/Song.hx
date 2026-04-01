@@ -27,6 +27,10 @@ class Song
     final _chart:SongChartData;
     final _tracks:SoundTrackMetadata;
 
+    public var id:String:String = "";
+    public var difficulty:String = "hard";
+    public var variation:String = "default";
+
     public var songName(get, default):String;
     function get_songName() return _metadata.songName;
 
@@ -112,6 +116,11 @@ class Song
         var tracksParser = new JsonParser<SoundTrackMetadata>();
         tracksParser.fromJson(File.getContent(tracksPath), tracksPath);
 
-        return new Song(metaParser.value, chartParser.value, tracksParser.value);
+        var result = new Song(metaParser.value, chartParser.value, tracksParser.value);
+        result.id = id;
+        result.difficulty = difficulty;
+        result.variation = variation;
+
+        return result;
     }
 }
