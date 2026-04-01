@@ -1,0 +1,12 @@
+{
+    "data": [
+        {
+            "id": 0,
+            "classPath": "BlazinPunchHighNote"
+        },
+        {
+            "id": 1,
+            "classPath": "BlazinPunchHighDodgedNote"
+        }
+    ]
+}

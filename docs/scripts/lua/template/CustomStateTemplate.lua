@@ -13,7 +13,7 @@ function onEndSong()
 
     callNextState('CustomResultState', [true, songName, charId, newHighscore, practice])
 
-    if getVariable('public', 'ResultEnds', 1)
+    if getVariable('public', 'ResultEnds', true)
         return Function_Continue;
     end
 end
@@ -23,9 +23,10 @@ function onLoadGame()
     -- setClassPackage(CustomPackageNamehere, 'ClassNameHere')
     -- For example:
     setClassPackage('custom.results', 'CustomResultState')
-    setVariable('public', 'ResultEnds', 0)
+    setVariable('public', 'ResultEnds', false)
 end
 
 function callNew(storyMode, title, charId, newHighscore, practice)
     
+    setVariable('public', 'ResultEnds', true)
 end

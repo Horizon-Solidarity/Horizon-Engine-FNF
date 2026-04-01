@@ -23,6 +23,8 @@ _________________________
 
 [Note Skin Editor (計画段階。)](/docs/Japanese/Editor/Charting.md)
 
+[Note Type Editor (計画段階。)](/docs/Japanese/Editor/Charting.md)
+
 ## Mod制作者用
 ### スクリプト
 [Lua](/docs/Japanese/API/Lua.md) | 
