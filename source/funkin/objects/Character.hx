@@ -63,8 +63,7 @@ class Character extends FlxSprite
 		animArray = [];
 		animOffsets = [];
 
-		var charJson:String = 'data/characters/$charID.json';
-		var path:String = Paths.getPath(charJson, TEXT);
+		var path:String = Paths.json('characters/$charID');
 
 		try
 		{
@@ -89,7 +88,7 @@ class Character extends FlxSprite
 		spriteType = json.renderType;
 
 		charSprite = json.assetPath;
-		var texture:FlxAtlasFrames = Paths.getSparrowAtlas(charSprite);
+		var texture:FlxAtlasFrames = FunkinAssets.getSparrow(charSprite);
 		frames = texture;
 
 		if (json.scale != null && json.scale != 1)
