@@ -1,7 +1,7 @@
-package template.customNote;
+package notes;
 
-// package notes;
-// import funkin.play.ui.notes.types.ScriptedNote;
+import funkin.play.ui.notes.types.ScriptedNote;
+
 class AltAnimationsNote extends ScriptedNote
 {
     var singAnim:String = ['singLEFT', 'singDOWN', 'singUP', 'singRIGHT'];
