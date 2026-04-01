@@ -25,6 +25,20 @@ class Paths
 		return getPath('$folder/$key.ogg');
 	}
 
+	public static inline function inst(song:String, variation:String = "default"):String
+	{
+		if (variation != "default")
+			return getPath('songs/$song/audio/$variation/Inst.ogg');
+		return getPath('songs/$song/audio/Inst.ogg');
+	}
+
+	public static inline function voice(song:String, postfix:String = "", variation:String = "default"):String
+	{
+		if (variation != "default")
+			return getPath('songs/$song/audio/$variation/Voices$postfix.ogg');
+		return getPath('songs/$song/audio/Voices$postfix.ogg');
+	}
+
 	public static inline function font(key:String, ext:String = "ttf", folder:String = "fonts"):String
 	{
 		return getPath('$folder/$key.$ext');

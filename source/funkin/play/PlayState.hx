@@ -42,6 +42,9 @@ class PlayState extends MusicBeatState
 
 	public var strumlines:Array<Strumline> = [];
 
+	public var instrumental:FlxSound;
+	public var voices:Array<FlxSound> = [];
+
 	public var skipCountdown:Bool = false;
 	
 	// ___________________ Script Stuff ___________________
@@ -72,6 +75,12 @@ class PlayState extends MusicBeatState
 		ui.scrollFactor.set();
 		add(ui);
 
+		instrumental = new FlxSound();
+		instrumental.loadEmbedded(Paths.inst(song.id, song.variation));
+		FlxG.sound.list.add(instrumental);
+
+		var loadedVocals = [];
+
 		for (character in song.characters)
 		{
 			var strumY:Float = 40;
@@ -88,6 +97,17 @@ class PlayState extends MusicBeatState
 
 			for (note in character.strumline.notes)
 				strumline.addNoteQueue(note);
+
+			var p = Paths.voice(song.id, character.vocalSuffix, song.variation);
+			if (p != null && !loadedVocals.contains(p))
+			{
+				var vocal = new FlxSound();
+				vocal.loadEmbedded(p);
+				FlxG.sound.list.add(vocal);
+				voices.push(vocal);
+
+				loadedVocals.push(p);
+			}
 			
 			// TODO: setup actual characters here
 
@@ -128,39 +148,31 @@ class PlayState extends MusicBeatState
     {
         super.update(elapsed);
 
-		notePress();
+		// Psych Sync shit (stole from TE)
+		conductor.songPosition += elapsed * 1000;
+		if (instrumental.playing)
+		{
+			conductor.songPosition = FlxMath.lerp(instrumental.time, conductor.songPosition, Math.exp(-elapsed * 5));
+			var timeDiff:Float = Math.abs(instrumental.time - conductor.songPosition);
+			if (timeDiff > 1000)
+				conductor.songPosition = conductor.songPosition + 1000 * FlxMath.signOf(timeDiff);
 
-		// playerDance();
+			// who let me cook (syncing vocals)
+			for (voice in voices)
+			{
+				if ((instrumental.time - voice.time) > 10)
+					voice.time = instrumental.time;
+			}
+		}
 	}
 
-	var lastStepHit:Int = -1;
-
-	override function stepHit()
+	override function stepHit(step:Int)
 	{
-		super.stepHit();
 
-		if (curStep == lastStepHit)
-		{
-			return;
-		}
-
-		lastStepHit = curStep;
 	}
 
-	var lastBeatHit:Int = -1;
-
-	override function beatHit()
+	override function beatHit(beat:Int)
 	{
-		if (lastBeatHit >= curBeat)
-		{
-			trace('BEAT HIT: ' + curBeat + ', LAST HIT: ' + lastBeatHit);
-			return;
-		}
-
-		charBopping(curBeat);
-
-		super.beatHit();
-		lastBeatHit = curBeat;
 	}
 
 	public function charBopping(beat:Int):Void
@@ -172,31 +184,8 @@ class PlayState extends MusicBeatState
 	public function playerDance():Void
 	{
 		var anim:String = player.getAnimationName();
-		if (player.holdTimer > IMusicBeatSystem.stepCrochet * (0.0011 #if FLX_PITCH / FlxG.sound.music.pitch #end) * player.charSingingTime
+		if (player.holdTimer > conductor.stepCrochet * (0.0011 #if FLX_PITCH / FlxG.sound.music.pitch #end) * player.charSingingTime
 			&& anim.startsWith('sing') && !anim.endsWith('miss'))
 			player.dance();
-	}
-
-
-	function notePress()
-	{
-		var left:Bool = false;
-		var down:Bool = false;
-		var up:Bool = false;
-		var right:Bool = false;
-
-		left = FlxG.keys.anyPressed([LEFT, A]);
-		down = FlxG.keys.anyPressed([DOWN, S]);
-		up = FlxG.keys.anyPressed([UP, W]);
-		right = FlxG.keys.anyPressed([RIGHT, D]);
-
-		if (left)
-			player.playAnim('singLeft', true);
-		else if (down)
-			player.playAnim('singDown', true);
-		else if (up)
-			player.playAnim('singUp', true);
-		else if (right)
-			player.playAnim('singRight', true);
 	}
 }

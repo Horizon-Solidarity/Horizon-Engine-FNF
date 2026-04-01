@@ -87,8 +87,12 @@ class Song
 
 	public var format:ChartFormat = DEFAULT_CHART_FORMAT;
 
-    public function new(metadata:SongMetadata, chart:SongChartData, track:SoundTrackMetadata)
+    public function new(id:String, difficulty:String = "normal", variation:String = "default", ?metadata:SongMetadata, ?chart:SongChartData, ?track:SoundTrackMetadata)
     {
+        this.id = id;
+        this.difficulty = difficulty;
+        this.variation = variation;
+
         this.metadata = metadata;
         this.chart = chart;
         this.track = track;
@@ -116,10 +120,7 @@ class Song
         var tracksParser = new JsonParser<SoundTrackMetadata>();
         tracksParser.fromJson(File.getContent(tracksPath), tracksPath);
 
-        var result = new Song(metaParser.value, chartParser.value, tracksParser.value);
-        result.id = id;
-        result.difficulty = difficulty;
-        result.variation = variation;
+        var result = new Song(id, difficulty, variation, metaParser.value, chartParser.value, tracksParser.value);
 
         return result;
     }

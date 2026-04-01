@@ -65,10 +65,11 @@ class Strumline extends FlxTypedSpriteGroup<Receptor>
 	function set_skinId(value:String):String
 	{
 		skinId = value;
-		if (Paths.json("ui/noteskins" + skinId) != null)
-			var parser = new json2object.JsonParser<NoteskinData>();
-			parser.fromJson(File.getContent(Paths.json("ui/noteskins" + skinId)));
-			skin = parser.value;
+		if (Paths.json("ui/noteskins" + skinId) == null)
+			skinId = DEFAULT_NOTE_SKIN;
+		var parser = new json2object.JsonParser<NoteskinData>();
+		parser.fromJson(File.getContent(Paths.json("ui/noteskins" + skinId)));
+		skin = parser.value;
 		return skinId;
 	}
 
