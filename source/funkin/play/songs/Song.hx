@@ -17,6 +17,13 @@ enum abstract ChartFormat(String) to String
 	var Horizon = 'Funkin\': Horizon Engine (alpha) - Chart Editor';
 }
 
+enum abstract CharacterType(String) to String
+{
+	var OPPONENT = 'opponent';
+	var CENTER = 'center';
+	var PLAYER = 'player';
+}
+
 class Song
 {
 	public static final DEFAULT_CHART_FORMAT:ChartFormat = ChartFormat.Horizon;

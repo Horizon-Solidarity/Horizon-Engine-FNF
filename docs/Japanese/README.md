@@ -38,6 +38,8 @@ ____
 * T.R - アーティスト。
 
 ## スペシャルサンクス!!
+* rushillbunny - プログラマー。
+
 * Psych Engine (Shadow Mario) - コード一部や譜面の変換機能の参考。
 * Nightmare Vision Engine (DuskieWhy) - 上と同じ。
 * Psychness Engine (Nes) - 譜面変換･出力機能。

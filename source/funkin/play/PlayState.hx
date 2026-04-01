@@ -8,13 +8,23 @@ import funkin.play.ui.UI;
 class PlayState extends MusicBeatState
 {
 	// ___________________ Character Stuff ___________________
+	public var OPP_X:Float = 100;
+	public var OPP_Y:Float = 100;
+
 	public var PLY_X:Float = 770;
 	public var PLY_Y:Float = 100;
+	public var CNT_X:Float = 400;
+	public var CNT_Y:Float = 130;
 
 	public var playerCameraOffsets:String;
 
+	public var opponentGroup:FlxSpriteGroup;
 	public var playerGroup:FlxSpriteGroup;
+	public var centerGroup:FlxSpriteGroup;
+
+	public var opponent:Character = null;
 	public var player:Character = null;
+	public var center:Character = null;
 
 	// ___________________ Camera Stuff ___________________
 	public var camGame:FlxCamera;
