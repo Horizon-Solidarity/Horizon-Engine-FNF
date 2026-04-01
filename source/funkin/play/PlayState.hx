@@ -1,11 +1,10 @@
 package funkin.play;
 
 import flixel.FlxState;
+import funkin.api.scripting.ScriptManager;
 import funkin.backend.game.system.IMusicBeatSystem;
 import funkin.objects.Character;
 import funkin.play.ui.UI;
-
-import funkin.api.scripting.ScriptManager;
 
 class PlayState extends MusicBeatState
 {
@@ -15,6 +14,7 @@ class PlayState extends MusicBeatState
 
 	public var PLY_X:Float = 770;
 	public var PLY_Y:Float = 100;
+
 	public var CNT_X:Float = 400;
 	public var CNT_Y:Float = 130;
 
@@ -71,11 +71,18 @@ class PlayState extends MusicBeatState
 	{
 		player = new Character(20, 20, 'bf');
 		add(player);
+		opponent = new Character(20, 20, 'dad');
+		add(opponent);
+
 		PLY_X = 770 + player.sprPosition[0];
 		PLY_Y = 100 + player.sprPosition[1];
+		OPP_X = 100 + opponent.sprPosition[0];
+		OPP_Y = 100 + opponent.sprPosition[1];
 
 		playerGroup = new FlxSpriteGroup(PLY_X, PLY_Y);
 		playerGroup.add(player);
+		opponentGroup = new FlxSpriteGroup(OPP_X, OPP_Y);
+		opponentGroup.add(opponent);
 	}
 
     override public function update(elapsed:Float)
