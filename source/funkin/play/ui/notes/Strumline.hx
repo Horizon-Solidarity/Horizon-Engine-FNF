@@ -74,7 +74,7 @@ class Strumline extends FlxTypedSpriteGroup<FunkinSprite>
 			}
 		}
 
-		members.sort(function(a, b)
+		sort(function(i, a, b)
 		{
 			if (a is Receptor)
 				return -1;

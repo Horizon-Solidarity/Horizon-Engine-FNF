@@ -5,6 +5,7 @@ import flixel.util.typeLimit.NextState;
 
 import funkin.api.scripting.ScriptManager;
 import funkin.objects.Character;
+import funkin.data.songs.SongData.ChartEventsData;
 import funkin.data.songs.SongData.SongCharacterData;
 import funkin.play.ui.UI;
 import funkin.play.ui.notes.*;
@@ -41,9 +42,13 @@ class PlayState extends MusicBeatState
 	public var song(get, never):Song;
 	function get_song() return playlist[0];
 
+	public var events:Array<ChartEventsData> = [];
+
 	public var ui:UI;
 
 	public var instrumental:FlxSound;
+
+	public var stage:Stage;
 
 	public var skipCountdown:Bool = false;
 	
@@ -79,6 +84,9 @@ class PlayState extends MusicBeatState
 		instrumental.loadEmbedded(Paths.inst(song.id, song.variation));
 		FlxG.sound.list.add(instrumental);
 		instrumental.onComplete = endSong;
+
+		stage = new Stage(song.stage);
+		add(stage);
 
 		var loadedVocals = [];
 
@@ -116,7 +124,7 @@ class PlayState extends MusicBeatState
 			strumline.setPosition(characterData.strumline.offset[0], strumLineY + characterData.strumline.offset[1]);
 
 			var character = new Character(characterData.id);
-			add(character);
+			stage.addCharacter(character, characterData.type);
 
 			strumline.onNoteHit.add(function(n){
 				playSingAnim(character, n);
@@ -129,6 +137,8 @@ class PlayState extends MusicBeatState
 
 				strumline.onNoteHit.add(playerNoteHit);
 				strumline.onNoteMiss.add(playerNoteMiss);
+
+				character.flipX = !character.flipX;
 			}
 			else
 				strumline.x += 25;
@@ -145,6 +155,8 @@ class PlayState extends MusicBeatState
 			if (obj.vocal.length > 0)
 				obj.vocal.play();
 		}
+
+		camGame.focusOn(player.getPosition() - player.cameraOffset);
 	}
 
     override public function update(elapsed:Float)
@@ -222,7 +234,7 @@ class PlayState extends MusicBeatState
 		}
 		else
 		{
-			FlxG.switchState(new PlayState());
+			FlxG.switchState(PlayState.new);
 		}
 	}
 	

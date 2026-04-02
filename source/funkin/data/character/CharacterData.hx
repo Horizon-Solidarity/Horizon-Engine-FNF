@@ -5,6 +5,10 @@ import funkin.data.animation.AnimationData;
 enum abstract CharacterRenderType(String) from String to String
 {
   /**
+   * Renders the character using a single graphic.
+   */
+    public var Image = 'image';
+  /**
    * Renders the character using a single spritesheet and XML data.
    */
     public var Sparrow = 'sparrow';

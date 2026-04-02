@@ -8,7 +8,9 @@ class Character extends FunkinSprite
 	public var id:String;
 	public var data:CharacterMetadata;
 
-	// _____________________ search variables _____________________
+	public var cameraOffset:FlxPoint = FlxPoint.get();
+	public var characterOrigin(get, never):FlxPoint;
+
 	public var specialAnim:Bool = false;
 	public var idleSuffix:String = '';
 
@@ -23,6 +25,7 @@ class Character extends FunkinSprite
 
 		if (Conductor.instance != null)
 			Conductor.instance.onBeatHit.add(beatHit);
+		centerOrigin();
 
 		changeCharacter(charName);
 	}
@@ -42,6 +45,8 @@ class Character extends FunkinSprite
 		}
 
 		scale.set(data.scale[0], data.scale[1]);
+		flipX = data.flipX;
+		flipY = data.flipY;
 		updateHitbox();
 
 		antialiasing = (ClientPrefs.data.antialiasing && data.antialiasing);
@@ -64,11 +69,11 @@ class Character extends FunkinSprite
 
 	function beatHit(beat:Int)
 	{
-		if (Conductor.instance.curBeat + 2 >= lastSingBeat)
+		if (Conductor.instance.curBeat - lastSingBeat >= 2)
 		{
 			if (animation.exists(animation.name + "-end"))
 			{
-				playAnimation(animation.name + "-end");
+				playAnimation(animation.name + "-end", true);
 				return;
 			}
 			dance(beat);
@@ -101,4 +106,10 @@ class Character extends FunkinSprite
 		super.playAnimation(anim, force);
 	}
 
+	function get_characterOrigin()
+	{
+		var xPos = (width / 2);
+		var yPos = (height);
+		return FlxPoint.get(xPos, yPos);
+	}
 }

@@ -1,20 +1,21 @@
 package funkin.data.stages;
 
+import funkin.data.character.CharacterData;
+import funkin.data.animation.AnimationData;
+
 class StageMetadata
 {
     public static inline final DEFAULT_STAGE_ID:String = "stage";
 
 
-    var directory:String;
+    public var directory:String;
     @:default("Unknown")
-    var name:String;
-    @:default(1.1)
-    var cameraSpeed:Float;
-    @:default(0.7)
-    var cameraZoom:Float;
+    public var name:String;
+    public var camera:StageCameraData;
     
-    var character:StageCharacterMetadata;
-    // var props:Array<StagePropsData>;
+    public var characters:StageCharacterMetadata;
+    public var props:Array<StagePropData>;
+
 
     public static inline function fromStageId(id:String)
 	{
@@ -24,7 +25,7 @@ class StageMetadata
 			id = DEFAULT_STAGE_ID;
 		}
 
-		var parser = new json2object.JsonParser<CharacterMetadata>();
+		var parser = new json2object.JsonParser<StageMetadata>();
 
 		try
 		{
@@ -40,16 +41,49 @@ class StageMetadata
 	}
 }
 
+typedef StageCameraData =
+{
+	@:default(1.9)
+    var speed:Float;
+	@:default(0.7)
+    var zoom:Float;
+}
+
+typedef BasePropData = {
+	var zIndex:Int;
+	@:default([0, 0])
+    var position:Array<Float>;
+	@:default([1, 1])
+	var scale:Array<Float>;
+}
+
 typedef StageCharacterMetadata =
 {
     var player:StageCharacterData;
-    var opponent:StageCharacterData;
     var spectator:StageCharacterData;
+	var opponent:StageCharacterData;
 }
 
 typedef StageCharacterData =
 {
-    var zIndex:Int;
-    var position:Array<Float>;
-    var cameraPos:Array<Float>;
+	> BasePropData,
+	@:default([])
+    var cameraOffset:Array<Float>;
+}
+
+typedef StagePropData =
+{
+	> BasePropData,
+	var assetPath:String;
+	var renderType:CharacterRenderType;
+	@:default([1, 1])
+	var scrollFactor:Array<Float>;
+	@:default(true)
+	var antialiasing:Bool;
+	@:default([])
+	var animations:Array<NamedAnimationData>;
+	@:default(false)
+	var flipX:Bool;
+	@:default(false)
+	var flipY:Bool;
 }
