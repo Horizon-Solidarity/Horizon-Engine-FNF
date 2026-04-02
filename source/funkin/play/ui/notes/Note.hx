@@ -22,6 +22,8 @@ class Note extends FunkinSprite
 
 	public var state:NoteState = NORMAL;
 
+	public var animSuffix:String = "";
+
 	public function new(strumline:Strumline, data:ChartNoteData, skin:NoteskinMetadata)
 	{
 		super();
@@ -46,7 +48,20 @@ class Note extends FunkinSprite
 		this.playAnimation("default");
 
 		updateHitbox();
+		centerOrigin();
 
 		return value;
+	}
+
+	override function update(elapsed:Float)
+	{
+		super.update(elapsed);
+
+		if (state == HIT || state == MISSED || Conductor.instance == null || data == null)
+			return;
+		if (data.time > Conductor.instance.songPosition - Conductor.safeZone && data.time < Conductor.instance.songPosition + Conductor.safeZone)
+			state = HITTABLE;
+		else if (data.time < Conductor.instance.songPosition - Conductor.safeZone)
+			state = MISSED;
 	}
 }

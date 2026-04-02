@@ -11,24 +11,16 @@ class PlayState extends MusicBeatState
 	public static var instance:PlayState;
 
 	// ___________________ Character Stuff ___________________
-	public var OPP_X:Float = 100;
-	public var OPP_Y:Float = 100;
+	public var characters:Array<Character> = [];
 
-	public var PLY_X:Float = 770;
-	public var PLY_Y:Float = 100;
+	public var player(get, never):Character;
+	function get_player() return characters[0];
 
-	public var CNT_X:Float = 400;
-	public var CNT_Y:Float = 130;
+	public var opponent(get, never):Character;
+	function get_opponent() return characters[1];
 
-	public var playerCameraOffsets:String;
-
-	public var opponentGroup:FlxSpriteGroup;
-	public var playerGroup:FlxSpriteGroup;
-	public var centerGroup:FlxSpriteGroup;
-
-	public var opponent:Character = null;
-	public var player:Character = null;
-	public var center:Character = null;
+	public var spectator(get, never):Character;
+	function get_spectator() return characters[2];
 
 	// ___________________ Camera Stuff ___________________
 	public var camGame:FlxCamera;
@@ -81,7 +73,7 @@ class PlayState extends MusicBeatState
 
 		var loadedVocals = [];
 
-		for (character in song.characters)
+		for (characterData in song.characters)
 		{
 			var strumline = new Strumline(song.uiStyle, true, false, song.scrollSpeed);
 			strumline.scrollFactor.set();
@@ -90,20 +82,21 @@ class PlayState extends MusicBeatState
 
 			for (receptor in strumline.receptors)
 			{
-				receptor.scale.x *= character.strumline.scale;
-				receptor.scale.y *= character.strumline.scale;
+				receptor.scale.x *= characterData.strumline.scale;
+				receptor.scale.y *= characterData.strumline.scale;
 			}
 
-			strumline.visible = character.strumline.visible;
-			strumline.mania = character.strumline.keys;
+			strumline.visible = characterData.strumline.visible;
+			strumline.mania = characterData.strumline.keys;
 
-			for (note in character.strumline.notes)
+			for (note in characterData.strumline.notes)
 				strumline.addNoteQueue(note);
 
-			var p = Paths.voice(song.id, character.vocalSuffix, song.variation);
+			var p = Paths.voice(song.id, characterData.vocalSuffix, song.variation);
+			var vocal = new FlxSound(); // To match the index with other arrays, we put in empty instances even if they don't have a vocal file.
+
 			if (p != null && !loadedVocals.contains(p))
 			{
-				var vocal = new FlxSound();
 				vocal.loadEmbedded(p);
 				FlxG.sound.list.add(vocal);
 				voices.push(vocal);
@@ -112,48 +105,37 @@ class PlayState extends MusicBeatState
 			}
 			
 			var strumLineY:Float = ClientPrefs.data.downScroll ? (FlxG.height - 150) : 30;
-			strumline.setPosition(character.strumline.offset[0], strumLineY + character.strumline.offset[1]);
-			// TODO: setup actual characters here
+			strumline.setPosition(characterData.strumline.offset[0], strumLineY + characterData.strumline.offset[1]);
 
+			var character = new Character(0, 0, "bf");
+			add(character);
+			characters.push(character);
 
-			if (character == song.player)
+			strumline.onNoteHit.add(function(n){
+				playSingAnim(character, n);
+			});
+
+			if (characterData == song.player)
 			{
 				strumline.x += (FlxG.width / 2) + 50;
 				strumline.botplay = false;
 			}
-			if (character == song.opponent)
-			{
+			else
 				strumline.x += 25;
-			}
+
+			characters.push(character);
+			strumlines.push(strumline);
 		}
 
 		scripts = new ScriptManager();
 		scripts.loadFromFolder("scripts/play/", true);
 
-
-		setupCharacter();
-
 		instrumental.play();
 		for (voice in voices)
-			voice.play();
-	}
-
-	function setupCharacter()
-	{
-		player = new Character(20, 20, 'bf');
-		add(player);
-		opponent = new Character(20, 20, 'dad');
-		add(opponent);
-
-		PLY_X = 770 + player.sprPosition[0];
-		PLY_Y = 100 + player.sprPosition[1];
-		OPP_X = 100 + opponent.sprPosition[0];
-		OPP_Y = 100 + opponent.sprPosition[1];
-
-		playerGroup = new FlxSpriteGroup(PLY_X, PLY_Y);
-		playerGroup.add(player);
-		opponentGroup = new FlxSpriteGroup(OPP_X, OPP_Y);
-		opponentGroup.add(opponent);
+		{
+			if (voice.length > 0)
+				voice.play();
+		}
 	}
 
     override public function update(elapsed:Float)
@@ -172,7 +154,7 @@ class PlayState extends MusicBeatState
 			// who let me cook (syncing vocals)
 			for (voice in voices)
 			{
-				if ((instrumental.time - voice.time) > 10)
+				if (voice.playing && (instrumental.time - voice.time) > 10)
 					voice.time = instrumental.time;
 			}
 		}
@@ -185,19 +167,17 @@ class PlayState extends MusicBeatState
 
 	override function beatHit(beat:Int)
 	{
-	}
 
-	public function charBopping(beat:Int):Void
-	{
-		if (player != null && beat % player.charIdleBeat == 0 && !player.getAnimationName().startsWith('sing') && !player.stunned)
-			player.dance();
 	}
     
-	public function playerDance():Void
+	function playSingAnim(character:Character, note:Note)
 	{
-		var anim:String = player.getAnimationName();
-		if (player.holdTimer > conductor.stepCrochet * (0.0011 #if FLX_PITCH / FlxG.sound.music.pitch #end) * player.charSingingTime
-			&& anim.startsWith('sing') && !anim.endsWith('miss'))
-			player.dance();
+		character.playAnimation(character.singAnimations[note.data.lane] + note.animSuffix, true);
+		character.lastSingBeat = conductor.curBeat;
+	}
+
+	function playMissAnim(character:Character, direction:Int, suffix:String = "")
+	{
+		character.playAnimation(character.singAnimations[direction] + suffix + "-miss", true);
 	}
 }

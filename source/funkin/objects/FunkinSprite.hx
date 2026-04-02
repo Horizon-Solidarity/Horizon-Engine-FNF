@@ -27,10 +27,10 @@ class FunkinSprite extends FlxAnimate
         offsets.set(name, FlxPoint.get(data.offset[0], data.offset[1]));
     }
 
-    public function playAnimation(anim:String)
+    public function playAnimation(anim:String, force:Bool = false)
     {
         if (offsets.exists(anim))
             this.offset = offsets.get(anim);
-        animation.play(anim);
+        animation.play(anim, force);
     }
 }

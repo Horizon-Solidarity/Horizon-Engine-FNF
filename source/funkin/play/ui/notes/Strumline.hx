@@ -31,7 +31,7 @@ class Strumline extends FlxTypedSpriteGroup<FunkinSprite>
 	public var noteQueue:Array<ChartNoteData> = [];
 
 	public var onNoteHit:FlxTypedSignal<Note->Void> = new FlxTypedSignal<Note->Void>();
-	public var onNoteMiss:FlxTypedSignal<Note->Void> = new FlxTypedSignal<Note->Void>();
+	public var onNoteMiss:FlxTypedSignal<Null<Note>->Void> = new FlxTypedSignal<Null<Note>->Void>();
 
 	public function new(skin:String = DEFAULT_NOTE_SKIN, botplay:Bool = false, downscroll:Bool = false, speed:Float = 1)
 	{
@@ -75,11 +75,25 @@ class Strumline extends FlxTypedSpriteGroup<FunkinSprite>
 			}
 		}
 
+		members.sort(function(a, b)
+		{
+			if (a is Receptor)
+				return -1;
+			else if (a is Note && b is Note)
+			{
+				if (cast(a, Note).data.time > cast(b, Note).data.time)
+					return -1;
+				else
+					return 1;
+			}
+			return -1;
+		});
+
 		for (note in notes)
 		{
-			if (note.state == NORMAL)
+			if (note.state != HIT)
 			{
-				var targetX:Float = receptors[note.data.lane].x + 22; // wtf
+				var targetX:Float = receptors[note.data.lane].x + 25; // wtf
 				var targetY:Float = receptors[note.data.lane].y + 0.45 * (Conductor.instance.songPosition - note.data.time) * speed * (downscroll ? 1 : -1);
 				note.setPosition(targetX, targetY);
 				
@@ -87,12 +101,51 @@ class Strumline extends FlxTypedSpriteGroup<FunkinSprite>
 					noteHit(note);
 			}
 		}
+		
+		// INPUT HANDLING
+		for (i in 0...directions.length)
+		{
+			if (!botplay && Controls.instance.justPressed(inputs[i]))
+			{
+				var targetNote:Note = null;
+				for (note in notes)
+					if (note.state == HITTABLE && note.data.lane == i)
+					{
+						targetNote = note;
+						break;
+					}
+				if (targetNote != null)
+					noteHit(targetNote);
+				else
+				{
+					receptors[i].playAnimation("pressed");
+					if (!ClientPrefs.data.ghostTapping)
+						noteMiss(null);
+				}
+			}
+			else if ((receptors[i].animation.finished && botplay) || Controls.instance.justReleased(inputs[i]))
+				receptors[i].playAnimation("static");
+		}
 	}
 
 	public function noteHit(note:Note)
 	{
+		receptors[note.data.lane].playAnimation("confirm", true);
+
+		onNoteHit.dispatch(note);
+
 		notes.remove(note);
 		note.destroy();
+	}
+
+	public function noteMiss(note:Null<Note>)
+	{
+		onNoteHit.dispatch(note);
+		if (note != null)
+		{
+			notes.remove(note);
+			note.destroy();
+		}
 	}
 
 	function set_skinId(value:String):String

@@ -7,11 +7,12 @@ import flixel.util.FlxDestroyUtil;
 import flixel.util.FlxSort;
 import funkin.data.animation.AnimationData;
 import funkin.data.character.CharacterData;
+import funkin.objects.FunkinSprite;
 import haxe.Json;
 import openfl.utils.AssetType;
 import openfl.utils.Assets;
 
-class Character extends FlxSprite
+class Character extends FunkinSprite
 {
 	public static var CHARACTER_DEFAULT_SPRITE:String = 'characters/BOYFRIEND';
 
@@ -41,18 +42,22 @@ class Character extends FlxSprite
 	// _____________________ search variables _____________________
 	public var stunned:Bool = false;
 	public var debugMode:Bool = false;
-	public var skipDance:Bool = false;
 	public var specialAnim:Bool = false;
-	public var danceIdle:Bool = false;
-	public var danced:Bool = false;
 	public var idleSuffix:String = '';
-	public var holdTimer:Float = 0;
+
+	public var lastSingBeat:Float = 0;
+
+	public var danceAnimations:Array<String> = ["idle"];
+	public var singAnimations:Array<String> = ["singLEFT", "singDOWN", "singUP", "singRIGHT"];
 
 	public function new(x:Float = 0, y:Float = 0, ?charName:String = 'bf')
 	{
 		super(x, y);
 
 		animOffsets = new Map<String, Array<Dynamic>>();
+
+		if (Conductor.instance != null)
+			Conductor.instance.onBeatHit.add(beatHit);
 
 		changeCharacter(charName);
 	}
@@ -72,8 +77,7 @@ class Character extends FlxSprite
 		{
 			trace('Error loading character file of "$charID": $e');
 		}
-		skipDance = false;
-		recalculateDanceIdle();
+
 		dance();
 	}
 
@@ -152,58 +156,39 @@ class Character extends FlxSprite
 		}
 
 		if (specialAnim && isAnimationFinished())
-		{
 			specialAnim = false;
-			dance();
-		}
-		else if (getAnimationName().endsWith('miss') && isAnimationFinished())
-		{
-			dance();
-			finishAnimation();
-		}
 
-		if (getAnimationName().startsWith('sing'))
-			holdTimer += elapsed;
-
-		if (holdTimer >= Conductor.instance.stepCrochet * (0.0011 #if FLX_PITCH / (FlxG.sound.music != null ? FlxG.sound.music.pitch : 1) #end) * charSingingTime)
-		{
-			dance();
-			holdTimer = 0;
-		}
 		super.update(elapsed);
 	}
 
-	public function dance()
+	function beatHit(beat:Int)
 	{
-		if (!debugMode && !skipDance && !specialAnim)
+		if (Conductor.instance.curBeat + 2 >= lastSingBeat)
 		{
-			if (danceIdle)
+			if (animation.exists(animation.name + "-end"))
 			{
-				danced = !danced;
-
-				if (danced)
-					playAnim('danceRight' + idleSuffix);
-				else
-					playAnim('danceLeft' + idleSuffix);
+				playAnimation(animation.name + "-end");
+				return;
 			}
-			else if (hasAnimation('idle' + idleSuffix))
-				playAnim('idle' + idleSuffix);
+			dance(beat);
 		}
 	}
 
-	var _lastPlayedAnimation:String;
+	var danceIndex:Int = 0;
 
-    public function playAnim(isAnimName:String, isForce:Bool = false, isReversed:Bool = false, isFrame:Int = 0)
-    {
-		specialAnim = false;
-        animation.play(isAnimName, isForce, isReversed, isFrame);
-        _lastPlayedAnimation = isAnimName;
-		if (hasAnimation(isAnimName))
+	function dance(beat:Int = 0)
+	{
+		var mod = danceAnimations.length > 1 ? 1 : 2;
+
+		if (beat % mod == 0)
 		{
-			var daOffset = animOffsets.get(isAnimName);
-			offset.set(daOffset[0], daOffset[1]);
+			playAnimation(danceAnimations[danceIndex]);
+			danceIndex += 1;
+			if (danceIndex >= danceAnimations.length)
+				danceIndex = 0;
 		}
-    }
+	}
+
 	public function addAnimByPrefix(animName:String, prefix:String, fps:Int = 24, looped:Bool = false, ?flipX:Bool = false, ?flipY:Bool = false)
 	{
 		animation.addByPrefix(animName, prefix, fps, looped, flipX, flipY);
@@ -223,11 +208,6 @@ class Character extends FlxSprite
 	inline public function isAnimationNull():Bool
 	{
 		return (animation.curAnim == null);
-	}
-
-	inline public function getAnimationName():String
-	{
-		return _lastPlayedAnimation;
 	}
 
 	public function isAnimationFinished():Bool
@@ -271,26 +251,4 @@ class Character extends FlxSprite
 	}
 
 	private var settingCharacterUp:Bool = true;
-
-	public function recalculateDanceIdle()
-	{
-		var lastDanceIdle:Bool = danceIdle;
-		danceIdle = (hasAnimation('danceLeft' + idleSuffix) && hasAnimation('danceRight' + idleSuffix));
-
-		if (settingCharacterUp)
-		{
-			charIdleBeat = (danceIdle ? 1 : 2);
-		}
-		else if (lastDanceIdle != danceIdle)
-		{
-			var calc:Float = charIdleBeat;
-			if (danceIdle)
-				calc /= 2;
-			else
-				calc *= 2;
-
-			charIdleBeat = Math.round(Math.max(calc, 1));
-		}
-		settingCharacterUp = false;
-	}
 }
