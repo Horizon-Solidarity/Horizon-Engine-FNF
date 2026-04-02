@@ -24,7 +24,6 @@ import flixel.util.FlxTimer;
 import funkin.Paths;
 import funkin.backend.*;
 import funkin.backend.game.*;
-import funkin.backend.game.Controls;
 import funkin.backend.save.ClientPrefs;
 import funkin.play.*;
 // import funkin.ui.mainmenu.MainMenuState;

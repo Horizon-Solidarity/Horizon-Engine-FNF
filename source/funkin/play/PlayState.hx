@@ -2,9 +2,9 @@ package funkin.play;
 
 import flixel.FlxState;
 import funkin.api.scripting.ScriptManager;
-import funkin.backend.game.system.IMusicBeatSystem;
 import funkin.objects.Character;
 import funkin.play.ui.UI;
+import funkin.play.ui.notes.*;
 
 class PlayState extends MusicBeatState
 {
@@ -56,7 +56,7 @@ class PlayState extends MusicBeatState
 		instance = this;
 
 		if (song == null)
-			song = Song.fromId("ugh", "hard", "pico");
+			song = Song.fromSongId("ugh", "hard", "pico");
 
 		camGame = new FlxCamera();
 		camHUD = new FlxCamera();
@@ -83,15 +83,17 @@ class PlayState extends MusicBeatState
 
 		for (character in song.characters)
 		{
-			var strumY:Float = 40;
-			// TODO: Check downscroll option
-
-			var strumline = new Strumline(character.strumline.offset[0], strumY + character.strumline.offset[1], song.uiStyle, true, false, song.scrollSpeed);
+			var strumline = new Strumline(song.uiStyle, true, false, song.scrollSpeed);
 			strumline.scrollFactor.set();
 			strumline.cameras = [camHUD];
 			add(strumline);
 
-			strumline.scale.set(character.strumline.scale, character.strumline.scale);
+			for (receptor in strumline.receptors)
+			{
+				receptor.scale.x *= character.strumline.scale;
+				receptor.scale.y *= character.strumline.scale;
+			}
+
 			strumline.visible = character.strumline.visible;
 			strumline.mania = character.strumline.keys;
 
@@ -109,6 +111,8 @@ class PlayState extends MusicBeatState
 				loadedVocals.push(p);
 			}
 			
+			var strumLineY:Float = ClientPrefs.data.downScroll ? (FlxG.height - 150) : 30;
+			strumline.setPosition(character.strumline.offset[0], strumLineY + character.strumline.offset[1]);
 			// TODO: setup actual characters here
 
 
@@ -117,6 +121,10 @@ class PlayState extends MusicBeatState
 				strumline.x += (FlxG.width / 2) + 50;
 				strumline.botplay = false;
 			}
+			if (character == song.opponent)
+			{
+				strumline.x += 25;
+			}
 		}
 
 		scripts = new ScriptManager();
@@ -124,6 +132,10 @@ class PlayState extends MusicBeatState
 
 
 		setupCharacter();
+
+		instrumental.play();
+		for (voice in voices)
+			voice.play();
 	}
 
 	function setupCharacter()

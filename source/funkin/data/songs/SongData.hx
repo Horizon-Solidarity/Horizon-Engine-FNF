@@ -2,6 +2,7 @@ package funkin.data.songs;
 
 typedef SongChartData =
 {
+	var bpm:Float;
 	@:default(1)
 	var scrollSpeed:Float;
 	@:default([])
@@ -18,7 +19,6 @@ typedef SongChartData =
 typedef SongCharacterData =
 {
 	var id:String;
-	@:default(CharacterType.PLAYER)
 	var type:CharacterType;
 	@:default("")
 	var vocalSuffix:String;

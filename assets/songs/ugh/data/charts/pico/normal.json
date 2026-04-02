@@ -2,7 +2,7 @@
 	"uiStyle": "funkin",
 	"characters": [
 		{
-			"vocalSuffix": "-pico-playable",
+			"vocalSuffix": "-pico",
 			"strumline": {
 				"scale": 1,
 				"offset": [

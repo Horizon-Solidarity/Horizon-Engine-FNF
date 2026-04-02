@@ -1,5 +1,6 @@
 package funkin.play.ui.notes;
 
+import funkin.objects.FunkinSprite;
 import funkin.data.ui.NoteskinData;
 import sys.io.File;
 

@@ -1,8 +1,6 @@
 package funkin.backend;
 
-import mogato.song.formats.ChartFormat;
 import flixel.util.FlxSignal.FlxTypedSignal;
-import flixel.system.FlxSound;
 
 typedef BPMChange = {
 	var bpm:Float;
@@ -15,15 +13,12 @@ class Conductor extends flixel.FlxBasic {
 
 	public static var instance:Conductor;
 	
-	public var bpm(default, set):Float = 100;
-	private function set_bpm(newBPM:Float) {
-		crochet = (60 / newBPM) * 1000;
-		stepCrochet = crochet / 4;
-		return bpm = newBPM;
-	}
+	public var bpm:Float = 100;
 
-	public var crochet:Float = 0;
-	public var stepCrochet:Float = 0;
+	public var crochet(get, never):Float;
+	function get_crochet() return (60 / bpm) * 1000;
+	public var stepCrochet(get, never):Float;
+	function get_stepCrochet() return crochet / 4;
 
 	public var onStepHit:FlxTypedSignal<Int->Void> = new FlxTypedSignal<Int->Void>();
 	public var onBeatHit:FlxTypedSignal<Int->Void> = new FlxTypedSignal<Int->Void>();
@@ -35,37 +30,10 @@ class Conductor extends flixel.FlxBasic {
 	public var curStep:Int = 0;
 	public var curBeat:Int = 0;
 
-	override public function new(song:ChartFormat)
+	override public function new()
 	{
 		super();
-
 		instance = this;
-
-		bpmChanges = [];
-
-		var time:Float = 0;
-		var step:Float = 0;
-
-		bpm = song.bpm;
-		crochet = (60 / bpm) * 1000;
-		stepCrochet = crochet / 4;
-
-		for(e in song.events) {
-			if(e.name == "BPM Change") {
-				if(Std.parseFloat(e.data.bpm) == song.bpm) continue;
-
-				var steps:Float = (e.time - time) / ((60 / song.bpm) * 1000 / 4);
-				step += steps;
-				time = e.time;
-				song.bpm = e.data.bpm;
-
-				bpmChanges.push({
-					step: step,
-					time: time,
-					bpm: song.bpm
-				});
-			}
-		}
 	}
 
 	override public function update(elapsed:Float) {

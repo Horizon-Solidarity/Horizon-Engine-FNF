@@ -1,7 +1,5 @@
 package funkin.api.scripting;
 
-import funkin.backend.game.MusicBeatState;
-
 enum ScriptType
 {
     LUA;

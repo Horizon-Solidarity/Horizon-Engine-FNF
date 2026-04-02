@@ -1,10 +1,10 @@
 package funkin.data.songs;
 
-import funkin.play.Song;
+import funkin.play.Song.ChartFormat;
 
 typedef SongMetadata =
 {
-    @:default(Song.DEFAULT_CHART_FORMAT)
+    @:default("0.0.1")
     var version:String;
 
 	var name:String;
@@ -17,7 +17,7 @@ typedef SongMetadata =
     var credits:SongCredits;
 
 
-    @:default(Song.HORIZON_CONVERTED)
+    @:default("Unknown")
     var generatedBy:String;
 }
 
@@ -29,7 +29,7 @@ typedef SongCredits =
     var charter:String;
 
     @:default('Unknown Animator')
-    var animatior:String;
+    var animator:String;
 
     @:default('Unknown Coder')
     var coder:String;

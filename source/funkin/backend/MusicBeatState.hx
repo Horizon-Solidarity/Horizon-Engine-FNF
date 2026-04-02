@@ -1,4 +1,4 @@
-package funkin.backend.game;
+package funkin.backend;
 
 import flixel.FlxState;
 import funkin.backend.Conductor;

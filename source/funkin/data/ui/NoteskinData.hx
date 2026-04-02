@@ -7,6 +7,7 @@ typedef NoteskinMetadata =
     var name:String;
     @:default("Unknown")
     var author:String;
+    var folder:String;
     var assets:NoteskinAssetsData;
 }
 
@@ -23,9 +24,13 @@ typedef NoteskinData =
 {
     var assetPath:String;
     @:default(1)
+    var scale:Float;
+    @:default(1)
     var alpha:Float;
     @:default([0, 0])
     var offset:Array<Float>;
     @:default([])
-    var animations:Map<String, Array<AnimationData>>;
+    var animations:Map<String, Array<UnnamedAnimationData>>;
+    @:default(true)
+    var antialiasing:Bool;
 }

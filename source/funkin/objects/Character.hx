@@ -5,7 +5,6 @@ import flixel.graphics.frames.FlxFramesCollection;
 import flixel.util.FlxColor;
 import flixel.util.FlxDestroyUtil;
 import flixel.util.FlxSort;
-import funkin.backend.game.system.IMusicBeatSystem;
 import funkin.data.animation.AnimationData;
 import funkin.data.character.CharacterData;
 import haxe.Json;
@@ -132,9 +131,9 @@ class Character extends FlxSprite
 					addAnimByPrefix(animName, animPrefix, animFps, animLoop, animFlipX, animFlipY);
 				}
 
-				if (anim.offsets != null && anim.offsets.length > 1)
+				if (anim.offset != null && anim.offset.length > 1)
 				{
-					addOffset(anim.name, anim.offsets[0], anim.offsets[1]);
+					addOffset(anim.name, anim.offset[0], anim.offset[1]);
 				}
 			}
 		}
@@ -166,7 +165,7 @@ class Character extends FlxSprite
 		if (getAnimationName().startsWith('sing'))
 			holdTimer += elapsed;
 
-		if (holdTimer >= IMusicBeatSystem.stepCrochet * (0.0011 #if FLX_PITCH / (FlxG.sound.music != null ? FlxG.sound.music.pitch : 1) #end) * charSingingTime)
+		if (holdTimer >= Conductor.instance.stepCrochet * (0.0011 #if FLX_PITCH / (FlxG.sound.music != null ? FlxG.sound.music.pitch : 1) #end) * charSingingTime)
 		{
 			dance();
 			holdTimer = 0;
