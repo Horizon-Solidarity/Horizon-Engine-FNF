@@ -4,7 +4,7 @@ import funkin.play.ui.notes.types.ScriptedNote;
 
 class BlazinPunchHighNote extends ScriptedNote
 {
-    public function new(note:Int)
+	public function new()
     {
 		super("Punch High", "weekend-1-punchhigh");
     }
@@ -12,7 +12,7 @@ class BlazinPunchHighNote extends ScriptedNote
 
 class BlazinPunchHighDodgedNote extends ScriptedNote
 {
-    public function new(note:Int)
+	public function new()
     {
 		super("Punch High (Dodge)", "weekend-1-punchhighdodged");
     }
