@@ -78,6 +78,8 @@ class Strumline extends FlxTypedSpriteGroup<FunkinSprite>
 		{
 			if (a is Receptor)
 				return -1;
+			else if (a is Note && b is Receptor)
+				return 1;
 			else if (a is Note && b is Note)
 			{
 				if (cast(a, Note).data.time > cast(b, Note).data.time)
