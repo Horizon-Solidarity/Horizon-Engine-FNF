@@ -12,8 +12,7 @@ class Strumline extends FlxTypedSpriteGroup<FunkinSprite>
 {
 	public static inline final DEFAULT_NOTE_SKIN:String = 'funkin';
 
-	public var skin:NoteskinMetadata;
-	public var skinId(default, set):String;
+	public var skinId:String;
 
 	public var directions:Array<String> = ["left", "down", "up", "right"];
 	public var mania(default, set):Int;
@@ -69,7 +68,7 @@ class Strumline extends FlxTypedSpriteGroup<FunkinSprite>
 				var data = noteQueue[0];
 				noteQueue.remove(data);
 
-				var note = new Note(this, data, skin);
+				var note = new Note(this, data, skinId);
 				add(note);
 				notes.push(note);
 			}
@@ -148,26 +147,22 @@ class Strumline extends FlxTypedSpriteGroup<FunkinSprite>
 		}
 	}
 
-	function set_skinId(value:String):String
-	{
-		skinId = value;
-		if (Paths.json("ui/noteskins" + skinId) == null)
-			skinId = DEFAULT_NOTE_SKIN;
-		var parser = new json2object.JsonParser<NoteskinMetadata>();
-		parser.fromJson(File.getContent(Paths.json("ui/noteskins/" + skinId)));
-		skin = parser.value;
-		return skinId;
-	}
-
 	function set_mania(value:Int):Int
 	{
 		if (mania == value)
 			return mania;
 		mania = value;
-		
+		reloadReceptors();
+		return mania;
+	}
+
+	function reloadReceptors()
+	{
 		for (receptor in receptors)
 			receptor.destroy();
 		receptors = [];
+
+		var skin = NoteskinMetadata.fromSkinId(skinId);
 
 		for (i in 0...mania)
 		{
@@ -191,7 +186,5 @@ class Strumline extends FlxTypedSpriteGroup<FunkinSprite>
 			receptors.push(receptor);
 			add(receptor);
 		}
-
-		return mania;
 	}
 }

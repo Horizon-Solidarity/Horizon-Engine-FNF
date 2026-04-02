@@ -1,46 +1,163 @@
 {
-    "name": "Daddy Dearest",
-    "assetPath": "characters/DADDY_DEAREST",
-    "renderType": "sparrow",
-    "isPixel": false,
-    "flipX": false,
-    "offsets": [2, 16],
-    "cameraOffsets": [-2, 9],
-    "idleBeat": 2,
-    "singTime": 8.0,
-    "sustainAnim": false,
-    "ghostEffect": false,
-    "healthIcon": {
-        "iconID": "dad",
-        "bar": {
-            "colored": false
-        }
-    },
-    "animations": [
-        {
-            "name": "idle",
-            "prefix": "Dad idle dance",
-            "frameRate": 24
-        },
-        {
-            "name": "singLeft",
-            "prefix": "dad sing note right",
-            "frameRate": 24
-        },
-        {
-            "name": "singDown",
-            "prefix": "Dad Sing Note DOWN",
-            "frameRate": 24
-        },
-        {
-            "name": "singUp",
-            "prefix": "Dad Sing note UP",
-            "frameRate": 24
-        },
-        {
-            "name": "singRight",
-            "prefix": "Dad Sing Note LEFT",
-            "frameRate": 24
-        }
-    ]
+	"assetPath": "characters/DADDY_DEAREST",
+	"flipX": false,
+	"name": "Daddy Dearest",
+	"scale": [
+		1,
+		1
+	],
+	"offset": [
+		0,
+		0
+	],
+	"cameraOffset": [
+		0,
+		0
+	],
+	"danceAnimations": [
+		"idle"
+	],
+	"renderType": "sparrow",
+	"healthIcon": {
+		"id": "dad",
+		"bar": {
+			"colored": false
+		}
+	},
+	"flipY": false,
+	"antialiasing": true,
+	"loopOnHold": false,
+	"animations": [
+		{
+			"flipX": false,
+			"prefix": "idle",
+			"name": "idle",
+			"offset": [
+				0,
+				0
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "idle",
+			"name": "idle-hold",
+			"offset": [
+				0,
+				0
+			],
+			"looped": true,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "singLEFT",
+			"name": "singLEFT",
+			"offset": [
+				-10,
+				10
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "singLEFT",
+			"name": "singLEFT-hold",
+			"offset": [
+				-10,
+				10
+			],
+			"looped": true,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "singDOWN",
+			"name": "singDOWN",
+			"offset": [
+				0,
+				-30
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "singDOWN",
+			"name": "singDOWN-hold",
+			"offset": [
+				0,
+				-30
+			],
+			"looped": true,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "singUP",
+			"name": "singUP",
+			"offset": [
+				-6,
+				50
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "singUP",
+			"name": "singUP-hold",
+			"offset": [
+				-6,
+				50
+			],
+			"looped": true,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "singRIGHT",
+			"name": "singRIGHT",
+			"offset": [
+				0,
+				27
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "singRIGHT",
+			"name": "singRIGHT-hold",
+			"offset": [
+				0,
+				27
+			],
+			"looped": true,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		}
+	],
+	"doubleGhost": true
 }

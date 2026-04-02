@@ -1,26 +1,36 @@
 package funkin.play;
 
 import flixel.FlxState;
+import flixel.util.typeLimit.NextState;
+
 import funkin.api.scripting.ScriptManager;
 import funkin.objects.Character;
+import funkin.data.songs.SongData.SongCharacterData;
 import funkin.play.ui.UI;
 import funkin.play.ui.notes.*;
 
 class PlayState extends MusicBeatState
 {
+	// ___________________ Static Variables ___________________
+	public static var playlist:Array<Song> = [];
+	
 	public static var instance:PlayState;
+	public static var exitState:NextState;
+
+	// public static var levelData:
+	// public static var storyStats:Float = 0;
 
 	// ___________________ Character Stuff ___________________
-	public var characters:Array<Character> = [];
+	public var characterObjects:Map<SongCharacterData, {vocal:FlxSound, character:Character, strumline:Strumline}> = [];
 
 	public var player(get, never):Character;
-	function get_player() return characters[0];
+	function get_player() return characterObjects.get(song.player).character;
 
 	public var opponent(get, never):Character;
-	function get_opponent() return characters[1];
+	function get_opponent() return characterObjects.get(song.opponent).character;
 
 	public var spectator(get, never):Character;
-	function get_spectator() return characters[2];
+	function get_spectator() return characterObjects.get(song.spectator).character;
 
 	// ___________________ Camera Stuff ___________________
 	public var camGame:FlxCamera;
@@ -28,14 +38,12 @@ class PlayState extends MusicBeatState
 	public var camOther:FlxCamera;
 
 	// ___________________ Gameplay Stuff ___________________
-	public var song:Song;
+	public var song(get, never):Song;
+	function get_song() return playlist[0];
 
 	public var ui:UI;
 
-	public var strumlines:Array<Strumline> = [];
-
 	public var instrumental:FlxSound;
-	public var voices:Array<FlxSound> = [];
 
 	public var skipCountdown:Bool = false;
 	
@@ -47,8 +55,8 @@ class PlayState extends MusicBeatState
 		super.create();
 		instance = this;
 
-		if (song == null)
-			song = Song.fromSongId("ugh", "hard", "pico");
+		if (playlist.length == 0)
+			playlist.push(Song.fromSongId("ugh", "hard", "pico"));
 
 		camGame = new FlxCamera();
 		camHUD = new FlxCamera();
@@ -62,7 +70,7 @@ class PlayState extends MusicBeatState
 
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
 
-		ui = new UI();
+		ui = new UI(song.uiStyle);
 		ui.cameras = [camHUD];
 		ui.scrollFactor.set();
 		add(ui);
@@ -70,12 +78,13 @@ class PlayState extends MusicBeatState
 		instrumental = new FlxSound();
 		instrumental.loadEmbedded(Paths.inst(song.id, song.variation));
 		FlxG.sound.list.add(instrumental);
+		instrumental.onComplete = endSong;
 
 		var loadedVocals = [];
 
 		for (characterData in song.characters)
 		{
-			var strumline = new Strumline(song.uiStyle, true, false, song.scrollSpeed);
+			var strumline = new Strumline(characterData.strumline.noteskin, true, false, song.scrollSpeed);
 			strumline.scrollFactor.set();
 			strumline.cameras = [camHUD];
 			add(strumline);
@@ -99,7 +108,6 @@ class PlayState extends MusicBeatState
 			{
 				vocal.loadEmbedded(p);
 				FlxG.sound.list.add(vocal);
-				voices.push(vocal);
 
 				loadedVocals.push(p);
 			}
@@ -107,9 +115,8 @@ class PlayState extends MusicBeatState
 			var strumLineY:Float = ClientPrefs.data.downScroll ? (FlxG.height - 150) : 30;
 			strumline.setPosition(characterData.strumline.offset[0], strumLineY + characterData.strumline.offset[1]);
 
-			var character = new Character(0, 0, "bf");
+			var character = new Character(characterData.id);
 			add(character);
-			characters.push(character);
 
 			strumline.onNoteHit.add(function(n){
 				playSingAnim(character, n);
@@ -119,22 +126,24 @@ class PlayState extends MusicBeatState
 			{
 				strumline.x += (FlxG.width / 2) + 50;
 				strumline.botplay = false;
+
+				strumline.onNoteHit.add(playerNoteHit);
+				strumline.onNoteMiss.add(playerNoteMiss);
 			}
 			else
 				strumline.x += 25;
 
-			characters.push(character);
-			strumlines.push(strumline);
+			characterObjects.set(characterData, {vocal: vocal, character: character, strumline: strumline});
 		}
 
 		scripts = new ScriptManager();
 		scripts.loadFromFolder("scripts/play/", true);
 
 		instrumental.play();
-		for (voice in voices)
+		for (obj in characterObjects)
 		{
-			if (voice.length > 0)
-				voice.play();
+			if (obj.vocal.length > 0)
+				obj.vocal.play();
 		}
 	}
 
@@ -152,22 +161,23 @@ class PlayState extends MusicBeatState
 				conductor.songPosition = conductor.songPosition + 1000 * FlxMath.signOf(timeDiff);
 
 			// who let me cook (syncing vocals)
-			for (voice in voices)
+
+			for (obj in characterObjects)
 			{
-				if (voice.playing && (instrumental.time - voice.time) > 10)
-					voice.time = instrumental.time;
+				if (obj.vocal.playing && (instrumental.time - obj.vocal.time) > 10)
+					obj.vocal.time = instrumental.time;
 			}
 		}
 	}
 
 	override function stepHit(step:Int)
 	{
-
+		scripts.call("onStepHit", [step]);
 	}
 
 	override function beatHit(beat:Int)
 	{
-
+		scripts.call("onBeatHit", [beat]);
 	}
     
 	function playSingAnim(character:Character, note:Note)
@@ -179,5 +189,48 @@ class PlayState extends MusicBeatState
 	function playMissAnim(character:Character, direction:Int, suffix:String = "")
 	{
 		character.playAnimation(character.singAnimations[direction] + suffix + "-miss", true);
+	}
+
+	function playerNoteHit(note:Note)
+	{
+
+	}
+
+	function playerNoteMiss(note:Null<Note>)
+	{
+
+	}
+
+	function endSong()
+	{
+		scripts.call("onEndSong");
+
+		var currentSong = song;
+		playlist.shift();
+
+		if (playlist.length == 0)
+		{
+			// TODO: save score
+
+			// levelData = null;
+			// levelScore = 0;
+
+			if (exitState != null)
+			{
+				FlxG.switchState(exitState);
+			}
+		}
+		else
+		{
+			FlxG.switchState(new PlayState());
+		}
+	}
+	
+
+	override public function destroy():Void
+	{
+		scripts.destroy();
+
+		super.destroy();
 	}
 }

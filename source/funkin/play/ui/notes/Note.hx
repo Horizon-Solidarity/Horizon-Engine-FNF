@@ -15,7 +15,7 @@ enum NoteState
 
 class Note extends FunkinSprite
 {
-	public var skin(default, set):NoteskinMetadata;
+	public var skinId(default, set):String;
 	public var data:ChartNoteData;
 
 	public var strumline:Strumline;
@@ -24,18 +24,19 @@ class Note extends FunkinSprite
 
 	public var animSuffix:String = "";
 
-	public function new(strumline:Strumline, data:ChartNoteData, skin:NoteskinMetadata)
+	public function new(strumline:Strumline, data:ChartNoteData, skinId:String)
 	{
 		super();
 
 		this.strumline = strumline;
 		this.data = data;
-		this.skin = skin;
+		this.skinId = skinId;
     }
 
-	function set_skin(value:NoteskinMetadata)
+	function set_skinId(value:String)
 	{
-		skin = value;
+		skinId = value;
+		var skin = NoteskinMetadata.fromSkinId(skinId);
 
 		frames = FunkinAssets.getSparrow(haxe.io.Path.join([skin.folder, skin.assets.note.assetPath]));
 		scale.set(skin.assets.note.scale, skin.assets.note.scale);

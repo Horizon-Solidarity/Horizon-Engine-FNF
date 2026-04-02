@@ -21,6 +21,8 @@ class HScript extends RuleScript implements IScriptHandler
 
     public function call(id:String, ?args:Array<Dynamic>):Dynamic
     {
+        if (!exists(id))
+            return null;
         var func = variables.get(id);
         return Reflect.callMethod(null, func, args);
     }
@@ -40,10 +42,18 @@ class HScript extends RuleScript implements IScriptHandler
         return variables.set(id, value);
     }
 
-    public function preset():Void{}
+    public function preset():Void
+    {
+        ScriptGlobals.preset(this);
+    }
 
     public function setParent(parent:Dynamic):Void
     {
         this.superInstance = parent;
+    }
+
+    public function destroy():Void
+    {
+        call("onDestroy");
     }
 }

@@ -8,6 +8,8 @@ class FunkinSprite extends FlxAnimate
 {
     public var offsets:Map<String, FlxPoint> = new Map<String, FlxPoint>();
 
+    public var zIndex:Int = 0;
+
     public function addAnimationData(name:String, data:UnnamedAnimationData)
     {
         if (isAnimate)
@@ -32,5 +34,27 @@ class FunkinSprite extends FlxAnimate
         if (offsets.exists(anim))
             this.offset = offsets.get(anim);
         animation.play(anim, force);
+    }
+
+    inline public function isAnimationNull():Bool
+	{
+		return (animation.curAnim == null);
+	}
+
+	public function isAnimationFinished():Bool
+	{
+		if (isAnimationNull())
+			return false;
+		return animation.curAnim.finished;
+	}
+
+    public function clearAnimations()
+    {
+        for (anim in animation.getNameList())
+		{
+			animation.remove(anim);
+			if (offsets.exists(anim))
+				offsets.remove(anim);
+		}
     }
 }

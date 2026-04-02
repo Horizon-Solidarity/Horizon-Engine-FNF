@@ -1,12 +1,14 @@
 package funkin.api.scripting;
 
+import flixel.util.FlxDestroyUtil;
+
 enum ScriptType
 {
     LUA;
     HSCRIPT;
 }
 
-interface IScriptHandler
+interface IScriptHandler extends IFlxDestroyable
 {
     public var scriptType:ScriptType;
 
@@ -18,4 +20,6 @@ interface IScriptHandler
 
     public function preset():Void;
     public function setParent(parent:Dynamic):Void;
+
+    public function destroy():Void;
 }

@@ -31,6 +31,8 @@ typedef Strumlinedata =
 	var visible:Bool;
 	@:default(4)
 	var keys:Int;
+	@:default("funkin")
+	var noteskin:String;
 	@:default(1)
 	var scale:Float;
 	@:default([0, 0])
