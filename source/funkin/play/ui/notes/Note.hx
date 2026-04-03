@@ -1,7 +1,7 @@
 package funkin.play.ui.notes;
 
 import funkin.data.songs.SongData;
-import funkin.data.ui.NoteskinData;
+import funkin.data.play.NoteskinData;
 import funkin.objects.FunkinSprite;
 
 enum NoteState

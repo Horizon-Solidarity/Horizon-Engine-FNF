@@ -1,7 +1,7 @@
 package funkin.play.ui.notes;
 
 import funkin.objects.FunkinSprite;
-import funkin.data.ui.NoteskinData;
+import funkin.data.play.NoteskinData;
 import sys.io.File;
 
 class Receptor extends FunkinSprite

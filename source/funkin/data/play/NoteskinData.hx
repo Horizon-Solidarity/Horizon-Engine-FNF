@@ -1,4 +1,4 @@
-package funkin.data.ui;
+package funkin.data.play;
 
 import funkin.data.animation.AnimationData;
 

@@ -1,7 +1,7 @@
 package funkin.play.ui.notes;
 
 import funkin.objects.FunkinSprite;
-import funkin.data.ui.NoteskinData;
+import funkin.data.play.NoteskinData;
 import funkin.data.songs.SongData;
 
 import flixel.util.FlxSignal;
@@ -22,7 +22,7 @@ class Strumline extends FlxTypedSpriteGroup<FunkinSprite>
 
 	public var botplay:Bool;
 	public var downscroll:Bool;
-	public var speed:Float;
+	public var scrollSpeed:Float;
 
 	public var receptors:Array<Receptor> = [];
 	public var notes:Array<Note> = [];
@@ -32,7 +32,7 @@ class Strumline extends FlxTypedSpriteGroup<FunkinSprite>
 	public var onNoteHit:FlxTypedSignal<Note->Void> = new FlxTypedSignal<Note->Void>();
 	public var onNoteMiss:FlxTypedSignal<Null<Note>->Void> = new FlxTypedSignal<Null<Note>->Void>();
 
-	public function new(skin:String = DEFAULT_NOTE_SKIN, botplay:Bool = false, downscroll:Bool = false, speed:Float = 1)
+	public function new(skin:String = DEFAULT_NOTE_SKIN, botplay:Bool = false, downscroll:Bool = false, scrollSpeed:Float = 1)
 	{
 		super();
 
@@ -40,7 +40,7 @@ class Strumline extends FlxTypedSpriteGroup<FunkinSprite>
 
 		this.botplay = botplay;
 		this.downscroll = downscroll;
-		this.speed = speed;
+		this.scrollSpeed = scrollSpeed;
 
 		mania = 4;
 	}
@@ -94,8 +94,8 @@ class Strumline extends FlxTypedSpriteGroup<FunkinSprite>
 		{
 			if (note.state != HIT)
 			{
-				var targetX:Float = receptors[note.data.lane].x + 25; // wtf
-				var targetY:Float = receptors[note.data.lane].y + 0.45 * (Conductor.instance.songPosition - note.data.time) * speed * (downscroll ? 1 : -1);
+				var targetX:Float = receptors[note.data.lane].x;
+				var targetY:Float = receptors[note.data.lane].y + 0.45 * (Conductor.instance.songPosition - note.data.time) * scrollSpeed * (downscroll ? 1 : -1);
 				note.setPosition(targetX, targetY);
 				
 				if (botplay && note.data.time <= Conductor.instance.songPosition)
