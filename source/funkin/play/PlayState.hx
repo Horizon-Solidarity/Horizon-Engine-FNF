@@ -1,12 +1,14 @@
 package funkin.play;
 
 import flixel.FlxState;
+import flixel.FlxObject;
 import flixel.util.typeLimit.NextState;
 
 import funkin.api.scripting.ScriptManager;
 import funkin.objects.Character;
 import funkin.data.songs.SongData.ChartEventsData;
 import funkin.data.songs.SongData.SongCharacterData;
+import funkin.data.songs.EventData.EventMetadata;
 import funkin.play.ui.UI;
 import funkin.play.ui.notes.*;
 
@@ -38,11 +40,15 @@ class PlayState extends MusicBeatState
 	public var camHUD:FlxCamera;
 	public var camOther:FlxCamera;
 
+	public var cameraFollowPos:FlxPoint;
+	public var cameraFollowOffset:FlxPoint;
+	public var cameraFollowFinal:FlxObject;
+
 	// ___________________ Gameplay Stuff ___________________
 	public var song(get, never):Song;
 	function get_song() return playlist[0];
 
-	public var events:Array<ChartEventsData> = [];
+	public var events:Array<Event> = [];
 
 	public var ui:UI;
 
@@ -61,7 +67,7 @@ class PlayState extends MusicBeatState
 		instance = this;
 
 		if (playlist.length == 0)
-			playlist.push(Song.fromSongId("ugh", "hard", "pico"));
+			playlist.push(Song.fromSongId("darnell", "hard", "bf"));
 
 		camGame = new FlxCamera();
 		camHUD = new FlxCamera();
@@ -74,6 +80,15 @@ class PlayState extends MusicBeatState
 		FlxG.cameras.add(camOther, false);
 
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
+
+		
+		cameraFollowPos = FlxPoint.get();
+		cameraFollowOffset = FlxPoint.get();
+		cameraFollowFinal = new FlxObject();
+		add(cameraFollowFinal);
+
+		camGame.follow(cameraFollowFinal, LOCKON);
+
 
 		ui = new UI(song.uiStyle);
 		ui.cameras = [camHUD];
@@ -156,17 +171,33 @@ class PlayState extends MusicBeatState
 				obj.vocal.play();
 		}
 
-		camGame.focusOn(player.getPosition() - player.cameraOffset);
+		for (event in song.events)
+		{
+			var meta = EventMetadata.fromEventId(event.name);
+			if (meta != null)
+			{
+				var eventObj = new Event(EventMetadata.fromEventId(event.name), event);
+				events.push(eventObj);
+			}
+		}
+
+		events.sort((a, b) -> {
+			if (a.data.time < a.data.time)
+				return 1;
+			return -1;
+		});
+
+		// camGame.focusOn(player.getPosition() - player.cameraOffset);
 	}
 
     override public function update(elapsed:Float)
     {
         super.update(elapsed);
 
-		// Psych Sync shit (stole from TE)
 		conductor.songPosition += elapsed * 1000;
 		if (instrumental.playing)
 		{
+			// Psych Sync shit (stole from TE)
 			conductor.songPosition = FlxMath.lerp(instrumental.time, conductor.songPosition, Math.exp(-elapsed * 5));
 			var timeDiff:Float = Math.abs(instrumental.time - conductor.songPosition);
 			if (timeDiff > 1000)
@@ -179,7 +210,19 @@ class PlayState extends MusicBeatState
 				if (obj.vocal.playing && (instrumental.time - obj.vocal.time) > 10)
 					obj.vocal.time = instrumental.time;
 			}
+
+
+			for (event in events)
+			{
+				if (conductor.songPosition >= event.data.time)
+				{
+					event.call();
+					events.remove(event);
+				}
+			}
 		}
+
+		cameraFollowFinal.setPosition(cameraFollowPos.x + cameraFollowOffset.x, cameraFollowPos.y + cameraFollowOffset.y);
 	}
 
 	override function stepHit(step:Int)
@@ -211,6 +254,17 @@ class PlayState extends MusicBeatState
 	function playerNoteMiss(note:Null<Note>)
 	{
 
+	}
+
+	var cameraFollowTween:FlxTween;
+	public function moveCamera(_x:Float = 0, _y:Float = 0, time:Float = 1.9, ?_ease:flixel.tweens.EaseFunction)
+	{
+		if (_ease == null)
+			_ease = FlxEase.expoOut;
+
+		if (cameraFollowTween != null)
+			cameraFollowTween.cancel();
+		cameraFollowTween = FlxTween.tween(cameraFollowPos, {x: _x, y: _y}, time, {ease: _ease});
 	}
 
 	function endSong()

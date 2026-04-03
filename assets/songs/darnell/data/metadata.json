@@ -1,0 +1,36 @@
+{
+	"name": "Darnell",
+	"difficulties": [
+		"easy",
+		"normal",
+		"hard"
+	],
+	"variations": [
+		{
+			"name": "Darnell (BF Mix)",
+			"difficulties": [
+				"easy",
+				"normal",
+				"hard"
+			],
+			"id": "bf",
+			"credits": {
+				"charter": "Fabs + Spazkid"
+			}
+		},
+		{
+			"name": "Darnell Erect",
+			"difficulties": [
+				"erect",
+				"nightmare"
+			],
+			"id": "erect",
+			"credits": {
+				"charter": "Fabs + Spazkid"
+			}
+		}
+	],
+	"credits": {
+		"charter": "fabs"
+	}
+}

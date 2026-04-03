@@ -19,7 +19,7 @@
         "opponent": {
             "zIndex": 200,
             "position": [335, 885],
-            "cameraOffset": [150, -100]
+            "cameraOffset": [300, -100]
         }
     },
     "props": [

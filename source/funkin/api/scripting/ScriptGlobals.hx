@@ -1,5 +1,7 @@
 package funkin.api.scripting;
 
+import funkin.play.PlayState;
+
 class ScriptGlobals
 {
     public static inline final FUNCTION_STOP:String = "##FUNCTION_STOP##";
@@ -11,7 +13,9 @@ class ScriptGlobals
         script.set("Conductor", Conductor);
         script.set("FunkinAssets", FunkinAssets);
         script.set("ClientPrefs", ClientPrefs);
-        script.set("PlayState", funkin.play.PlayState);
+        script.set("PlayState", PlayState);
+        if (PlayState.instance != null)
+            script.set("game", PlayState.instance);
 
         script.set("FlxSprite", FlxSprite);
         script.set("FlxCamera", FlxCamera);

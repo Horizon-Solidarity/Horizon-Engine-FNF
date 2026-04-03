@@ -46,8 +46,18 @@ class ScriptManager implements IFlxDestroyable
             script.setParent(parent);
         if (!scripts.contains(script))
             scripts.push(script);
+        script.preset();
+
         if (callOnCreate && script.exists("onCreate"))
             script.call("onCreate");
+    }
+
+    public function set(id:String, value:Dynamic)
+    {
+        for (script in scripts)
+        {
+            script.set(id, value);
+        }
     }
 
     public function call(id:String, ?args:Array<Dynamic>, ?acceptedValues:Array<Dynamic>):Dynamic

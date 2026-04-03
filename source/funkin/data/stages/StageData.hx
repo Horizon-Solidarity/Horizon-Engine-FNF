@@ -43,10 +43,10 @@ class StageMetadata
 
 typedef StageCameraData =
 {
-	@:default(1.9)
-    var speed:Float;
 	@:default(0.7)
     var zoom:Float;
+	@:default([0, 0])
+    var initialPosition:Array<Float>;
 }
 
 typedef BasePropData = {

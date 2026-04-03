@@ -1,9 +1,0 @@
-{
-    "artist": "Kawai Sprite (feat.MtH)",
-    "preview": {"start": 0, "end": 15000},
-    "album": {
-        "assetPath": "albumRoll/volume1",
-        "text": "volume1-text",
-        "fonts": [false]
-    }
-}

@@ -39,10 +39,9 @@ class Conductor extends flixel.FlxBasic {
 	override public function update(elapsed:Float) {
 		super.update(elapsed);
 
-		var songPos:Float = songPosition;
 		var bpmChange:BPMChange = {step: 0, time: 0, bpm: 0};
 		for (event in bpmChanges) {
-			if (songPos >= event.time) {
+			if (songPosition >= event.time) {
 				bpmChange = event;
 				break;
 			}
@@ -52,7 +51,7 @@ class Conductor extends flixel.FlxBasic {
 			bpm = bpmChange.bpm;
 
 		var oldStep:Int = curStep;
-		curStep = Math.floor((bpmChange.step + (songPos - bpmChange.time) / stepCrochet));
+		curStep = Math.floor((bpmChange.step + (songPosition - bpmChange.time) / stepCrochet));
 
 		var oldBeat:Int = curBeat;
 		curBeat = Math.floor(curStep / 4);
