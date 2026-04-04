@@ -1,17 +1,23 @@
 package funkin.data.songs;
 
+import funkin.play.Song.ChartFormat;
+
 typedef SongMetadata =
 {
+    @:default("0.0.1")
     var version:String;
 
-	var songName:String;
+	var name:String;
 
-    var bpm:Float;
+    @:default(["easy", "normal", "hard"])
+    var difficulties:Array<String>;
+    @:default([])
+    var variations:Array<SongVariationData>;
 
-    var contributor:SongCredits;
+    var credits:SongCredits;
 
-    var playData:SongPlayData;
 
+    @:default("Unknown")
     var generatedBy:String;
 }
 
@@ -19,46 +25,25 @@ typedef SongMetadata =
 
 typedef SongCredits =
 {
-    var chart:String;
+    @:default('Unknown Charter')
+    var charter:String;
 
-    @:optional var art:String;
+    @:default('Unknown Animator')
+    var animator:String;
 
-    @:optional var animation:String;
-
-    @:optional var code:String;
-}
-
-typedef SongPlayData =
-{
-    var difficulties:Array<String>;
-
-	@:optional var variations:Array<SongVariationData>;
-
-	// var audio:SongAudioData;
-
-    var stage:String;
-
-	var songStartCamera:SongStartCamera;
-
-    @:optional var uiStyle:String;
-}
-
-// ___________________________________ Work In Progress ___________________________________
-
-typedef SongStrumLineData =
-{
-    var enabled:Bool;
-    var offsets:Array<Float>;
+    @:default('Unknown Coder')
+    var coder:String;
 }
 
 typedef SongVariationData =
 {
-	var coverMixes:Array<String>;
-	@:optional var extraDiffs:Array<String>;
-}
+    var id:String;
 
-typedef SongStartCamera =
-{
-	var focus:Int;
-    var zoom:Float;
+    @:default('Unknown Song Mix')
+    var name:String;
+
+    @:default(["easy", "normal", "hard"])
+    var difficulties:Array<String>;
+
+    var credits:SongCredits;
 }

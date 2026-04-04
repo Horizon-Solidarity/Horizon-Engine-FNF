@@ -1,11 +1,7 @@
 package funkin;
 
-import funkin.backend.game.MusicBeatState;
+import funkin.backend.MusicBeatState;
 
 class InitState extends MusicBeatState
 {
-    public function new(value)
-    {
-        
-    }
 }

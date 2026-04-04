@@ -29,7 +29,9 @@ class Main extends Sprite
 		super();
 		APIUtil.apiInit();
 
-		addChild(new FlxGame(0, 0, PlayState));
+		funkin.backend.Controls.instance = new funkin.backend.Controls();
+
+		addChild(new FlxGame(0, 0, PlayState, 60, 60, true));
 
 		#if CRASH_HANDLER
 		// funkin.backend.clash.ClashHandler.init();

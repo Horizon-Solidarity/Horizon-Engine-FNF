@@ -6,3 +6,5 @@ source/ldw/*
 content/Zside
 content/VsImpZside
 /.haxelib
+/docs/tools/exported_charts
+/docs/tools/exported_characters

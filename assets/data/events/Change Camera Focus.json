@@ -1,0 +1,37 @@
+{
+    "aliases": ["Focus"],
+    "script": "focus_camera",
+    "author": "Rushillbunny",
+    "args": [
+        {
+            "id": "target",
+            "name": "Focus Target",
+            "type": "characterList",
+            "defaultValue": "0"
+        },
+        {
+            "id": "xPos",
+            "name": "X Position",
+            "type":"float(null, null, 10, 2)",
+            "defaultValue": "0"
+        },
+        {
+            "id": "yPos",
+            "name": "Y Position",
+            "type":"float(null, null, 10, 2)",
+            "defaultValue": "0"
+        },
+        {
+            "id": "duration",
+            "name": "Duration (In Step)",
+            "type":"float(1, null, 1, 0)",
+            "defaultValue": "16"
+        },
+        {
+            "id": "ease",
+            "name": "Ease",
+            "type":"string",
+            "defaultValue": "expoOut"
+        }
+    ]
+}

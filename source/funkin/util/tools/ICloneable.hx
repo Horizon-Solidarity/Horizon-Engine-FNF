@@ -7,5 +7,5 @@ package funkin.util.tools;
 @:nullSafety
 interface ICloneable<T>
 {
-  public function clone():T;
+	public function clone():T;
 }

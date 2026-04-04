@@ -1,6 +1,6 @@
 package funkin.api.scripting;
 
-import funkin.backend.game.MusicBeatState;
+import flixel.util.FlxDestroyUtil;
 
 enum ScriptType
 {
@@ -8,7 +8,7 @@ enum ScriptType
     HSCRIPT;
 }
 
-interface IScriptHandler
+interface IScriptHandler extends IFlxDestroyable
 {
     public var scriptType:ScriptType;
 
@@ -20,4 +20,6 @@ interface IScriptHandler
 
     public function preset():Void;
     public function setParent(parent:Dynamic):Void;
+
+    public function destroy():Void;
 }

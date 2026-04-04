@@ -1,0 +1,73 @@
+import flixel.FlxSprite;
+import flixel.ui.FlxBar;
+import flixel.ui.FlxBarFillDirection;
+import flixel.text.FlxText;
+import flixel.text.FlxTextBorderStyle;
+import flixel.text.FlxTextAlign;
+import flixel.FlxG;
+import flixel.util.FlxColor;
+import flixel.util.FlxStringUtil;
+import flixel.math.FlxMath;
+import flixel.util.FlxAxes;
+
+import funkin.play.ui.HealthIcon;
+
+var healthLerp:Float = 1;
+var healthBarBG:FlxSprite;
+var healthBar:FlxBar;
+
+var scoreLerp:Float = 0;
+var scoreText:FlxText;
+
+var iconP1:HealthIcon;
+var iconP2:HealthIcon;
+
+function onLoad()
+{   
+    healthBarBG = new FlxSprite(0, FlxG.height * 0.9).loadGraphic(Paths.image('ui/funkin/healthBar'));
+	healthBarBG.screenCenter(FlxAxes.X);
+	add(healthBarBG);
+
+	healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, FlxBarFillDirection.RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), null, '', 0, 2);
+	healthBar.createFilledBar(0xFFFF0000, 0xFF66FF33);
+	add(healthBar);
+
+	iconP1 = new HealthIcon(characterObjects.get(song.player).character.data.healthIcon.id);
+	iconP1.flipX = true;
+	iconP1.y = healthBar.y - (iconP1.height / 2);
+	add(iconP1);
+
+	iconP2 = new HealthIcon(characterObjects.get(song.opponent).character.data.healthIcon.id);
+	iconP2.y = healthBar.y - (iconP2.height / 2);
+	add(iconP2);
+
+	scoreText = new FlxText(healthBarBG.x + healthBarBG.width - 190, healthBarBG.y + 30, 0, '', 20);
+	scoreText.setFormat(Paths.font('vcr'), 16, FlxColor.WHITE, FlxTextAlign.RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+	scoreText.antialiasing = ClientPrefs.data.antialiasing;
+	add(scoreText);
+}
+
+function onUpdate(elapsed:Float)
+{
+    healthLerp = FlxMath.lerp(healthLerp, game.health, 0.15);
+	healthBar.value = healthLerp;
+
+    scoreText.text = "Score: " + FlxStringUtil.formatMoney(stats.score, false, true);
+
+
+    iconP1.x = healthBar.x
+        + (healthBar.width * (FlxMath.remapToRange(healthBar.value, 0, 2, 100, 0) * 0.01) - 26);
+
+    iconP2.x = healthBar.x
+        + (healthBar.width * (FlxMath.remapToRange(healthBar.value, 0, 2, 100, 0) * 0.01))
+        - (iconP2.width - 26);
+
+    iconP1.scale.set(FlxMath.lerp(iconP1.data.scale[0], iconP1.scale.x, Math.exp(-elapsed * 9)), FlxMath.lerp(iconP1.data.scale[1], iconP1.scale.y, Math.exp(-elapsed * 9)));
+	iconP2.scale.set(FlxMath.lerp(iconP2.data.scale[0], iconP2.scale.x, Math.exp(-elapsed * 9)), FlxMath.lerp(iconP2.data.scale[1], iconP2.scale.y, Math.exp(-elapsed * 9)));
+}
+
+function onBeatHit(beat:Int)
+{
+	iconP1.scale.set(iconP1.data.scale[0] + 0.2, iconP1.data.scale[1] + 0.2);
+	iconP2.scale.set(iconP2.data.scale[0] + 0.2, iconP2.data.scale[1] + 0.2);
+}

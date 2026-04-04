@@ -1,17 +1,18 @@
 {
-    "subName": "Bop",
-    "id": "add_camera_zoom",
-    "translation": true,
+    "aliases": ["Bop"],
+    "script": "add_camera_zoom",
     "author": "Youbadao",
-    "value": [
+    "args": [
         {
-            "valueName": "Stage Zoom",
-            "type": "Float(-10, 10, 0.005, 2)",
-            "default": "0.015"
+            "id": "stageZoom",
+            "name": "Stage Zoom",
+            "type": "float(-10, 10, 0.005, 2)",
+            "defaultValue": "0.015"
         },
         {
-            "valueName": "HUD Zoom",
-            "type":"Float(-10, 10, 0.01, 2)",
+            "id": "hudZoom",
+            "name": "HUD Zoom",
+            "type":"float(-10, 10, 0.01, 2)",
             "defaultValue": "0.03"
         }
     ]

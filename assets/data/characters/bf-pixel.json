@@ -1,47 +1,189 @@
 {
-    "name": "Boyfriend | (Pixel)",
-    "assetPath": "characters/bfPixel",
-    "renderType": "sparrow",
-    "isPixel": true,
-    "flipX": false,
-    "idleBeat": 2,
-    "singTime": 8.0,
-    "sustainAnim": false,
-    "ghostEffect": false,
-    "healthIcon": {
-        "iconID": "bf-pixel",
-        "bar": {
-            "colored": false
-        }
-    },
-    "deathData": {
-        "cameraOffsets": [0, 0]
-    },
-    "animations": [
-        {
-            "name": "idle",
-            "prefix": "BF IDLE instance 10",
-            "frameRate": 24
-        },
-        {
-            "name": "singLeft",
-            "prefix": "BF LEFT NOTE instance 10",
-            "frameRate": 24
-        },
-        {
-            "name": "singDown",
-            "prefix": "BF DOWN NOTE instance 10",
-            "frameRate": 24
-        },
-        {
-            "name": "singUp",
-            "prefix": "BF UP NOTE instance 10",
-            "frameRate": 24
-        },
-        {
-            "name": "singRight",
-            "prefix": "BF RIGHT NOTE instance 10",
-            "frameRate": 24
-        }
-    ]
+	"assetPath": "characters/bfPixel",
+	"flipX": true,
+	"name": "Boyfriend (Pixel)",
+	"scale": [
+		6,
+		6
+	],
+	"offset": [
+		0,
+		0
+	],
+	"cameraOffset": [
+		0,
+		0
+	],
+	"danceAnimations": [
+		"idle"
+	],
+	"renderType": "multisparrow",
+	"healthIcon": {
+		"id": "bf-pixel",
+		"bar": {
+			"colored": false
+		}
+	},
+	"flipY": false,
+	"antialiasing": false,
+	"loopOnHold": false,
+	"animations": [
+		{
+			"flipX": false,
+			"prefix": "BF IDLE instance 10",
+			"name": "idle",
+			"offset": [
+				0,
+				0
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "BF UP NOTE instance 10",
+			"name": "singUP",
+			"offset": [
+				0,
+				0
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "BF LEFT NOTE instance 10",
+			"name": "singLEFT",
+			"offset": [
+				0,
+				0
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "BF RIGHT NOTE instance 10",
+			"name": "singRIGHT",
+			"offset": [
+				0,
+				0
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "BF DOWN NOTE instance 10",
+			"name": "singDOWN",
+			"offset": [
+				0,
+				0
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "BF UP MISS instance 10",
+			"name": "singUPmiss",
+			"offset": [
+				0,
+				0
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "BF LEFT MISS instance 10",
+			"name": "singLEFTmiss",
+			"offset": [
+				0,
+				0
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "BF RIGHT MISS instance 10",
+			"name": "singRIGHTmiss",
+			"offset": [
+				0,
+				0
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "BF DOWN MISS instance 10",
+			"name": "singDOWNmiss",
+			"offset": [
+				0,
+				0
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "BF Dies pixel",
+			"name": "firstDeath",
+			"offset": [
+				8.33,
+				0
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "Retry Loop",
+			"name": "deathLoop",
+			"offset": [
+				3.33,
+				-2.08
+			],
+			"looped": true,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "RETRY CONFIRM",
+			"name": "deathConfirm",
+			"offset": [
+				3.33,
+				-2.08
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		}
+	],
+	"doubleGhost": true
 }

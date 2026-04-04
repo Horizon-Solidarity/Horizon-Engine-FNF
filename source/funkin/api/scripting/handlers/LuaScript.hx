@@ -27,6 +27,8 @@ class LuaScript extends LScript implements IScriptHandler
 
     public function call(id:String, ?args:Array<Dynamic>):Dynamic
     {
+        if (!exists(id))
+            return null;
         return callFunc(id, args);
     }
 
@@ -45,10 +47,20 @@ class LuaScript extends LScript implements IScriptHandler
         return setVar(id, value);
     }
 
-    public function preset():Void{}
+    public function preset():Void
+    {
+        ScriptGlobals.preset(this);
+    }
 
     public function setParent(parent:Dynamic):Void
     {
         this.parent = parent;
+    }
+
+    public function destroy():Void
+    {
+        call("onDestroy");
+        llua.Lua.close(luaState);
+        luaState = null;
     }
 }

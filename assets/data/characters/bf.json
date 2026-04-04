@@ -1,53 +1,319 @@
 {
-    "name": "Boyfriend",
-    "assetPath": "characters/BOYFRIEND",
-    "renderType": "sparrow",
-    "isPixel": false,
-    "flipX": false,
-    "offsets": [17, 14],
-    "cameraOffsets": [-18, 36],
-    "idleBeat": 2,
-    "singTime": 8.0,
-    "sustainAnim": false,
-    "ghostEffect": false,
-    "healthData": {
-        "iconID": "bf",
-        "bar": {
-            "colored": false
-        }
-    },
-    "deathData": {
-        "cameraOffsets": [-73, 42]
-    },
-    "animations": [
-        {
-            "name": "idle",
-            "prefix": "BF idle dance0",
-            "frameRate": 24
-        },
-        {
-            "name": "singLeft",
-            "prefix": "BF NOTE LEFT0",
-            "frameRate": 24,
-			"offsets": [5, -6]
-        },
-        {
-            "name": "singDown",
-            "prefix": "BF NOTE DOWN0",
-            "frameRate": 24,
-			"offsets": [-20, -51]
-        },
-        {
-            "name": "singUp",
-            "prefix": "BF NOTE UP0",
-            "frameRate": 24,
-			"offsets": [-46, 27]
-        },
-        {
-            "name": "singRight",
-            "prefix": "BF NOTE RIGHT0",
-            "frameRate": 24,
-			"offsets": [-48, -7]
-        }
-    ]
+	"assetPath": "characters/BOYFRIEND",
+	"flipX": true,
+	"name": "Boyfriend",
+	"scale": [
+		1,
+		1
+	],
+	"offset": [
+		0,
+		0
+	],
+	"cameraOffset": [
+		0,
+		0
+	],
+	"danceAnimations": [
+		"idle"
+	],
+	"renderType": "multisparrow",
+	"healthIcon": {
+		"id": "bf",
+		"bar": {
+			"colored": false
+		}
+	},
+	"flipY": false,
+	"antialiasing": true,
+	"loopOnHold": false,
+	"animations": [
+		{
+			"flipX": false,
+			"prefix": "BF idle dance",
+			"name": "idle",
+			"offset": [
+				-5,
+				0
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "BF NOTE LEFT0",
+			"name": "singLEFT",
+			"offset": [
+				12,
+				-6
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "BF NOTE DOWN0",
+			"name": "singDOWN",
+			"offset": [
+				-10,
+				-50
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "BF NOTE UP0",
+			"name": "singUP",
+			"offset": [
+				-29,
+				27
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "BF NOTE RIGHT0",
+			"name": "singRIGHT",
+			"offset": [
+				-38,
+				-7
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "BF NOTE LEFT MISS",
+			"name": "singLEFTmiss",
+			"offset": [
+				12,
+				24
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "BF NOTE DOWN MISS",
+			"name": "singDOWNmiss",
+			"offset": [
+				-11,
+				-19
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "BF NOTE UP MISS",
+			"name": "singUPmiss",
+			"offset": [
+				-29,
+				27
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "BF NOTE RIGHT MISS",
+			"name": "singRIGHTmiss",
+			"offset": [
+				-30,
+				21
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "bf pre attack",
+			"name": "preAttack",
+			"offset": [
+				0,
+				0
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "boyfriend attack",
+			"name": "attack",
+			"offset": [
+				0,
+				0
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "boyfriend dodge",
+			"name": "dodge",
+			"offset": [
+				0,
+				0
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "boyfriend dodge",
+			"name": "dodge-hold",
+			"offset": [
+				0,
+				0
+			],
+			"looped": true,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "BF HEY!!",
+			"name": "hey",
+			"offset": [
+				7,
+				4
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "Cheer",
+			"name": "cheer",
+			"offset": [
+				0,
+				0
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "BF hit",
+			"name": "hit",
+			"offset": [
+				0,
+				0
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "BF hit",
+			"name": "hit-hold",
+			"offset": [
+				0,
+				0
+			],
+			"looped": true,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "BF dies",
+			"name": "firstDeath",
+			"offset": [
+				-37,
+				11
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "BF dies",
+			"name": "fakeoutDeath",
+			"offset": [
+				-37,
+				11
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "BF Dead Loop",
+			"name": "deathLoop",
+			"offset": [
+				-37,
+				5
+			],
+			"looped": true,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "BF Dead confirm",
+			"name": "deathConfirm",
+			"offset": [
+				-37,
+				69
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		},
+		{
+			"flipX": false,
+			"prefix": "BF idle shaking",
+			"name": "scared",
+			"offset": [
+				-4,
+				0
+			],
+			"looped": false,
+			"indices": [],
+			"flipY": false,
+			"frameRate": 24
+		}
+	],
+	"doubleGhost": true
 }

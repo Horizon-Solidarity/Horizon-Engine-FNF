@@ -3,19 +3,10 @@ package funkin.data.songs;
 typedef SoundTrackMetadata =
 {
     var artist:String;
-    var songData:AudioSetting;
 	var preview:AudioPreviewData;
 	var album:TrackAlbumData;
 }
 
-typedef AudioSetting =
-{
-    var bpm:Float;
-    var songTime:Float;
-    var step:Int;
-    var beat:Int;
-	var splitVocals:Bool;
-}
 typedef AudioPreviewData =
 {
 	var start:Float;

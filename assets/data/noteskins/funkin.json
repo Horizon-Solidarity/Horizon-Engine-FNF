@@ -1,0 +1,75 @@
+{
+    "name": "Funkin'",
+    "folder": "ui/funkin/",
+    "author": "PhantomArcade",
+    "assets": {
+        "note": {
+            "assetPath": "notes/notes",
+            "scale": 0.7,
+            "animations": {
+                "left": [{"prefix": "purple0"}],
+                "down":[ {"prefix": "blue0"}],
+                "up": [{"prefix": "green0"}],
+                "right": [{"prefix": "red0"}]
+            }
+        },
+        "strumline": {
+            "assetPath": "notes/notes",
+            "scale": 0.7,
+            "offset": [0, 0],
+            "animations": {
+                "leftStatic": [{ "prefix": "arrowLEFT" }],
+                "leftPress": [{ "prefix": "left press"}],
+                "leftConfirm": [{ "prefix": "left confirm" }],
+                "downStatic": [{ "prefix": "arrowDOWN" }],
+                "downPress": [{ "prefix": "down press" }],
+                "downConfirm": [{ "prefix": "down confirm" }],
+                "upStatic": [{ "prefix": "arrowUP" }],
+                "upPress": [{ "prefix": "up press" }],
+                "upConfirm": [{ "prefix": "up confirm" }],
+                "rightStatic": [{ "prefix": "arrowRIGHT" }],
+                "rightPress": [{ "prefix": "right press" }],
+                "rightConfirm": [{ "prefix": "right confirm" }]
+            }
+        },
+        "holdNote": {
+            "assetPath": "notes/notes",
+            "scale": 0.7,
+            "animations": {
+                "left": [{"prefix": "purple hold piece"}],
+                "down":[ {"prefix": "blue hold piece"}],
+                "up": [{"prefix": "green hold piece"}],
+                "right": [{"prefix": "red hold piece"}],
+                "leftEnd": [{"prefix": "purple hold end"}],
+                "downEnd":[ {"prefix": "blue hold end"}],
+                "upEnd": [{"prefix": "green hold end"}],
+                "rightEnd": [{"prefix": "red hold end"}]
+            }
+        },
+        "noteSplash": {
+            "assetPath": "notes/noteSplashes",
+            "alpha": 0.8,
+            "offset": [25, -5],
+            "animations": {
+                "left": [
+                  { "prefix": "note impact 1 purple0" },
+                  { "prefix": "note impact 2 purple0" }
+                ],
+                "right": [
+                  { "prefix": "note impact 1 red0" },
+                  { "prefix": "note impact 2 red0" }
+                ],
+                "up": [
+                  { "prefix": "note impact 1 green0" },
+                  { "prefix": "note impact 2 green0" }
+                ],
+                "down": [
+                  { "prefix": "note impact 1  blue0" },
+                  { "prefix": "note impact 2 blue0" }
+                ]
+            }
+        },
+        "holdNoteCover": {}
+    },
+    "generatedBy": "Youbadao (by hand)"
+}

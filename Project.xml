@@ -16,7 +16,7 @@
 	<!-- ____________________________ Window Settings ___________________________ -->
 
 	<!--These window settings apply to all targets-->
-	<window width="1280" height="720" fps="60" background="#000000" hardware="true" vsync="false" />
+	<window width="1280" height="720" fps="60" background="#000000" hardware="true" vsync="false" allow-high-dpi="true"/>
 
 	<!--HTML5-specific-->
 	<window if="html5" resizable="true" />
@@ -42,11 +42,13 @@
 	<haxelib name="flixel" />
 	<haxelib name="flixel-addons" />
 
-	<haxelib name="hscript" />
-	<haxelib name="rulescript" />
+	<haxelib name="hscript-insanity" />
 
 	<haxelib name="linc_luajit" />
 	<haxelib name="lscript" />
+
+	<haxelib name="flixel-animate" />
+	<haxelib name="json2object" />
 
 	<!--Needed for better error reporting with hscript-->
 	<define name="hscriptPos"/>
@@ -89,8 +91,20 @@
 	<!-- Haxe 4.3.0+: Enable pretty syntax errors and stuff. -->
 	<!-- pretty (haxeflixel default), indent, classic (haxe compiler default) -->
 	<haxedef name="message.reporting" value="pretty" />
-	<!-- ________________________________ Hscript _______________________________ -->
-	<!-- <define name="hscriptPos" /> -->
+
+	<haxedef name="HXCPP_CHECK_POINTER" if="cpp" />
+	<haxedef name="HXCPP_STACK_LINE" if="cpp" />
+	<haxedef name="HXCPP_STACK_TRACE" if="cpp" />
+	
+	<!-- _________________________________ Macros _________________________________ -->
+
+	<compilerflag name="--macro" value="include('funkin', true)" />
+	<compilerflag name="--macro" value="include('flixel', true, [ 'flixel.addons.editors.spine.*', 'flixel.addons.nape.*', 'flixel.system.macros.*', 'flixel.addons.tile.FlxRayCastTilemap' ])" />
+	
+	<!-- Using Insanity's macro to support some abstracts on HScript -->
+	<haxeflag name="--macro" value="addMetadata('@:build(insanity.backend.macro.AbstractMacro.build())', 'flixel.util.FlxColor')" />
+	<haxeflag name="--macro" value="addMetadata('@:build(insanity.backend.macro.AbstractMacro.build())', 'flixel.util.FlxAxes')" />
+	<haxeflag name="--macro" value="addMetadata('@:build(insanity.backend.macro.AbstractMacro.build())', 'flixel.text.FlxTextAlign')" />
 
 	<!-- _________________________________ Custom _______________________________ -->
 
