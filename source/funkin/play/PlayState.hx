@@ -100,6 +100,8 @@ class PlayState extends MusicBeatState
 		FlxG.sound.list.add(instrumental);
 		instrumental.onComplete = endSong;
 
+		conductor.bpm = song.bpm;
+
 		scripts = new ScriptManager();
 		scripts.customPreset = presetScript;
 
@@ -147,7 +149,8 @@ class PlayState extends MusicBeatState
 			stage.addCharacter(character, characterData.type);
 
 			strumline.onNoteHit.add(function(n){
-				playSingAnim(character, n);
+				character.playAnimation(character.singAnimations[n.data.lane] + n.animSuffix, true);
+				character.lastSingBeat = conductor.curBeat;
 			});
 
 			if (characterData == song.player)
@@ -219,6 +222,13 @@ class PlayState extends MusicBeatState
 				return Paths.sound('funkin/' + sound);
 			}
 
+			function getGraphicPath(image:String)
+			{
+				if (Paths.image('ui/' + song.uiStyle + '/' + image) != null)
+					return Paths.image('ui/' + song.uiStyle + '/' + image);
+				return Paths.image('ui/funkin/' + image);
+			}
+
 			switch (counter)
 			{
 				case 0:
@@ -231,6 +241,26 @@ class PlayState extends MusicBeatState
 					FlxG.sound.play(getSoundPath("countdown/go"), 0.6);
 				case 4:
 					startSong();
+			}
+
+			var countdownNames = [null, "countdown/ready", "countdown/set", "countdown/go", null];
+			if (countdownNames[counter] != null)
+			{
+				var countdownSprite = new FlxSprite().loadGraphic(getGraphicPath(countdownNames[counter]));
+				countdownSprite.scale.set(0.7, 0.7);
+				countdownSprite.antialiasing = ClientPrefs.data.antialiasing;
+				countdownSprite.screenCenter();
+				countdownSprite.cameras = [camHUD];
+				countdownSprite.scrollFactor.set();
+				add(countdownSprite);
+
+				FlxTween.tween(countdownSprite, {y: countdownSprite.y + 100, alpha: 0}, conductor.crochet / 1000, {
+					ease: FlxEase.cubeInOut,
+					onComplete: (twn) ->
+					{
+						countdownSprite.destroy();
+					}
+				});
 			}
 
 			counter += 1;
@@ -290,12 +320,6 @@ class PlayState extends MusicBeatState
 	override function beatHit(beat:Int)
 	{
 		scripts.call("onBeatHit", [beat]);
-	}
-    
-	function playSingAnim(character:Character, note:Note)
-	{
-		character.playAnimation(character.singAnimations[note.data.lane] + note.animSuffix, true);
-		character.lastSingBeat = conductor.curBeat;
 	}
 
 	function playMissAnim(character:Character, direction:Int, suffix:String = "")

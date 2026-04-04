@@ -1,5 +1,3 @@
-// Mostly 1:1 remade of Vanilla  HUD
-
 import flixel.FlxSprite;
 import flixel.ui.FlxBar;
 import flixel.ui.FlxBarFillDirection;
@@ -64,28 +62,12 @@ function onUpdate(elapsed:Float)
         + (healthBar.width * (FlxMath.remapToRange(healthBar.value, 0, 2, 100, 0) * 0.01))
         - (iconP2.width - 26);
 
-    iconP1.scale.x = funkinLerp(iconP2.scale.x, iconP2.data.scale[0], 0.15);
-    iconP1.scale.y = funkinLerp(iconP2.scale.y, iconP2.data.scale[1], 0.15);
-
-    iconP2.scale.x = funkinLerp(iconP2.scale.x, iconP2.data.scale[0], 1, 0.15);
-    iconP2.scale.y = funkinLerp(iconP2.scale.y, iconP2.data.scale[1], 1, 0.15);
+    iconP1.scale.set(FlxMath.lerp(iconP1.data.scale[0], iconP1.scale.x, Math.exp(-elapsed * 9)), FlxMath.lerp(iconP1.data.scale[1], iconP1.scale.y, Math.exp(-elapsed * 9)));
+	iconP2.scale.set(FlxMath.lerp(iconP2.data.scale[0], iconP2.scale.x, Math.exp(-elapsed * 9)), FlxMath.lerp(iconP2.data.scale[1], iconP2.scale.y, Math.exp(-elapsed * 9)));
 }
 
 function onBeatHit(beat:Int)
 {
-	if (beat % 2 == 0)
-	{
-		iconP1.scale.set(iconP1.data.scale[0] + 0.1, iconP1.data.scale[1] + 0.1);
-		iconP2.scale.set(iconP2.data.scale[0] + 0.1, iconP2.data.scale[1] + 0.1);
-	}
-}
-
-function funkinLerp(base:Float, target:Float, ratio:Float):Float
-{
-	return base + cameraLerp(ratio) * (target - base);
-}
-
-function cameraLerp(lerp:Float):Float
-{
-	return lerp * (FlxG.elapsed / (1 / 60));
+	iconP1.scale.set(iconP1.data.scale[0] + 0.2, iconP1.data.scale[1] + 0.2);
+	iconP2.scale.set(iconP2.data.scale[0] + 0.2, iconP2.data.scale[1] + 0.2);
 }

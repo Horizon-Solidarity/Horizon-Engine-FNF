@@ -1716,7 +1716,8 @@
 					}
 				],
 				"visible": true,
-				"keys": 4
+				"keys": 4,
+				"noteskin": "funkin"
 			},
 			"id": "bf",
 			"type": "player"
@@ -3880,7 +3881,8 @@
 					}
 				],
 				"visible": true,
-				"keys": 4
+				"keys": 4,
+				"noteskin": "funkin"
 			},
 			"id": "darnell",
 			"type": "opponent"
@@ -3895,7 +3897,8 @@
 				],
 				"notes": [],
 				"visible": false,
-				"keys": 4
+				"keys": 4,
+				"noteskin": "funkin"
 			},
 			"id": "gf",
 			"type": "spectator"
@@ -4234,5 +4237,6 @@
 		}
 	],
 	"stage": "phillyStreetsErect",
+	"bpm": 155,
 	"scrollSpeed": 2
 }

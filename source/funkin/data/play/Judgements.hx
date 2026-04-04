@@ -11,7 +11,7 @@ class Judgements
             id: "sick",
             range: 45,
             accuracyMult: 1,
-            healthGain: 0.25,
+            healthGain: 0.025,
             scoreGain: 300,
             showSplash: true
         },
@@ -19,7 +19,7 @@ class Judgements
             id: "good",
             range: 90,
             accuracyMult: 0.85,
-            healthGain: 0.1,
+            healthGain: 0.01,
             scoreGain: 200,
             showSplash: false
         },
@@ -27,7 +27,7 @@ class Judgements
             id: "bad",
             range: 135,
             accuracyMult: 0.45,
-            healthGain: -0.06,
+            healthGain: -0.006,
             scoreGain: 100,
             showSplash: false
         },
@@ -35,7 +35,7 @@ class Judgements
             id: "shit",
             range: 180,
             accuracyMult: 0.3,
-            healthGain: -0.1,
+            healthGain: -0.01,
             scoreGain: 10,
             showSplash: false
         }

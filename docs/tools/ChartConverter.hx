@@ -71,6 +71,7 @@ class ChartConverter {
 			for (difficulty in difficulties)
 			{
 				var horizonChart:SongChartData = {
+					bpm: curVSliceMeta.timeChanges[0].bpm,
 					scrollSpeed: Reflect.field(curVSliceChart.scrollSpeed, difficulty),
 					events: [],
 					characters: [
@@ -213,6 +214,7 @@ typedef SongVariationData =
 // _____________________________ Chart _____________________________
 typedef SongChartData =
 {
+	var bpm:Float;
 	var scrollSpeed:Float;
 	var events:Array<ChartEventsData>;
 	var characters:Array<SongCharacterData>;
@@ -234,6 +236,7 @@ typedef StrumLinedata =
 	var visible:Bool;
 	var keys:Int;
 	var scale:Float;
+	var noteskin:String;
 	var offset:Array<Float>;
 	var notes:Array<ChartNotesData>;
 }
