@@ -19,7 +19,7 @@ class ScriptManager implements IFlxDestroyable
     {
         for (file in FunkinAssets.listDirectory(folder))
         {
-            loadFromFile(Path.join([folder, file]), true, callOnCreate);
+            loadFromFile(Path.join([folder, file]), parent, true, callOnCreate);
         }
     }
 

@@ -9,7 +9,7 @@ import funkin.objects.Character;
 import funkin.data.songs.SongData.ChartEventsData;
 import funkin.data.songs.SongData.SongCharacterData;
 import funkin.data.songs.EventData.EventMetadata;
-import funkin.play.ui.UI;
+import funkin.play.ui.HUD;
 import funkin.play.ui.notes.*;
 
 class PlayState extends MusicBeatState
@@ -50,7 +50,7 @@ class PlayState extends MusicBeatState
 
 	public var events:Array<Event> = [];
 
-	public var ui:UI;
+	public var ui:HUD;
 
 	public var instrumental:FlxSound;
 
@@ -90,7 +90,7 @@ class PlayState extends MusicBeatState
 		camGame.follow(cameraFollowFinal, LOCKON);
 
 
-		ui = new UI(song.uiStyle);
+		ui = new HUD(song.uiStyle);
 		ui.cameras = [camHUD];
 		ui.scrollFactor.set();
 		add(ui);
@@ -163,13 +163,7 @@ class PlayState extends MusicBeatState
 
 		scripts = new ScriptManager();
 		scripts.loadFromFolder("scripts/play/", true);
-
-		instrumental.play();
-		for (obj in characterObjects)
-		{
-			if (obj.vocal.length > 0)
-				obj.vocal.play();
-		}
+		scripts.loadFromFolder("songs/" + song.id + "/scripts/", true);
 
 		for (event in song.events)
 		{
@@ -182,12 +176,63 @@ class PlayState extends MusicBeatState
 		}
 
 		events.sort((a, b) -> {
-			if (a.data.time < a.data.time)
-				return 1;
-			return -1;
+			if (a.data.time < b.data.time)
+				return -1;
+			return 1;
 		});
 
-		// camGame.focusOn(player.getPosition() - player.cameraOffset);
+		startCountdown();
+	}
+
+	function startCountdown()
+	{
+		scripts.call("onStartCountdown");
+
+		conductor.songPosition = conductor.crochet * -5;
+
+		trace(events[0].data.time);
+		if (events[0].data.time == 0 && events[0].meta.script == "focus_camera")
+		{
+			events[0].call();
+			events.remove(events[0]);
+		}
+
+		var counter:Int = 0;
+		var startTimer = new FlxTimer().start(conductor.crochet / 1000, function(t:FlxTimer)
+		{
+			function getSoundPath(sound:String)
+			{
+				if (Paths.sound(song.uiStyle + '/' + sound) != null)
+					return Paths.sound(song.uiStyle + '/' + sound);
+				return Paths.sound('funkin/' + sound);
+			}
+
+			switch (counter)
+			{
+				case 0:
+					FlxG.sound.play(getSoundPath("countdown/three"), 0.6);
+				case 1:
+					FlxG.sound.play(getSoundPath("countdown/two"), 0.6);
+				case 2:
+					FlxG.sound.play(getSoundPath("countdown/one"), 0.6);
+				case 3:
+					FlxG.sound.play(getSoundPath("countdown/go"), 0.6);
+				case 4:
+					startSong();
+			}
+
+			counter += 1;
+		}, 5);
+	}
+
+	public function startSong()
+	{
+		instrumental.play();
+		for (obj in characterObjects)
+		{
+			if (obj.vocal.length > 0)
+				obj.vocal.play();
+		}
 	}
 
     override public function update(elapsed:Float)

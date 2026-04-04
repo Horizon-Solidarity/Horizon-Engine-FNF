@@ -2,6 +2,7 @@ package funkin.data.play;
 
 import funkin.data.animation.AnimationData;
 import funkin.data.play.NoteskinData;
+import funkin.data.songs.SongData;
 
 class Judgements
 {
@@ -10,13 +11,14 @@ class Judgements
             id: "sick",
             range: 45,
             accuracyMult: 1,
-            healthAdd: 1.1,
+            healthMult: 1.1,
             showSplash: true
         }
     ];
 
-    public static function judge(data:ChartNoteData, pos:Float = Conductor.instance.songPosition):JudgementData
+    public static function judge(data:ChartNoteData, ?pos:Float):JudgementData
     {
+        if (pos == null) pos = Conductor.instance.songPosition;
         var diff = Math.abs(data.time - pos);
 
         for (judge in judges)
@@ -24,6 +26,8 @@ class Judgements
             if (diff <= judge.range)
                 return judge;
         }
+
+        return judges[0];
     }
 }
 

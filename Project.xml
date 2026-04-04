@@ -42,8 +42,7 @@
 	<haxelib name="flixel" />
 	<haxelib name="flixel-addons" />
 
-	<haxelib name="hscript" />
-	<haxelib name="rulescript" />
+	<haxelib name="hscript-insanity" />
 
 	<haxelib name="linc_luajit" />
 	<haxelib name="lscript" />
@@ -92,8 +91,14 @@
 	<!-- Haxe 4.3.0+: Enable pretty syntax errors and stuff. -->
 	<!-- pretty (haxeflixel default), indent, classic (haxe compiler default) -->
 	<haxedef name="message.reporting" value="pretty" />
-	<!-- ________________________________ Hscript _______________________________ -->
-	<!-- <define name="hscriptPos" /> -->
+	
+	<!-- _________________________________ Macros _________________________________ -->
+
+	<compilerflag name="--macro" value="include('funkin', true)" />
+	<compilerflag name="--macro" value="include('flixel', true, [ 'flixel.addons.editors.spine.*', 'flixel.addons.nape.*', 'flixel.system.macros.*', 'flixel.addons.tile.FlxRayCastTilemap' ])" />
+	
+	<!-- Using Insanity's macro to support some abstracts on HScript -->
+	<haxeflag name="--macro" value="addMetadata('@:build(insanity.backend.macro.AbstractMacro.build())', 'flixel.util.FlxColor')" />
 
 	<!-- _________________________________ Custom _______________________________ -->
 

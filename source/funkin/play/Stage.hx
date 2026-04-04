@@ -4,6 +4,7 @@ import funkin.data.stages.StageData;
 import funkin.data.songs.SongData;
 import funkin.objects.FunkinSprite;
 import funkin.objects.Character;
+import funkin.api.scripting.ScriptManager;
 
 class Stage extends FlxTypedGroup<FunkinSprite>
 {
@@ -43,6 +44,9 @@ class Stage extends FlxTypedGroup<FunkinSprite>
 
             add(sprite);
         }
+
+        for (ext in ScriptManager.LUA_EXTENSIONS.concat(ScriptManager.HSCRIPT_EXTENSIONS))
+            PlayState.instance.scripts.loadFromFile("scripts/play/stages/" + id + "." + ext, this, true, false);
     }
 
     public function addCharacter(character:Character, type:CharacterType)

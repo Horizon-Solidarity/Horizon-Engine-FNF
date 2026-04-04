@@ -6,7 +6,8 @@ class FunkinAssets
 {
     public static inline function listDirectory(directory:String):Array<String>
     {
-        trace(directory);
+        if (Paths.getPath(directory, "assets") == null)
+            return [];
         var result = FileSystem.readDirectory(Paths.getPath(directory, "assets"));
         // TODO: handle mods
         return result;

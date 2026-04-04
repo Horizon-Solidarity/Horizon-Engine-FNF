@@ -32,8 +32,10 @@ class FunkinSprite extends FlxAnimate
     public function playAnimation(anim:String, force:Bool = false)
     {
         if (offsets.exists(anim))
+        {
             this.offset = offsets.get(anim);
-        animation.play(anim, force);
+            animation.play(anim, force);
+        }
     }
 
     inline public function isAnimationNull():Bool
@@ -56,5 +58,10 @@ class FunkinSprite extends FlxAnimate
 			if (offsets.exists(anim))
 				offsets.remove(anim);
 		}
+    }
+
+    public function animationExists(name:String)
+    {
+        return animation.exists(name);
     }
 }

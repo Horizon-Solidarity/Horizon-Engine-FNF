@@ -22,6 +22,11 @@ class Event
         scripts = new ScriptManager();
         for (ext in ScriptManager.LUA_EXTENSIONS.concat(ScriptManager.HSCRIPT_EXTENSIONS))
             scripts.loadFromFile("scripts/play/events/" + meta.script + "." + ext, this, true, false);
+
+        scripts.set("meta", meta);
+        scripts.set("data", data);
+        scripts.set("getArgValue", getArgValue);
+        
         scripts.call("onLoad");
     }
 

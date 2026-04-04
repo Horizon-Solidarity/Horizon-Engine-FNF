@@ -1,0 +1,6 @@
+import flixel.util.FlxColor;
+
+function onLoad()
+{
+    trace(FlxColor.RED);
+}

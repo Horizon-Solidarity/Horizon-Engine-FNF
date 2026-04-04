@@ -16,8 +16,7 @@ haxelib git flixel-animate https://github.com/MaybeMaru/flixel-animate c5e3393c7
 haxelib git linc_luajit https://github.com/superpowers04/linc_luajit
 haxelib git lscript https://github.com/SrtHero278/lscript 778712861e0ffb27712c154eb180d20931701a68
 
-haxelib install hscript
-haxelib git rulescript https://github.com/Kriptel/RuleScript dev
+haxelib git hscript-insanity https://github.com/inky03/hscript-insanity
 
 haxelib git json2object https://github.com/FunkinCrew/json2object
 
