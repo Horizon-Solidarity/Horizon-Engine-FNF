@@ -20,6 +20,7 @@ class Event
         this.data = data;
 
         scripts = new ScriptManager();
+        scripts.customPreset = PlayState.instance.presetScript;
         for (ext in ScriptManager.LUA_EXTENSIONS.concat(ScriptManager.HSCRIPT_EXTENSIONS))
             scripts.loadFromFile("scripts/play/events/" + meta.script + "." + ext, this, true, false);
 

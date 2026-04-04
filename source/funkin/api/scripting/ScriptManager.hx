@@ -10,7 +10,6 @@ class ScriptManager implements IFlxDestroyable
     public static final LUA_EXTENSIONS:Array<String> = ["lua"];
     public static final HSCRIPT_EXTENSIONS:Array<String> = ["hx", "hxs", "hscript"];
 
-    
     public var scripts:Array<IScriptHandler> = [];
 
     public function new(){}
@@ -23,7 +22,7 @@ class ScriptManager implements IFlxDestroyable
         }
     }
 
-    public function loadFromFile(path:String, ?parent:Dynamic, ignoreNonExistError:Bool = false, callOnCreate:Bool = true):Void
+    public function loadFromFile(path:String, ?parent:Dynamic, ignoreNonExistError:Bool = false, callOnCreate:Bool = true):IScriptHandler
     {
         var realPath = Paths.getPath(path);
         var script:IScriptHandler = null;
@@ -37,20 +36,26 @@ class ScriptManager implements IFlxDestroyable
 
 
         if (script != null)
-            addScript(script, parent, callOnCreate);
+            return addScript(script, parent, callOnCreate);
+        return null;
     }
 
-    public function addScript(script:IScriptHandler, ?parent:Dynamic, callOnCreate:Bool = true):Void
+    public function addScript(script:IScriptHandler, ?parent:Dynamic, callOnCreate:Bool = true):IScriptHandler
     {
         if (parent != null)
             script.setParent(parent);
         if (!scripts.contains(script))
             scripts.push(script);
         script.preset();
+        customPreset(script);
 
         if (callOnCreate && script.exists("onCreate"))
             script.call("onCreate");
+        return script;
     }
+
+
+    public dynamic function customPreset(script:IScriptHandler){}
 
     public function set(id:String, value:Dynamic)
     {
@@ -62,7 +67,7 @@ class ScriptManager implements IFlxDestroyable
 
     public function call(id:String, ?args:Array<Dynamic>, ?acceptedValues:Array<Dynamic>):Dynamic
     {
-        if (acceptedValues != null)
+        if (acceptedValues == null)
             acceptedValues = [ScriptGlobals.FUNCTION_STOP, ScriptGlobals.FUNCTION_CONTINUE];
         var result:Dynamic = null;
 

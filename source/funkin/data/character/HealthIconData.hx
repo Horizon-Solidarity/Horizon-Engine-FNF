@@ -34,6 +34,9 @@ class HealthIconMetadata
 {
 	public static inline final DEFAULT_ICON_ID:String = "face";
 
+	@:jignored
+	public var id:String = DEFAULT_ICON_ID;
+
 	public var renderType:HealthIconRenderType;
 
 	@:default(false)
@@ -97,6 +100,8 @@ class HealthIconMetadata
 			trace('Error loading Healthicon metadata file of "$id": $e');
 			parser.fromJson(File.getContent(Paths.json("metadata", "images/icons/" + DEFAULT_ICON_ID)));
 		}
+
+		parser.value.id = id;
 
 		return parser.value;
 	}

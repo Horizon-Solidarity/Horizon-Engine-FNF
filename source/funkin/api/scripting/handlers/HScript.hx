@@ -30,7 +30,16 @@ class HScript implements IScriptHandler
     public function call(id:String, ?args:Array<Dynamic>):Dynamic
     {
         if (exists(id))
-            return _script.call(id, args);
+        {
+            try
+            {
+                return _script.call(id, args);
+            }
+            catch(e)
+            {
+                trace('Error on running function $id: ' + e);
+            }
+        }
         return null;
     }
 

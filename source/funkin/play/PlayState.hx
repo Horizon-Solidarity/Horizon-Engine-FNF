@@ -5,10 +5,13 @@ import flixel.FlxObject;
 import flixel.util.typeLimit.NextState;
 
 import funkin.api.scripting.ScriptManager;
+import funkin.api.scripting.IScriptHandler;
+
 import funkin.objects.Character;
 import funkin.data.songs.SongData.ChartEventsData;
 import funkin.data.songs.SongData.SongCharacterData;
 import funkin.data.songs.EventData.EventMetadata;
+import funkin.data.play.*;
 import funkin.play.ui.HUD;
 import funkin.play.ui.notes.*;
 
@@ -21,7 +24,7 @@ class PlayState extends MusicBeatState
 	public static var exitState:NextState;
 
 	// public static var levelData:
-	// public static var storyStats:Float = 0;
+	public static var storyScore:Float = 0;
 
 	// ___________________ Character Stuff ___________________
 	public var characterObjects:Map<SongCharacterData, {vocal:FlxSound, character:Character, strumline:Strumline}> = [];
@@ -50,13 +53,16 @@ class PlayState extends MusicBeatState
 
 	public var events:Array<Event> = [];
 
-	public var ui:HUD;
+	public var hud:HUD;
 
 	public var instrumental:FlxSound;
 
 	public var stage:Stage;
 
 	public var skipCountdown:Bool = false;
+
+	public var stats:PlayStats;
+	public var health(default, set):Float = 1;
 	
 	// ___________________ Script Stuff ___________________
 	public var scripts:ScriptManager;
@@ -89,19 +95,18 @@ class PlayState extends MusicBeatState
 
 		camGame.follow(cameraFollowFinal, LOCKON);
 
-
-		ui = new HUD(song.uiStyle);
-		ui.cameras = [camHUD];
-		ui.scrollFactor.set();
-		add(ui);
-
 		instrumental = new FlxSound();
 		instrumental.loadEmbedded(Paths.inst(song.id, song.variation));
 		FlxG.sound.list.add(instrumental);
 		instrumental.onComplete = endSong;
 
+		scripts = new ScriptManager();
+		scripts.customPreset = presetScript;
+
 		stage = new Stage(song.stage);
 		add(stage);
+
+		stats = new PlayStats();
 
 		var loadedVocals = [];
 
@@ -110,7 +115,7 @@ class PlayState extends MusicBeatState
 			var strumline = new Strumline(characterData.strumline.noteskin, true, false, song.scrollSpeed);
 			strumline.scrollFactor.set();
 			strumline.cameras = [camHUD];
-			add(strumline);
+			// add(strumline);
 
 			for (receptor in strumline.receptors)
 			{
@@ -161,7 +166,6 @@ class PlayState extends MusicBeatState
 			characterObjects.set(characterData, {vocal: vocal, character: character, strumline: strumline});
 		}
 
-		scripts = new ScriptManager();
 		scripts.loadFromFolder("scripts/play/", true);
 		scripts.loadFromFolder("songs/" + song.id + "/scripts/", true);
 
@@ -181,6 +185,15 @@ class PlayState extends MusicBeatState
 			return 1;
 		});
 
+		// shitty layering
+		hud = new HUD(song.uiStyle);
+		hud.cameras = [camHUD];
+		hud.scrollFactor.set();
+		add(hud);
+
+		for (char in characterObjects)
+			add(char.strumline);
+
 		startCountdown();
 	}
 
@@ -190,7 +203,6 @@ class PlayState extends MusicBeatState
 
 		conductor.songPosition = conductor.crochet * -5;
 
-		trace(events[0].data.time);
 		if (events[0].data.time == 0 && events[0].meta.script == "focus_camera")
 		{
 			events[0].call();
@@ -291,14 +303,37 @@ class PlayState extends MusicBeatState
 		character.playAnimation(character.singAnimations[direction] + suffix + "-miss", true);
 	}
 
+	function set_health(value:Float)
+	{
+		health = FlxMath.bound(value, 0, 2);
+		if (health == 0)
+			playerDeath();
+		return health;
+	}
+
 	function playerNoteHit(note:Note)
 	{
+		var judge = Judgements.judge(note.data);
 
+		switch(judge.id)
+		{
+			default:
+				stats.sicks += 1;
+			case "good":
+				stats.goods += 1;
+			case "bad":
+				stats.bads += 1;
+			case "shit":
+				stats.shits += 1;
+		}
+		
+		stats.score += judge.scoreGain;
+		health += judge.healthGain;
 	}
 
 	function playerNoteMiss(note:Null<Note>)
 	{
-
+		stats.misses += 1;
 	}
 
 	var cameraFollowTween:FlxTween;
@@ -333,8 +368,34 @@ class PlayState extends MusicBeatState
 		}
 		else
 		{
+			storyScore += stats.score;
+
 			FlxG.switchState(PlayState.new);
 		}
+	}
+
+	public function presetScript(script:IScriptHandler)
+	{
+		Conductor.instance.onStepHit.add((step) -> script.call("onStepHit", [step]));
+        Conductor.instance.onBeatHit.add((beat) -> script.call("onBeatHit", [beat]));
+
+		script.set("conductor", conductor);
+
+		script.set("playlist", playlist);
+		script.set("song", song);
+		script.set("characterObjects", characterObjects);
+
+		script.set("instrumental", instrumental);
+
+		script.set("stage", stage);
+		script.set("hud", hud);
+
+		script.set("stats", stats);
+	}
+
+	function playerDeath()
+	{
+
 	}
 	
 

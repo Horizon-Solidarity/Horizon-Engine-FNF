@@ -46,7 +46,19 @@ class Stage extends FlxTypedGroup<FunkinSprite>
         }
 
         for (ext in ScriptManager.LUA_EXTENSIONS.concat(ScriptManager.HSCRIPT_EXTENSIONS))
-            PlayState.instance.scripts.loadFromFile("scripts/play/stages/" + id + "." + ext, this, true, false);
+        {
+            var script = PlayState.instance.scripts.loadFromFile("scripts/play/stages/" + id + "." + ext, this, true, false);
+
+            if (script != null)
+            {
+                script.set("add", add);
+                script.set("remove", remove);
+                script.set("members", members);
+                script.set("insert", insert);
+
+                script.call("onLoad");
+            }
+        }
     }
 
     public function addCharacter(character:Character, type:CharacterType)

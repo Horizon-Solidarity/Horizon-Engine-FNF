@@ -130,6 +130,7 @@ class CharacterMetadata
 
 typedef HealthiconData =
 {
+    @:default("face")
 	var id:String;
 	var bar:HealthBarData;
 }

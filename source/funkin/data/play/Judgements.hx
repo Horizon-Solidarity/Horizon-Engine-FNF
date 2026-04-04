@@ -11,10 +11,45 @@ class Judgements
             id: "sick",
             range: 45,
             accuracyMult: 1,
-            healthMult: 1.1,
+            healthGain: 0.25,
+            scoreGain: 300,
             showSplash: true
+        },
+        {
+            id: "good",
+            range: 90,
+            accuracyMult: 0.85,
+            healthGain: 0.1,
+            scoreGain: 200,
+            showSplash: false
+        },
+        {
+            id: "bad",
+            range: 135,
+            accuracyMult: 0.45,
+            healthGain: -0.06,
+            scoreGain: 100,
+            showSplash: false
+        },
+        {
+            id: "shit",
+            range: 180,
+            accuracyMult: 0.3,
+            healthGain: -0.1,
+            scoreGain: 10,
+            showSplash: false
         }
     ];
+
+    public static function get(id:String):JudgementData
+    {
+        for (judge in judges)
+        {
+            if (judge.id == id)
+                return judge;
+        }
+        return null;
+    }
 
     public static function judge(data:ChartNoteData, ?pos:Float):JudgementData
     {
@@ -35,6 +70,7 @@ typedef JudgementData = {
     var id:String;
     var range:Float;
     var accuracyMult:Float;
-    var healthMult:Float;
+    var healthGain:Float;
+    var scoreGain:Float;
     var showSplash:Bool;
 }

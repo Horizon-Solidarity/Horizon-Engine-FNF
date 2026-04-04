@@ -91,6 +91,10 @@
 	<!-- Haxe 4.3.0+: Enable pretty syntax errors and stuff. -->
 	<!-- pretty (haxeflixel default), indent, classic (haxe compiler default) -->
 	<haxedef name="message.reporting" value="pretty" />
+
+	<haxedef name="HXCPP_CHECK_POINTER" if="cpp" />
+	<haxedef name="HXCPP_STACK_LINE" if="cpp" />
+	<haxedef name="HXCPP_STACK_TRACE" if="cpp" />
 	
 	<!-- _________________________________ Macros _________________________________ -->
 
@@ -99,6 +103,8 @@
 	
 	<!-- Using Insanity's macro to support some abstracts on HScript -->
 	<haxeflag name="--macro" value="addMetadata('@:build(insanity.backend.macro.AbstractMacro.build())', 'flixel.util.FlxColor')" />
+	<haxeflag name="--macro" value="addMetadata('@:build(insanity.backend.macro.AbstractMacro.build())', 'flixel.util.FlxAxes')" />
+	<haxeflag name="--macro" value="addMetadata('@:build(insanity.backend.macro.AbstractMacro.build())', 'flixel.text.FlxTextAlign')" />
 
 	<!-- _________________________________ Custom _______________________________ -->
 

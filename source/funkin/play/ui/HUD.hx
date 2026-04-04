@@ -11,13 +11,14 @@ class HUD extends FlxSpriteGroup
         super();
 
         scripts = new ScriptManager();
+        scripts.customPreset = PlayState.instance.presetScript;
         for (ext in ScriptManager.LUA_EXTENSIONS.concat(ScriptManager.HSCRIPT_EXTENSIONS))
             scripts.loadFromFile("scripts/play/huds/" + style + "." + ext, this, true, false);
 
-        Conductor.instance.onStepHit.add((step) -> scripts.call("onStepHit", [step]));
-        Conductor.instance.onBeatHit.add((beat) -> scripts.call("onBeatHit", [beat]));
-
-        scripts.set("HealthIcon", HealthIcon);
+        scripts.set("add", add);
+        scripts.set("remove", remove);
+        scripts.set("members", members);
+        scripts.set("insert", insert);
 
         scripts.call("onLoad");
     }

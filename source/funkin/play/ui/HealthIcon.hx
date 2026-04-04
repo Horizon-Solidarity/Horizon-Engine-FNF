@@ -13,21 +13,18 @@ class HealthIcon extends funkin.objects.FunkinSprite
     {
         super();
 
-        this.id = id;
         data = HealthIconMetadata.fromIconId(id);
+        this.id = id = data.id; // fix some crashes
 
-        var iconSize:Int = data.hasWinning ? 3 : 2;
+        var iconLength:Int = data.hasWinning ? 3 : 2;
 
         switch(data.renderType)
 		{
 			default: //case Slice:
                 var target = Paths.image("icons/" + id + "/icons");
-				if (target == null)
-                    target = Paths.image("icons/" + id);
-
 
 			    loadGraphic(target); //Load stupidly first for getting the file size
-			    loadGraphic(target, true, Math.floor(width / iconSize), Math.floor(height));
+			    loadGraphic(target, true, Math.floor(width / iconLength), Math.floor(height));
 
                 animation.add("normal", [0]);
                 animation.add("losing", [1]);

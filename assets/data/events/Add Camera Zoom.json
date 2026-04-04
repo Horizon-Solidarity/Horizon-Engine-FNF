@@ -6,13 +6,13 @@
         {
             "id": "stageZoom",
             "name": "Stage Zoom",
-            "type": "Float(-10, 10, 0.005, 2)",
+            "type": "float(-10, 10, 0.005, 2)",
             "defaultValue": "0.015"
         },
         {
             "id": "hudZoom",
             "name": "HUD Zoom",
-            "type":"Float(-10, 10, 0.01, 2)",
+            "type":"float(-10, 10, 0.01, 2)",
             "defaultValue": "0.03"
         }
     ]

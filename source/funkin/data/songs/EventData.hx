@@ -90,16 +90,20 @@ class EventArgUtil
 		{
 			case JString(s):
 				// oowhhhh im so codenamin....
-				var parser = new hscript.Parser();
-				var interp = new hscript.Interp();
+				var parser = new insanity.backend.Parser();
+				var interp = new insanity.backend.Interp();
 
-				interp.variables.set("Bool", ParamType.TBool);
-				interp.variables.set("Int", function (?min:Int, ?max:Int, ?step:Float):ParamType {return ParamType.TInt(min, max, step);});
-				interp.variables.set("Float", function (?min:Float, ?max:Float, ?step:Float, ?precision:Int):ParamType {return ParamType.TFloat(min, max, step, precision);});
-				interp.variables.set("String", ParamType.TString);
-				interp.variables.set("CharacterList", ParamType.TCharacterList);
+				interp.variables.set("bool", ParamType.TBool);
+				interp.variables.set("int", (?min:Int, ?max:Int, ?step:Float) -> return ParamType.TInt(min, max, step));
+				interp.variables.set("float", (?min:Float, ?max:Float, ?step:Float, ?precision:Int) -> ParamType.TFloat(min, max, step, precision));
+				interp.variables.set("string", () -> return ParamType.TString);
+				interp.variables.set("characterList", () -> return ParamType.TString);
+				
+				if (!s.endsWith(")")) // stupid workaround
+					s += "()";
 
-				return interp.expr(parser.parseString(s));
+				@:privateAccess
+				return interp.expr(parser.parseScript(s));
 			default:
 				throw 'Expected arg type property to be a string, but it was ${json.value}.';
 		}
