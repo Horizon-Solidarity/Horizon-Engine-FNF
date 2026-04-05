@@ -1,12 +1,11 @@
-package funkin.play.ui.notes;
-
-import funkin.objects.FunkinSprite;
-import funkin.data.play.NoteskinData;
-import funkin.data.songs.SongData;
+package funkin.play.notes;
 
 import flixel.util.FlxSignal;
-import sys.io.File;
+import funkin.data.play.NoteskinData;
+import funkin.data.songs.SongData;
+import funkin.objects.FunkinSprite;
 import haxe.io.Path;
+import sys.io.File;
 
 class Strumline extends FlxTypedSpriteGroup<FunkinSprite>
 {
@@ -74,24 +73,12 @@ class Strumline extends FlxTypedSpriteGroup<FunkinSprite>
 			}
 		}
 
-		sort(function(i, a, b)
-		{
-			if (a is Receptor)
-				return -1;
-			else if (a is Note && b is Receptor)
-				return 1;
-			else if (a is Note && b is Note)
-			{
-				if (cast(a, Note).data.time > cast(b, Note).data.time)
-					return -1;
-				else
-					return 1;
-			}
-			return -1;
-		});
+		sort(sortMembers);
 
-		for (note in notes)
+		var i:Int = notes.length - 1;
+		while (i >= 0)
 		{
+			var note = notes[i];
 			if (note.state != HIT)
 			{
 				var targetX:Float = receptors[note.data.lane].x;
@@ -100,7 +87,10 @@ class Strumline extends FlxTypedSpriteGroup<FunkinSprite>
 				
 				if (botplay && note.data.time <= Conductor.instance.songPosition)
 					noteHit(note);
+				else if (!botplay && note.state == MISSED)
+					noteMiss(note);
 			}
+			i--;
 		}
 		
 		// INPUT HANDLING
@@ -141,7 +131,7 @@ class Strumline extends FlxTypedSpriteGroup<FunkinSprite>
 
 	public function noteMiss(note:Null<Note>)
 	{
-		onNoteHit.dispatch(note);
+		onNoteMiss.dispatch(note);
 		if (note != null)
 		{
 			notes.remove(note);
@@ -188,5 +178,20 @@ class Strumline extends FlxTypedSpriteGroup<FunkinSprite>
 			receptors.push(receptor);
 			add(receptor);
 		}
+	}
+	static function sortMembers(i:Int, a:FunkinSprite, b:FunkinSprite):Int
+	{
+		if (a is Receptor)
+			return -1;
+		else if (a is Note && b is Receptor)
+			return 1;
+		else if (a is Note && b is Note)
+		{
+			if (cast(a, Note).data.time > cast(b, Note).data.time)
+				return -1;
+			else
+				return 1;
+		}
+		return -1;
 	}
 }

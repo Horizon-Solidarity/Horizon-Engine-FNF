@@ -6,6 +6,7 @@ import sys.io.File;
 
 class FunkinAssets
 {
+	public static var sparrowCache:Map<String, FlxAtlasFrames> = new Map();
     public static inline function listDirectory(directory:String):Array<String>
     {
         if (Paths.getPath(directory, "assets") == null)
@@ -19,8 +20,19 @@ class FunkinAssets
 
     public static inline function getSparrow(key:String, ?folder:String):FlxAtlasFrames
 	{
+		var xmlPath = Paths.xml(key, folder);
+		if (sparrowCache.exists(xmlPath))
+			return sparrowCache.get(xmlPath);
+
         // TODO: use fromFile instead for mod support
-		return FlxAtlasFrames.fromSparrow(Paths.image(key, folder), File.getContent(Paths.xml(key, folder)));
+		var frames = FlxAtlasFrames.fromSparrow(Paths.image(key, folder), File.getContent(xmlPath));
+		sparrowCache.set(xmlPath, frames);
+		return frames;
+	}
+
+	public static inline function clearSparrowCache():Void
+	{
+		sparrowCache.clear();
 	}
 
     public static inline function getText(key:String):String

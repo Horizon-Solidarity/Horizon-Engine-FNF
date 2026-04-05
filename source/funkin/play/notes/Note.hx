@@ -1,4 +1,4 @@
-package funkin.play.ui.notes;
+package funkin.play.notes;
 
 import funkin.data.songs.SongData;
 import funkin.data.play.NoteskinData;

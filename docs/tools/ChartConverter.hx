@@ -51,8 +51,8 @@ class ChartConverter {
 			});
 		}
 
-		FileSystem.createDirectory("exported_charts");
-		File.saveContent("exported_charts/metadata.json", haxe.Json.stringify(horizonMeta, "\t"));
+		FileSystem.createDirectory("exported_charts/data/");
+		File.saveContent("exported_charts/data/metadata.json", haxe.Json.stringify(horizonMeta, "\t"));
 
 		variations.push("default");
 
@@ -170,14 +170,50 @@ class ChartConverter {
 
 				if (variation != "default")
 				{
-					FileSystem.createDirectory("exported_charts/charts/" + variation);
-					File.saveContent("exported_charts/charts/" + variation + "/" + difficulty + ".json", haxe.Json.stringify(horizonChart, "\t"));
+					FileSystem.createDirectory("exported_charts/data/charts/" + variation);
+					File.saveContent("exported_charts/data/charts/" + variation + "/" + difficulty + ".json", haxe.Json.stringify(horizonChart, "\t"));
 				}
 				else
 				{
-					FileSystem.createDirectory("exported_charts/charts/");
-					File.saveContent("exported_charts/charts/" + difficulty + ".json", haxe.Json.stringify(horizonChart, "\t"));
+					FileSystem.createDirectory("exported_charts/data/charts/");
+					File.saveContent("exported_charts/data/charts/" + difficulty + ".json", haxe.Json.stringify(horizonChart, "\t"));
 				}
+			}
+
+			var horizonTrack:SoundTrackMetadata = {
+				artist: curVSliceMeta.artist,
+				preview: {
+					start: curVSliceMeta.playData.previewStart,
+					end: curVSliceMeta.playData.previewEnd
+				},
+				album: curVSliceMeta.playData.album,
+				bpmChanges: []
+			};
+
+			var stepsPerBeat:Int = 4;
+			var beatsPerMeasure:Int = 4;
+
+			for (i in 0...curVSliceMeta.timeChanges.length)
+			{
+				var timeChange = curVSliceMeta.timeChanges[i];
+				horizonTrack.bpmChanges.push({
+					time: timeChange.t,
+					bpm: timeChange.bpm,
+					stepTime: timeChange.n * timeChange.b,
+					stepsPerBeat: timeChange.n,
+					beatsPerMeasure: timeChange.d,
+				});
+			}
+
+			if (variation != "default")
+			{
+				FileSystem.createDirectory("exported_charts/audio/" + variation);
+				File.saveContent("exported_charts/audio/" + variation + "/track.json", haxe.Json.stringify(horizonTrack, "\t"));
+			}
+			else
+			{
+				FileSystem.createDirectory("exported_charts/audio/");
+				File.saveContent("exported_charts/audio/track.json", haxe.Json.stringify(horizonTrack, "\t"));
 			}
 		}
 	}
@@ -261,4 +297,30 @@ enum abstract CharacterType(String) to String
 	var OPPONENT = 'opponent';
 	var SPECTATOR = 'spectator';
 	var PLAYER = 'player';
+}
+
+
+typedef SoundTrackMetadata =
+{
+    var artist:String;
+	var preview:AudioPreviewData;
+	var album:String;
+
+	var bpmChanges:Array<AudioBPMChangesData>;
+}
+
+typedef AudioPreviewData =
+{
+	var start:Float;
+	var end:Float;
+}
+
+typedef AudioBPMChangesData =
+{
+	var time:Float;
+	var bpm:Float;
+	var ?endBpm:Float;
+	var ?stepTime:Float;
+	var ?stepsPerBeat:Int;
+	var ?beatsPerMeasure:Int;
 }

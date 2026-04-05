@@ -21,12 +21,17 @@ class MusicBeatState extends FlxState
 
 		conductor.onStepHit.add(stepHit);
 		conductor.onBeatHit.add(beatHit);
+		conductor.onMeasureHit.add(measureHit);
+
 		FlxG.signals.preStateSwitch.addOnce(() ->
 		{
 			funkin.cache.ImageCache.destroyByCount();
+			funkin.util.FunkinAssets.clearSparrowCache();
+			openfl.system.System.gc();
 		});
     }
 
 	public function stepHit(step:Int){}
 	public function beatHit(beat:Int){}
+	public function measureHit(measure:Int) {}
 }

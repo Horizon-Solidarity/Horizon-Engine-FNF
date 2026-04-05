@@ -1,9 +1,17 @@
 {
-    "artist": "Kawai Sprite",
-    "preview": {"start": 0, "end": 15000},
-    "album": {
-        "assetPath": "albumRoll/volume4",
-        "text": "volume4-text",
-        "fonts": [false]
-    }
+	"bpmChanges": [
+		{
+			"stepsPerBeat": 4,
+			"beatsPerMeasure": 4,
+			"time": 0,
+			"bpm": 155,
+			"stepTime": 0
+		}
+	],
+	"album": "volume4",
+	"preview": {
+		"start": 0,
+		"end": 0
+	},
+	"artist": "Kawai Sprite"
 }

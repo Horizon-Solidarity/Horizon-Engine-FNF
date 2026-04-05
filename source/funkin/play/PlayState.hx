@@ -1,19 +1,17 @@
 package funkin.play;
 
-import flixel.FlxState;
 import flixel.FlxObject;
+import flixel.FlxState;
 import flixel.util.typeLimit.NextState;
-
-import funkin.backend.scripting.ScriptManager;
 import funkin.backend.scripting.IScriptHandler;
-
-import funkin.objects.Character;
+import funkin.backend.scripting.ScriptManager;
+import funkin.data.play.*;
+import funkin.data.songs.EventData.EventMetadata;
 import funkin.data.songs.SongData.ChartEventsData;
 import funkin.data.songs.SongData.SongCharacterData;
-import funkin.data.songs.EventData.EventMetadata;
-import funkin.data.play.*;
+import funkin.objects.Character;
+import funkin.play.notes.*;
 import funkin.play.ui.HUD;
-import funkin.play.ui.notes.*;
 
 class PlayState extends MusicBeatState
 {
@@ -105,7 +103,8 @@ class PlayState extends MusicBeatState
 		FlxG.sound.list.add(instrumental);
 		instrumental.onComplete = endSong;
 
-		conductor.bpm = song.bpm;
+		@:privateAccess
+		conductor.loadBPMChanges(song._tracks.bpmChanges);
 
 		scripts = new ScriptManager();
 		scripts.customPreset = presetScript;
@@ -150,7 +149,7 @@ class PlayState extends MusicBeatState
 				loadedVocals.push(p);
 			}
 			
-			var strumLineY:Float = ClientPrefs.data.downScroll ? (FlxG.height - 150) : 30;
+			var strumLineY:Float = ClientPrefs.data.downScroll ? (FlxG.height - 150) : 48;
 			strumline.setPosition(characterData.strumline.offset[0], strumLineY + characterData.strumline.offset[1]);
 
 			var character = new Character(characterData.id);
@@ -172,7 +171,7 @@ class PlayState extends MusicBeatState
 				character.flipX = !character.flipX;
 			}
 			else
-				strumline.x += 25;
+				strumline.x += 48;
 
 			characterObjects.set(characterData, {vocal: vocal, character: character, strumline: strumline});
 		}
@@ -324,10 +323,6 @@ class PlayState extends MusicBeatState
 		camHUD.zoom = 1 + cameraZoomAdd;
 	}
 
-	override function stepHit(step:Int)
-	{
-	}
-
 	override function beatHit(beat:Int)
 	{
 		if (beat % cameraZoomRate == 0)
@@ -416,6 +411,7 @@ class PlayState extends MusicBeatState
 	{
 		Conductor.instance.onStepHit.add((step) -> script.call("onStepHit", [step]));
         Conductor.instance.onBeatHit.add((beat) -> script.call("onBeatHit", [beat]));
+		Conductor.instance.onMeasureHit.add((measure) -> script.call("onMeasureHit", [measure]));
 
 		script.set("conductor", conductor);
 

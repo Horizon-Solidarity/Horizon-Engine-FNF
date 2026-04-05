@@ -7,6 +7,7 @@ import lime.app.Application;
 import openfl.Lib;
 import openfl.display.Sprite;
 import openfl.events.Event;
+import funkin.debug.FPSCounter;
 
 #if CRASH_HANDLER
 import haxe.CallStack;
@@ -19,6 +20,8 @@ import sys.io.Process;
 
 class Main extends Sprite
 {
+	public static var fpsCounter:FPSCounter;
+
 	public function new()
 	{
 		super();
@@ -28,6 +31,9 @@ class Main extends Sprite
 		funkin.backend.modding.ContentManager.init();
 
 		addChild(new FlxGame(0, 0, PlayState, 60, 60, true));
+
+		fpsCounter = new FPSCounter();
+		addChild(fpsCounter);
 
 		#if CRASH_HANDLER
 		// funkin.backend.clash.ClashHandler.init();
