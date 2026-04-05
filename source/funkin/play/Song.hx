@@ -1,9 +1,9 @@
 package funkin.play;
 
+import funkin.backend.modding.ContentManager;
 import funkin.data.songs.SongData;
 import funkin.data.songs.SongMeta;
 import funkin.data.songs.SoundTrackData;
-
 import json2object.JsonParser;
 import sys.io.File;
 
@@ -138,6 +138,8 @@ class Song
         chartParser.fromJson(File.getContent(chartPath), chartPath);
         var tracksParser = new JsonParser<SoundTrackMetadata>();
         tracksParser.fromJson(File.getContent(tracksPath), tracksPath);
+
+		ContentManager.currentContent = ContentManager.getFileBelong(metaPath);
 
         var result = new Song(id, difficulty, variation, metaParser.value, chartParser.value, tracksParser.value);
 

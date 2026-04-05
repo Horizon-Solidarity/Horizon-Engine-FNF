@@ -2,15 +2,15 @@ package funkin.data;
 
 typedef ContentMetadata =
 {
+	@:jignored
+	@:optional var folder:String;
+    
     var name:String;
 
     var description:String;
     @:default([])
     var contributors:Array<ModContributor>;
     var version:String;
-
-    @:default(false)
-    var global:Bool;
 
 
     @:optional var icon:String;

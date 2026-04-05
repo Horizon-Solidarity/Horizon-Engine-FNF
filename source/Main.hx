@@ -1,20 +1,15 @@
 package;
 
 import flixel.FlxGame;
-import flixel.FlxState;
-import flixel.graphics.FlxGraphic;
 import funkin.play.PlayState;
 import haxe.io.Path;
 import lime.app.Application;
-import openfl.Assets;
 import openfl.Lib;
 import openfl.display.Sprite;
-import openfl.display.StageScaleMode;
 import openfl.events.Event;
 
 #if CRASH_HANDLER
 import haxe.CallStack;
-import haxe.io.Path;
 import lime.app.Application;
 import openfl.events.UncaughtErrorEvent;
 import sys.FileSystem;
@@ -30,6 +25,7 @@ class Main extends Sprite
 		APIUtil.apiInit();
 
 		funkin.backend.Controls.instance = new funkin.backend.Controls();
+		funkin.backend.modding.ContentManager.init();
 
 		addChild(new FlxGame(0, 0, PlayState, 60, 60, true));
 

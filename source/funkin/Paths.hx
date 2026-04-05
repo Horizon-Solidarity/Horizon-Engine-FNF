@@ -1,64 +1,94 @@
 package funkin;
 
+import flixel.system.FlxAssets.FlxGraphicAsset;
+import funkin.backend.modding.ContentManager;
+import funkin.cache.*;
 import sys.FileSystem;
 import sys.io.File;
 
 class Paths
 {
-	public static inline function image(key:String, folder:String = "images"):String
+	public static function image(key:String, folder:String = "images"):FlxGraphicAsset
 	{
-		return getPath('$folder/$key.png');
+		var p = getPath('$folder/$key.png');
+		if (p == null)
+			return null;
+		if (ImageCache.exists(p))
+			return ImageCache.get(p).graphic;
+		else
+			return ImageCache.loadLocal(p).graphic;
 	}
 
-	public static inline function xml(key:String, folder:String = "images"):String
+	public static function xml(key:String, folder:String = "images"):String
 	{
 		return getPath('$folder/$key.xml');
 	}
 
-	public static inline function sound(key:String, folder:String = "sounds"):String
+	public static function sound(key:String, folder:String = "sounds")
 	{
-		return getPath('$folder/$key.ogg');
+		return getSound(key, folder);
 	}
 
-	public static inline function music(key:String, folder:String = "music"):String
+	static function getSound(key:String, folder:String):Dynamic
 	{
-		return getPath('$folder/$key.ogg');
+		var p = getPath('$folder/$key.ogg');
+		if (p == null)
+			return p;
+		if (AudioCache.exists(p))
+			return AudioCache.get(p);
+		else
+			return AudioCache.load(p);
 	}
 
-	public static inline function inst(song:String, variation:String = "default"):String
+	public static function music(key:String, folder:String = "music")
+	{
+		return getSound(key, folder);
+	}
+
+	public static function inst(song:String, variation:String = "default")
 	{
 		if (variation != "default")
-			return getPath('songs/$song/audio/$variation/Inst.ogg');
-		return getPath('songs/$song/audio/Inst.ogg');
+			return getSound('$song/audio/$variation/Inst', 'songs');
+		return getSound('$song/audio/Inst', 'songs');
 	}
 
-	public static inline function voice(song:String, postfix:String = "", variation:String = "default"):String
+	public static function voice(song:String, postfix:String = "", variation:String = "default")
 	{
 		if (variation != "default")
-			return getPath('songs/$song/audio/$variation/Voices$postfix.ogg');
-		return getPath('songs/$song/audio/Voices$postfix.ogg');
+			return getSound('$song/audio/$variation/Voices$postfix', 'songs');
+		return getSound('$song/audio/Voices$postfix', 'songs');
 	}
 
-	public static inline function font(key:String, ext:String = "ttf", folder:String = "fonts"):String
+	public static function font(key:String, ext:String = "ttf", folder:String = "fonts"):String
 	{
 		return getPath('$folder/$key.$ext');
 	}
 
-	public static inline function json(key:String, folder:String = "data"):String
+	public static function json(key:String, folder:String = "data"):String
 	{
 		return getPath('$folder/$key.json');
 	}
 
-	public static inline function getPath(key:String, ?content:String):String
+	public static function getPath(key:String, ?content:String):String
 	{
 		var ret:String = "assets/" + key;
 		if (content != null && content.toLowerCase() == "assets")
 		{
+			if (content.toLowerCase() != "assets")
+				ret = ContentManager.get(content).getPath(key);
 			if (FileSystem.exists(ret))
 				return ret;
 			return null;
 		}
-		// TODO: handle mods
+		if (ContentManager.currentContent != null && ContentManager.get(ContentManager.currentContent).getPath(key) != null)
+			return ContentManager.get(ContentManager.currentContent).getPath(key);
+
+		for (content in ContentManager.contents)
+		{
+			if (content.getPath(key) != null)
+				return content.getPath(key);
+		}
+
 		if (FileSystem.exists(ret))
 			return ret;
 		return null;
