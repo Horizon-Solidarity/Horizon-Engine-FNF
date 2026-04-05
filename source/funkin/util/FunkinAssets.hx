@@ -13,10 +13,10 @@ class FunkinAssets
         return result;
     }
 
-    public static inline function getSparrow(key:String):FlxAtlasFrames
+    public static inline function getSparrow(key:String, ?folder:String):FlxAtlasFrames
 	{
         // TODO: use fromFile instead for mod support
-		return FlxAtlasFrames.fromSparrow(Paths.image(key), Paths.xml(key));
+		return FlxAtlasFrames.fromSparrow(Paths.image(key, folder), Paths.xml(key, folder));
 	}
 
     public static inline function getText(key:String):String

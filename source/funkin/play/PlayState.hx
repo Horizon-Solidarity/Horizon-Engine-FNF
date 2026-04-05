@@ -47,6 +47,11 @@ class PlayState extends MusicBeatState
 	public var cameraFollowOffset:FlxPoint;
 	public var cameraFollowFinal:FlxObject;
 
+	public var cameraZoom:Float = 1;
+	public var cameraZoomAdd:Float = 0;
+
+	public var cameraZoomRate:Float = 4;
+
 	// ___________________ Gameplay Stuff ___________________
 	public var song(get, never):Song;
 	function get_song() return playlist[0];
@@ -107,6 +112,9 @@ class PlayState extends MusicBeatState
 
 		stage = new Stage(song.stage);
 		add(stage);
+		
+		cameraZoom = stage.data.camera.zoom;
+		cameraFollowPos.set(stage.data.camera.initialPosition[0], stage.data.camera.initialPosition[1]);
 
 		stats = new PlayStats();
 
@@ -310,16 +318,22 @@ class PlayState extends MusicBeatState
 		}
 
 		cameraFollowFinal.setPosition(cameraFollowPos.x + cameraFollowOffset.x, cameraFollowPos.y + cameraFollowOffset.y);
+		cameraZoomAdd = FlxMath.lerp(cameraZoomAdd, 0, 0.1);
+
+		camGame.zoom = cameraZoom + cameraZoomAdd;
+		camHUD.zoom = 1 + cameraZoomAdd;
 	}
 
 	override function stepHit(step:Int)
 	{
-		scripts.call("onStepHit", [step]);
 	}
 
 	override function beatHit(beat:Int)
 	{
-		scripts.call("onBeatHit", [beat]);
+		if (beat % cameraZoomRate == 0)
+		{
+			cameraZoomAdd = 0.02;
+		}
 	}
 
 	function playMissAnim(character:Character, direction:Int, suffix:String = "")
