@@ -1,9 +1,8 @@
-package funkin.api.scripting;
+package funkin.backend.scripting;
 
-import haxe.io.Path;
 import flixel.util.FlxDestroyUtil;
-
-import funkin.api.scripting.handlers.*;
+import funkin.backend.scripting.handlers.*;
+import haxe.io.Path;
 
 class ScriptManager implements IFlxDestroyable
 {

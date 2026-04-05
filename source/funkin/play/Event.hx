@@ -1,9 +1,8 @@
 package funkin.play;
 
-import funkin.data.songs.SongData;
+import funkin.backend.scripting.ScriptManager;
 import funkin.data.songs.EventData;
-import funkin.api.scripting.ScriptManager;
-
+import funkin.data.songs.SongData;
 import json2object.JsonParser;
 import sys.io.File;
 

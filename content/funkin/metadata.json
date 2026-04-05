@@ -1,0 +1,14 @@
+{
+    "name": "Friday Night Funkin'",
+    "description": "A rhythm game made with HaxeFlixel. it's Base Game Port for Horizon Engine",
+    "contributors": [
+        {
+            "name": "Youbadao",
+            "role": "Porter"
+        }
+    ],
+    "version": "0.8.3",
+    "global": false,
+    "icon": "icon64",
+    "discordRpc": null
+}

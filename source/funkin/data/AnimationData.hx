@@ -1,4 +1,4 @@
-package funkin.data.animation;
+package funkin.data;
 
 typedef NamedAnimationData =
 {

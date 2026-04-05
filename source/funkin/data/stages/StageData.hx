@@ -1,7 +1,7 @@
 package funkin.data.stages;
 
+import funkin.data.AnimationData;
 import funkin.data.character.CharacterData;
-import funkin.data.animation.AnimationData;
 
 class StageMetadata
 {

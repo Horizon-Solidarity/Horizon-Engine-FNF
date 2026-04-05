@@ -1,4 +1,4 @@
-package funkin.api.scripting;
+package funkin.backend.scripting;
 
 import funkin.play.PlayState;
 

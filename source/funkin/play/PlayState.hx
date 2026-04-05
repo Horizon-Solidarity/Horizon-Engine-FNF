@@ -4,8 +4,8 @@ import flixel.FlxState;
 import flixel.FlxObject;
 import flixel.util.typeLimit.NextState;
 
-import funkin.api.scripting.ScriptManager;
-import funkin.api.scripting.IScriptHandler;
+import funkin.backend.scripting.ScriptManager;
+import funkin.backend.scripting.IScriptHandler;
 
 import funkin.objects.Character;
 import funkin.data.songs.SongData.ChartEventsData;

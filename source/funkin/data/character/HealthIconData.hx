@@ -1,6 +1,6 @@
 package funkin.data.character;
 
-import funkin.data.animation.AnimationData;
+import funkin.data.AnimationData;
 
 enum abstract HealthIconRenderType(String) from String to String
 {

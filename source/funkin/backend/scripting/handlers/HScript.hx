@@ -1,6 +1,6 @@
-package funkin.api.scripting.handlers;
+package funkin.backend.scripting.handlers;
 
-import funkin.api.scripting.IScriptHandler.ScriptType;
+import funkin.backend.scripting.IScriptHandler.ScriptType;
 import insanity.Script;
 
 class HScript implements IScriptHandler

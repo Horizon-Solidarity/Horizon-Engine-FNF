@@ -1,8 +1,8 @@
 package funkin.objects;
 
-import funkin.data.animation.AnimationData;
 import animate.FlxAnimate;
 import flixel.util.typeLimit.OneOfTwo;
+import funkin.data.AnimationData;
 
 class FunkinSprite extends FlxAnimate
 {

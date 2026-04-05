@@ -1,10 +1,10 @@
 package funkin.play;
 
-import funkin.data.stages.StageData;
+import funkin.backend.scripting.ScriptManager;
 import funkin.data.songs.SongData;
-import funkin.objects.FunkinSprite;
+import funkin.data.stages.StageData;
 import funkin.objects.Character;
-import funkin.api.scripting.ScriptManager;
+import funkin.objects.FunkinSprite;
 
 class Stage extends FlxTypedGroup<FunkinSprite>
 {

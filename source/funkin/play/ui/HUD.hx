@@ -1,6 +1,6 @@
 package funkin.play.ui;
 
-import funkin.api.scripting.ScriptManager;
+import funkin.backend.scripting.ScriptManager;
 
 class HUD extends FlxSpriteGroup
 {
