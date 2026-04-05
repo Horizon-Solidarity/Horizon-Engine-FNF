@@ -26,6 +26,7 @@
   - [ ] Difficulties
   - [ ] GameplayChangerSubstate
   - [ ] Script Support
+- [ ] ScriptedState
 
 ### PlayState
 - [ ] Character
