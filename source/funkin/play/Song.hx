@@ -65,7 +65,7 @@ class Song
 
 
     public var bpm(get, default):Float;
-    function get_bpm() return _chart.bpm;
+    function get_bpm() return _tracks.bpmChanges[0].bpm;
 
     public var scrollSpeed(get, default):Float;
     function get_scrollSpeed() return _chart.scrollSpeed;

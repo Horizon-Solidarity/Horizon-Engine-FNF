@@ -4,28 +4,23 @@ import funkin.backend.scripting.ScriptManager;
 
 class HUD extends FlxSpriteGroup
 {
-    public var scripts:ScriptManager;
+    public var game(get, never):PlayState;
+    function get_game() return PlayState.instance;
 
-    public function new(style:String):Void
+    public function new():Void
     {
         super();
 
-        scripts = new ScriptManager();
-        scripts.customPreset = PlayState.instance.presetScript;
-        for (ext in ScriptManager.LUA_EXTENSIONS.concat(ScriptManager.HSCRIPT_EXTENSIONS))
-            scripts.loadFromFile("scripts/play/huds/" + style + "." + ext, this, true, false);
+        Conductor.instance.onStepHit.add(stepHit);
+        Conductor.instance.onBeatHit.add(beatHit);
+		Conductor.instance.onMeasureHit.add(measureHit);
 
-        scripts.set("add", add);
-        scripts.set("remove", remove);
-        scripts.set("members", members);
-        scripts.set("insert", insert);
-
-        scripts.call("onLoad");
+        load();
     }
 
-    override public function update(elapsed:Float)
-    {
-        super.update(elapsed);
-        scripts.call("onUpdate", [elapsed]);
-    }
+    public function load():Void{}
+
+    public function stepHit(step:Int){}
+    public function beatHit(beat:Int){}
+    public function measureHit(measure:Int){}
 }

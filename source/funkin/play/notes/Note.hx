@@ -17,6 +17,7 @@ class Note extends FunkinSprite
 {
 	public var skinId(default, set):String;
 	public var data:ChartNoteData;
+	public var noteType:NoteType;
 
 	public var strumline:Strumline;
 
@@ -30,7 +31,12 @@ class Note extends FunkinSprite
 
 		this.strumline = strumline;
 		this.data = data;
-		this.skinId = skinId;
+
+		noteType = NoteType.get(data.type);
+		noteType?.noteInit(this);
+
+		if (this.skinId == null)
+			this.skinId = skinId;
     }
 
 	function set_skinId(value:String)
@@ -64,5 +70,7 @@ class Note extends FunkinSprite
 			state = HITTABLE;
 		else if (data.time < Conductor.instance.songPosition - Conductor.safeZone)
 			state = MISSED;
+
+		noteType?.noteUpdate(this, elapsed);
 	}
 }

@@ -71,7 +71,6 @@ class ChartConverter {
 			for (difficulty in difficulties)
 			{
 				var horizonChart:SongChartData = {
-					bpm: curVSliceMeta.timeChanges[0].bpm,
 					scrollSpeed: Reflect.field(curVSliceChart.scrollSpeed, difficulty),
 					events: [],
 					characters: [

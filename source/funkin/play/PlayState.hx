@@ -196,7 +196,13 @@ class PlayState extends MusicBeatState
 		});
 
 		// shitty layering
-		hud = new HUD(song.uiStyle);
+		hud = switch (song.uiStyle)
+		{
+			case "funkin":
+				new funkin.play.ui.huds.FunkinHUD();
+			default:
+				new funkin.play.ui.huds.ScriptedHUD(song.uiStyle);
+		}
 		hud.cameras = [camHUD];
 		hud.scrollFactor.set();
 		add(hud);
@@ -436,6 +442,7 @@ class PlayState extends MusicBeatState
 	override public function destroy():Void
 	{
 		scripts.destroy();
+		NoteType.types.clear();
 
 		super.destroy();
 	}

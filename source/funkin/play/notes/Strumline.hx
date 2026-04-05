@@ -124,6 +124,7 @@ class Strumline extends FlxTypedSpriteGroup<FunkinSprite>
 		receptors[note.data.lane].playAnimation("confirm", true);
 
 		onNoteHit.dispatch(note);
+		note.noteType?.noteHit(note, this);
 
 		notes.remove(note);
 		note.destroy();
