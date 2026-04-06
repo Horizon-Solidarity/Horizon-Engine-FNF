@@ -1,7 +1,7 @@
 package funkin.data.stages;
 
+import funkin.data.AnimationData;
 import funkin.data.character.CharacterData;
-import funkin.data.animation.AnimationData;
 
 class StageMetadata
 {
@@ -60,8 +60,8 @@ typedef BasePropData = {
 typedef StageCharacterMetadata =
 {
     var player:StageCharacterData;
-    var spectator:StageCharacterData;
 	var opponent:StageCharacterData;
+	var spectator:StageCharacterData;
 }
 
 typedef StageCharacterData =
@@ -74,6 +74,7 @@ typedef StageCharacterData =
 typedef StagePropData =
 {
 	> BasePropData,
+	var name:String;
 	var assetPath:String;
 	var renderType:CharacterRenderType;
 	@:default([1, 1])
@@ -86,4 +87,6 @@ typedef StagePropData =
 	var flipX:Bool;
 	@:default(false)
 	var flipY:Bool;
+	@:default(1)
+	var alpha:Float;
 }

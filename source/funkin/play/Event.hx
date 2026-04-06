@@ -1,35 +1,58 @@
 package funkin.play;
 
-import funkin.data.songs.SongData;
+import funkin.backend.scripting.ScriptManager;
 import funkin.data.songs.EventData;
-import funkin.api.scripting.ScriptManager;
-
+import funkin.data.songs.SongData;
 import json2object.JsonParser;
 import sys.io.File;
 
+import funkin.play.events.ScriptedEvent;
+
 class Event
 {
+    public static var types:Map<String, Event> = [];
+
+    public static function get(type:String, chartData:ChartEventsData):Event
+    {
+        if (Paths.json("events/" + type) != null)
+        {
+            var typeParser = new JsonParser<EventMetadata>();
+            var meta:EventMetadata;
+            try
+            {
+                meta = typeParser.fromJson(sys.io.File.getContent(Paths.json("events/" + type)), Paths.json("events/" + type));
+            
+                var instance:Event = Type.resolveClass(meta.script) != null ? Type.createInstance(Type.resolveClass(meta.script), []) : new ScriptedEvent(meta.script);
+                if (instance != null)
+                {
+                    instance.data = chartData;
+                    instance.meta = meta;
+                    instance.load();
+                }
+                return instance;
+            }
+            catch (e:Dynamic)
+            {
+                trace('Error loading event of "$type": $e');
+                return null;
+            }
+        }
+
+        trace("Notetype " + type + " not found!");
+        return null;
+    }
+
+    public var game(get, never):PlayState;
+    function get_game() return PlayState.instance;
+
     public var meta:EventMetadata;
     public var data:ChartEventsData;
-    
-    var scripts:ScriptManager;
 
-    public function new(meta:EventMetadata, data:ChartEventsData)
-    {
-        this.meta = meta;
-        this.data = data;
+    public function new(){}
 
-        scripts = new ScriptManager();
-        scripts.customPreset = PlayState.instance.presetScript;
-        for (ext in ScriptManager.LUA_EXTENSIONS.concat(ScriptManager.HSCRIPT_EXTENSIONS))
-            scripts.loadFromFile("scripts/play/events/" + meta.script + "." + ext, this, true, false);
+    public function allowCallBeforeStart() return false;
 
-        scripts.set("meta", meta);
-        scripts.set("data", data);
-        scripts.set("getArgValue", getArgValue);
-        
-        scripts.call("onLoad");
-    }
+    public function load():Void{}
 
     public function getArgValue(arg:String):Dynamic
     {
@@ -61,8 +84,5 @@ class Event
         return null;
     }
 
-    public function call()
-    {
-        scripts.call("onCall");
-    }
+    public function call():Void{}
 }

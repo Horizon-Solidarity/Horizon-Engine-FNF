@@ -33,6 +33,7 @@
 	<source path="source" />
 	
 	<assets path="assets" />
+	<assets path="content" />
 	<!-- ____________________________ Define Settings ___________________________ -->
 
 	 <define name="CRASH_HANDLER" />

@@ -1,20 +1,16 @@
 package;
 
 import flixel.FlxGame;
-import flixel.FlxState;
-import flixel.graphics.FlxGraphic;
 import funkin.play.PlayState;
 import haxe.io.Path;
 import lime.app.Application;
-import openfl.Assets;
 import openfl.Lib;
 import openfl.display.Sprite;
-import openfl.display.StageScaleMode;
 import openfl.events.Event;
+import funkin.debug.FPSCounter;
 
 #if CRASH_HANDLER
 import haxe.CallStack;
-import haxe.io.Path;
 import lime.app.Application;
 import openfl.events.UncaughtErrorEvent;
 import sys.FileSystem;
@@ -24,14 +20,20 @@ import sys.io.Process;
 
 class Main extends Sprite
 {
+	public static var fpsCounter:FPSCounter;
+
 	public function new()
 	{
 		super();
 		APIUtil.apiInit();
 
 		funkin.backend.Controls.instance = new funkin.backend.Controls();
+		funkin.backend.modding.ContentManager.init();
 
 		addChild(new FlxGame(0, 0, PlayState, 60, 60, true));
+
+		fpsCounter = new FPSCounter();
+		addChild(fpsCounter);
 
 		#if CRASH_HANDLER
 		// funkin.backend.clash.ClashHandler.init();

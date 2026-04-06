@@ -1,10 +1,10 @@
 package funkin.play;
 
-import funkin.data.stages.StageData;
+import funkin.backend.scripting.ScriptManager;
 import funkin.data.songs.SongData;
-import funkin.objects.FunkinSprite;
+import funkin.data.stages.StageData;
 import funkin.objects.Character;
-import funkin.api.scripting.ScriptManager;
+import funkin.objects.FunkinSprite;
 
 class Stage extends FlxTypedGroup<FunkinSprite>
 {
@@ -30,10 +30,14 @@ class Stage extends FlxTypedGroup<FunkinSprite>
             {
                 default: //case Image:
                     sprite.loadGraphic(Paths.image(assetPath));
+                case Sparrow:
+                    sprite.frames = FunkinAssets.getSparrow(assetPath);
             }
 
             for (anim in prop.animations)
                 sprite.addAnimationData(anim.name, anim);
+            if (prop.animations.length > 0)
+                sprite.playAnimation(prop.animations[0].name);
 
             sprite.zIndex = prop.zIndex;
             sprite.antialiasing = (ClientPrefs.data.antialiasing && prop.antialiasing);
@@ -41,7 +45,9 @@ class Stage extends FlxTypedGroup<FunkinSprite>
             sprite.scrollFactor.set(prop.scrollFactor[0], prop.scrollFactor[1]);
             sprite.flipX = prop.flipX;
             sprite.flipY = prop.flipY;
+            sprite.alpha = prop.alpha;
 
+            props.set(prop.name, sprite);
             add(sprite);
         }
 

@@ -1,0 +1,17 @@
+{
+	"bpmChanges": [
+		{
+			"stepsPerBeat": 4,
+			"beatsPerMeasure": 4,
+			"time": 0,
+			"bpm": 155,
+			"stepTime": 0
+		}
+	],
+	"album": "volume4",
+	"preview": {
+		"start": 0,
+		"end": 15000
+	},
+	"artist": "Saruky"
+}

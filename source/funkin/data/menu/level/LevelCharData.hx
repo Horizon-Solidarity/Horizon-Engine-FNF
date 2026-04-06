@@ -1,6 +1,6 @@
 package funkin.data.menu.level;
 
-import funkin.data.animation.AnimationData;
+import funkin.data.AnimationData;
 
 typedef LevelCharMetadata =
 {

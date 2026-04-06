@@ -1,7 +1,0 @@
-import Reflect;
-
-function onCall()
-{
-    var target = characterObjects.get(song.characters[getArgValue("target")]).character;
-    game.moveCamera(target.x + target.cameraOffset.x, target.y - target.cameraOffset.y, (conductor.stepCrochet / 1000) * getArgValue("duration"), Reflect.field(FlxEase, getArgValue("ease")));
-}

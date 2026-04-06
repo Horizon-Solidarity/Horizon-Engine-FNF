@@ -1,0 +1,16 @@
+{
+    "name": "Example Content",
+    "description": "example content for Horizon Engine!",
+    "contributors": [
+        {
+            "name": "Template Contributor",
+            "icon": "face",
+            "role": "Template Role",
+            "url": "https://github.com/Horizon-Solidarity/Horizon-Engine-FNF"
+        }
+    ],
+    "version": "0.0.1",
+    "global": false,
+    "icon": "icon64",
+    "discordRpc": null
+}

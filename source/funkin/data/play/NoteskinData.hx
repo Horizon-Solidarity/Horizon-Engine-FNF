@@ -1,6 +1,6 @@
 package funkin.data.play;
 
-import funkin.data.animation.AnimationData;
+import funkin.data.AnimationData;
 
 class NoteskinMetadata
 {

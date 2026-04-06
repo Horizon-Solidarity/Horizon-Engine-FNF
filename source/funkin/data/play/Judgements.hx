@@ -1,7 +1,6 @@
 package funkin.data.play;
 
-import funkin.data.animation.AnimationData;
-import funkin.data.play.NoteskinData;
+import funkin.backend.Conductor;
 import funkin.data.songs.SongData;
 
 class Judgements

@@ -1,8 +1,8 @@
 package funkin.objects;
 
-import funkin.data.animation.AnimationData;
 import animate.FlxAnimate;
 import flixel.util.typeLimit.OneOfTwo;
+import funkin.data.AnimationData;
 
 class FunkinSprite extends FlxAnimate
 {
@@ -31,10 +31,11 @@ class FunkinSprite extends FlxAnimate
 
     public function playAnimation(anim:String, force:Bool = false)
     {
+		animation.play(anim, force);
+        
         if (offsets.exists(anim))
         {
-            this.offset = offsets.get(anim);
-            animation.play(anim, force);
+			this.offset = offsets.get(anim);
         }
     }
 

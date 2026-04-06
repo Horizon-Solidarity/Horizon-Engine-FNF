@@ -2,7 +2,7 @@
     "directory": "week1/",
     "name": "Main Stage",
     "camera": {
-        "speed": 1.9,
+        "initialPosition": [0, 0],
         "zoom": 1.1
     },
     "characters": {

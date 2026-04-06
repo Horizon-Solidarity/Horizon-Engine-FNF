@@ -1,8 +1,8 @@
 package funkin.play.ui;
 
+import flixel.graphics.frames.FlxImageFrame;
 import funkin.data.character.CharacterData;
 import funkin.data.character.HealthIconData;
-import flixel.graphics.frames.FlxImageFrame;
 
 class HealthIcon extends funkin.objects.FunkinSprite
 {
@@ -30,6 +30,8 @@ class HealthIcon extends funkin.objects.FunkinSprite
                 animation.add("losing", [1]);
                 if (data.hasWinning)
                     animation.add("winning", [2]);
+				else
+					animation.add("winning", [0]);
 
 			    animation.play("normal");
             case Multiple:
@@ -51,7 +53,7 @@ class HealthIcon extends funkin.objects.FunkinSprite
                 loadGraphic(Paths.image("icons/" + id + "/" + anim));
             return;
         }
-        super.playAnimation(anim);
+		super.playAnimation(anim, force);
     }
 
     override public function animationExists(name:String)

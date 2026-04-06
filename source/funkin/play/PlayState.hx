@@ -1,19 +1,17 @@
 package funkin.play;
 
-import flixel.FlxState;
 import flixel.FlxObject;
+import flixel.FlxState;
 import flixel.util.typeLimit.NextState;
-
-import funkin.api.scripting.ScriptManager;
-import funkin.api.scripting.IScriptHandler;
-
-import funkin.objects.Character;
+import funkin.backend.scripting.IScriptHandler;
+import funkin.backend.scripting.ScriptManager;
+import funkin.data.play.*;
+import funkin.data.songs.EventData.EventMetadata;
 import funkin.data.songs.SongData.ChartEventsData;
 import funkin.data.songs.SongData.SongCharacterData;
-import funkin.data.songs.EventData.EventMetadata;
-import funkin.data.play.*;
+import funkin.objects.Character;
+import funkin.play.notes.*;
 import funkin.play.ui.HUD;
-import funkin.play.ui.notes.*;
 
 class PlayState extends MusicBeatState
 {
@@ -47,6 +45,11 @@ class PlayState extends MusicBeatState
 	public var cameraFollowOffset:FlxPoint;
 	public var cameraFollowFinal:FlxObject;
 
+	public var cameraZoom:Float = 1;
+	public var cameraZoomAdd:Float = 0;
+
+	public var cameraZoomRate:Float = 4;
+
 	// ___________________ Gameplay Stuff ___________________
 	public var song(get, never):Song;
 	function get_song() return playlist[0];
@@ -63,9 +66,7 @@ class PlayState extends MusicBeatState
 
 	public var stats:PlayStats;
 	public var health(default, set):Float = 1;
-	
-	// ___________________ Script Stuff ___________________
-	public var scripts:ScriptManager;
+
 
 	override public function create()
 	{
@@ -100,13 +101,17 @@ class PlayState extends MusicBeatState
 		FlxG.sound.list.add(instrumental);
 		instrumental.onComplete = endSong;
 
-		conductor.bpm = song.bpm;
+		@:privateAccess
+		conductor.loadBPMChanges(song._tracks.bpmChanges);
 
 		scripts = new ScriptManager();
 		scripts.customPreset = presetScript;
 
 		stage = new Stage(song.stage);
 		add(stage);
+		
+		cameraZoom = stage.data.camera.zoom;
+		cameraFollowPos.set(stage.data.camera.initialPosition[0], stage.data.camera.initialPosition[1]);
 
 		stats = new PlayStats();
 
@@ -142,7 +147,7 @@ class PlayState extends MusicBeatState
 				loadedVocals.push(p);
 			}
 			
-			var strumLineY:Float = ClientPrefs.data.downScroll ? (FlxG.height - 150) : 30;
+			var strumLineY:Float = ClientPrefs.data.downScroll ? (FlxG.height - 150) : 48;
 			strumline.setPosition(characterData.strumline.offset[0], strumLineY + characterData.strumline.offset[1]);
 
 			var character = new Character(characterData.id);
@@ -164,22 +169,18 @@ class PlayState extends MusicBeatState
 				character.flipX = !character.flipX;
 			}
 			else
-				strumline.x += 25;
+				strumline.x += 48;
 
 			characterObjects.set(characterData, {vocal: vocal, character: character, strumline: strumline});
 		}
 
 		scripts.loadFromFolder("scripts/play/", true);
-		scripts.loadFromFolder("songs/" + song.id + "/scripts/", true);
+		scripts.loadFromName("scripts/songs/" + song.id, true);
 
 		for (event in song.events)
 		{
-			var meta = EventMetadata.fromEventId(event.name);
-			if (meta != null)
-			{
-				var eventObj = new Event(EventMetadata.fromEventId(event.name), event);
-				events.push(eventObj);
-			}
+			var eventObj = Event.get(event.name, event);
+			events.push(eventObj);
 		}
 
 		events.sort((a, b) -> {
@@ -189,7 +190,13 @@ class PlayState extends MusicBeatState
 		});
 
 		// shitty layering
-		hud = new HUD(song.uiStyle);
+		hud = switch (song.uiStyle)
+		{
+			case "funkin":
+				new funkin.play.ui.huds.FunkinHUD();
+			default:
+				new funkin.play.ui.huds.ScriptedHUD(song.uiStyle);
+		}
 		hud.cameras = [camHUD];
 		hud.scrollFactor.set();
 		add(hud);
@@ -206,7 +213,7 @@ class PlayState extends MusicBeatState
 
 		conductor.songPosition = conductor.crochet * -5;
 
-		if (events[0].data.time == 0 && events[0].meta.script == "focus_camera")
+		if (events[0].data.time == 0 && events[0].allowCallBeforeStart())
 		{
 			events[0].call();
 			events.remove(events[0]);
@@ -310,16 +317,18 @@ class PlayState extends MusicBeatState
 		}
 
 		cameraFollowFinal.setPosition(cameraFollowPos.x + cameraFollowOffset.x, cameraFollowPos.y + cameraFollowOffset.y);
-	}
+		cameraZoomAdd = FlxMath.lerp(cameraZoomAdd, 0, 0.1);
 
-	override function stepHit(step:Int)
-	{
-		scripts.call("onStepHit", [step]);
+		camGame.zoom = cameraZoom + cameraZoomAdd;
+		camHUD.zoom = 1 + cameraZoomAdd;
 	}
 
 	override function beatHit(beat:Int)
 	{
-		scripts.call("onBeatHit", [beat]);
+		if (beat % cameraZoomRate == 0)
+		{
+			cameraZoomAdd = 0.02;
+		}
 	}
 
 	function playMissAnim(character:Character, direction:Int, suffix:String = "")
@@ -366,8 +375,7 @@ class PlayState extends MusicBeatState
 		if (_ease == null)
 			_ease = FlxEase.expoOut;
 
-		if (cameraFollowTween != null)
-			cameraFollowTween.cancel();
+		cameraFollowTween?.cancel();
 		cameraFollowTween = FlxTween.tween(cameraFollowPos, {x: _x, y: _y}, time, {ease: _ease});
 	}
 
@@ -400,9 +408,6 @@ class PlayState extends MusicBeatState
 
 	public function presetScript(script:IScriptHandler)
 	{
-		Conductor.instance.onStepHit.add((step) -> script.call("onStepHit", [step]));
-        Conductor.instance.onBeatHit.add((beat) -> script.call("onBeatHit", [beat]));
-
 		script.set("conductor", conductor);
 
 		script.set("playlist", playlist);
@@ -425,7 +430,8 @@ class PlayState extends MusicBeatState
 
 	override public function destroy():Void
 	{
-		scripts.destroy();
+		NoteType.types.clear();
+		Event.types.clear();
 
 		super.destroy();
 	}

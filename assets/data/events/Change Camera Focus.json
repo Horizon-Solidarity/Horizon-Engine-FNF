@@ -1,6 +1,5 @@
 {
-    "aliases": ["Focus"],
-    "script": "focus_camera",
+    "script": "funkin.play.events.CameraFocusEvent",
     "author": "Rushillbunny",
     "args": [
         {

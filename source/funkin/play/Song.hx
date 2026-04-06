@@ -1,9 +1,9 @@
 package funkin.play;
 
+import funkin.backend.modding.ContentManager;
 import funkin.data.songs.SongData;
 import funkin.data.songs.SongMeta;
 import funkin.data.songs.SoundTrackData;
-
 import json2object.JsonParser;
 import sys.io.File;
 
@@ -65,7 +65,7 @@ class Song
 
 
     public var bpm(get, default):Float;
-    function get_bpm() return _chart.bpm;
+    function get_bpm() return _tracks.bpmChanges[0].bpm;
 
     public var scrollSpeed(get, default):Float;
     function get_scrollSpeed() return _chart.scrollSpeed;
@@ -138,6 +138,8 @@ class Song
         chartParser.fromJson(File.getContent(chartPath), chartPath);
         var tracksParser = new JsonParser<SoundTrackMetadata>();
         tracksParser.fromJson(File.getContent(tracksPath), tracksPath);
+
+		ContentManager.currentContent = ContentManager.getFileBelong(metaPath);
 
         var result = new Song(id, difficulty, variation, metaParser.value, chartParser.value, tracksParser.value);
 

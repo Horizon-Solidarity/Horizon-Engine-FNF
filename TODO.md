@@ -36,8 +36,8 @@
   - [ ] Aseprite
     - >Conceptual Stage
 - [ ] Stage
-  - [X] Json
-  - [ ] Script Support
+  - [x] Json
+  - [x] Script Support
 - [ ] Notes
   - [x] NoteSprite
   - [x] Strumline
@@ -53,7 +53,7 @@
 ## System
 ### Visual
 - [ ] FPS Counter
-  - [ ] Default
+  - [x] Default
   - [ ] Rich
 ### Sprites
 - [ ] FunkinSprite
