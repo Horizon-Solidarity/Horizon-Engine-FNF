@@ -12,64 +12,16 @@ enum ParamType
 	TCharacterList;
 }
 
-class EventMetadata
+typedef EventMetadata =
 {
-	public static var list:Map<String, String> = [];
-
-
 	@:default([])
-	public var aliases:Array<String>;
-	public var script:String;
+	var aliases:Array<String>;
+	var script:String;
 	@:default("Unknown")
-	public var author:String;
+	var author:String;
 
 	@:default([])
-	public var args:Array<EventArgData>;
-
-	public static function reloadEvents()
-	{
-		list.clear();
-
-		for (file in FunkinAssets.listDirectory("data/events/"))
-		{
-			if (file.endsWith(".json"))
-			{
-				var json = haxe.Json.parse(File.getContent(Paths.getPath(Path.join(["data/events", file]))));
-				var event = Path.withoutDirectory(Path.withoutExtension(file));
-				if (json.aliases != null)
-				{
-					var aliases:Array<String> = json.aliases;
-					for (alias in aliases)
-						list.set(alias, event);
-				}
-				list.set(event, event);
-			}
-		}
-	}
-	public static function fromEventId(id:String):EventMetadata
-	{
-		if (!list.exists(id))
-			reloadEvents();
-		if (!list.exists(id)) // if still not exists, return null
-		{
-			trace('Event file of $id not found! returning null!');
-			return null;
-		}
-
-		var parser = new json2object.JsonParser<EventMetadata>();
-
-		try
-		{
-			parser.fromJson(File.getContent(Paths.json("events/" + id)));
-		}
-		catch (e:Dynamic)
-		{
-			trace('Error loading event file of "$id": $e');
-			return null;
-		}
-
-		return parser.value;
-	}
+	var args:Array<EventArgData>;
 }
 
 class EventArgData

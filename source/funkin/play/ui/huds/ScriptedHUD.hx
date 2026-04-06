@@ -12,8 +12,11 @@ class ScriptedHUD extends HUD
 
         scripts = new ScriptManager();
         scripts.customPreset = PlayState.instance.presetScript;
-        for (ext in ScriptManager.LUA_EXTENSIONS.concat(ScriptManager.HSCRIPT_EXTENSIONS))
-            scripts.loadFromFile("scripts/play/huds/" + style + "." + ext, this, true, false);
+        scripts.loadFromName("scripts/play/huds/" + style, this, true, false);
+
+        Conductor.instance.onStepHit.add((step) -> scripts.call("onStepHit", [step]));
+        Conductor.instance.onBeatHit.add((beat) -> scripts.call("onBeatHit", [beat]));
+		Conductor.instance.onMeasureHit.add((measure) -> scripts.call("onMeasureHit", [measure]));
 
         scripts.set("add", add);
         scripts.set("remove", remove);

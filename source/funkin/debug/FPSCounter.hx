@@ -3,7 +3,9 @@ package funkin.debug;
 import flixel.FlxG;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
+import lime.app.Application;
 import openfl.system.System;
+import flixel.util.FlxColor;
 
 /**
 	The FPS class provides an easy-to-use monitor to display
@@ -21,6 +23,8 @@ class FPSCounter extends TextField
 	**/
 	public var memoryMegas(get, never):Float;
 
+	public var memoryPeak:Float = 0;
+
 	public function new()
 	{
 		super();
@@ -31,7 +35,7 @@ class FPSCounter extends TextField
 		currentFPS = 0;
 		selectable = false;
 		mouseEnabled = false;
-		defaultTextFormat = new TextFormat(Paths.font("vcr"), 14);
+		defaultTextFormat = new TextFormat("_sans", 14);
 		autoSize = LEFT;
 		multiline = true;
 		textColor = 0xFFFFFFFF;
@@ -51,9 +55,14 @@ class FPSCounter extends TextField
 	}
 
 	public dynamic function updateText():Void { // so people can override it in hscript
-		text = 'FPS: ${currentFPS} • Memory: ${flixel.util.FlxStringUtil.formatBytes(memoryMegas)}';
+		text = '${currentFPS} FPS';
+		text += '\n${flixel.util.FlxStringUtil.formatBytes(memoryMegas)} / ${flixel.util.FlxStringUtil.formatBytes(memoryPeak)}';
 	}
 
 	inline function get_memoryMegas():Float
+	{
+		if (System.totalMemoryNumber > memoryPeak)
+			memoryPeak = System.totalMemoryNumber;
 		return System.totalMemoryNumber;
+	}
 }

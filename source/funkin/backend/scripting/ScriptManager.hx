@@ -21,6 +21,12 @@ class ScriptManager implements IFlxDestroyable
         }
     }
 
+    public function loadFromName(path:String, ?parent:Dynamic, ignoreNonExistError:Bool = false, callOnCreate:Bool = true):Void
+    {
+        for (ext in ScriptManager.LUA_EXTENSIONS.concat(ScriptManager.HSCRIPT_EXTENSIONS))
+            loadFromFile(path + "." + ext, parent, ignoreNonExistError, callOnCreate);
+    }
+
     public function loadFromFile(path:String, ?parent:Dynamic, ignoreNonExistError:Bool = false, callOnCreate:Bool = true):IScriptHandler
     {
         var realPath = Paths.getPath(path);

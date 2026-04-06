@@ -32,7 +32,8 @@ class Note extends FunkinSprite
 		this.strumline = strumline;
 		this.data = data;
 
-		noteType = NoteType.get(data.type);
+		if (data.type != null)
+			noteType = NoteType.get(data.type);
 		noteType?.noteInit(this);
 
 		if (this.skinId == null)

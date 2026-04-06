@@ -1,5 +1,4 @@
 {
-    "aliases": ["Bop"],
     "script": "add_camera_zoom",
     "author": "Youbadao",
     "args": [

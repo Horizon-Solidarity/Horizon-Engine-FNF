@@ -31,10 +31,11 @@ class FunkinSprite extends FlxAnimate
 
     public function playAnimation(anim:String, force:Bool = false)
     {
+		animation.play(anim, force);
+        
         if (offsets.exists(anim))
         {
-            this.offset = offsets.get(anim);
-            animation.play(anim, force);
+			this.offset = offsets.get(anim);
         }
     }
 

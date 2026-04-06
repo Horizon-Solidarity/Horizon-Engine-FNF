@@ -66,9 +66,7 @@ class PlayState extends MusicBeatState
 
 	public var stats:PlayStats;
 	public var health(default, set):Float = 1;
-	
-	// ___________________ Script Stuff ___________________
-	public var scripts:ScriptManager;
+
 
 	override public function create()
 	{
@@ -177,16 +175,12 @@ class PlayState extends MusicBeatState
 		}
 
 		scripts.loadFromFolder("scripts/play/", true);
-		scripts.loadFromFolder("songs/" + song.id + "/scripts/", true);
+		scripts.loadFromName("scripts/songs/" + song.id, true);
 
 		for (event in song.events)
 		{
-			var meta = EventMetadata.fromEventId(event.name);
-			if (meta != null)
-			{
-				var eventObj = new Event(EventMetadata.fromEventId(event.name), event);
-				events.push(eventObj);
-			}
+			var eventObj = Event.get(event.name, event);
+			events.push(eventObj);
 		}
 
 		events.sort((a, b) -> {
@@ -219,7 +213,7 @@ class PlayState extends MusicBeatState
 
 		conductor.songPosition = conductor.crochet * -5;
 
-		if (events[0].data.time == 0 && events[0].meta.script == "focus_camera")
+		if (events[0].data.time == 0 && events[0].allowCallBeforeStart())
 		{
 			events[0].call();
 			events.remove(events[0]);
@@ -381,8 +375,7 @@ class PlayState extends MusicBeatState
 		if (_ease == null)
 			_ease = FlxEase.expoOut;
 
-		if (cameraFollowTween != null)
-			cameraFollowTween.cancel();
+		cameraFollowTween?.cancel();
 		cameraFollowTween = FlxTween.tween(cameraFollowPos, {x: _x, y: _y}, time, {ease: _ease});
 	}
 
@@ -415,10 +408,6 @@ class PlayState extends MusicBeatState
 
 	public function presetScript(script:IScriptHandler)
 	{
-		Conductor.instance.onStepHit.add((step) -> script.call("onStepHit", [step]));
-        Conductor.instance.onBeatHit.add((beat) -> script.call("onBeatHit", [beat]));
-		Conductor.instance.onMeasureHit.add((measure) -> script.call("onMeasureHit", [measure]));
-
 		script.set("conductor", conductor);
 
 		script.set("playlist", playlist);
@@ -441,8 +430,8 @@ class PlayState extends MusicBeatState
 
 	override public function destroy():Void
 	{
-		scripts.destroy();
 		NoteType.types.clear();
+		Event.types.clear();
 
 		super.destroy();
 	}

@@ -68,6 +68,22 @@ class FunkinHUD extends HUD
 
         iconP1.scale.set(FlxMath.lerp(iconP1.data.scale[0], iconP1.scale.x, Math.exp(-elapsed * 9)), FlxMath.lerp(iconP1.data.scale[1], iconP1.scale.y, Math.exp(-elapsed * 9)));
         iconP2.scale.set(FlxMath.lerp(iconP2.data.scale[0], iconP2.scale.x, Math.exp(-elapsed * 9)), FlxMath.lerp(iconP2.data.scale[1], iconP2.scale.y, Math.exp(-elapsed * 9)));
+
+        if (healthBar.percent < 20)
+        {
+            iconP1.playAnimation("losing");
+            iconP2.playAnimation("winning");
+        }
+        else if (healthBar.percent > 80)
+        {
+            iconP1.playAnimation("winning");
+            iconP2.playAnimation("losing");
+        }
+        else
+        {
+            iconP1.playAnimation("normal");
+            iconP2.playAnimation("normal");
+        }
     }
 
     override public function beatHit(beat:Int)

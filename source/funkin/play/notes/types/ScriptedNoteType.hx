@@ -12,8 +12,7 @@ class ScriptedNoteType extends NoteType
 
         scripts = new ScriptManager();
         scripts.customPreset = PlayState.instance.presetScript;
-        for (ext in ScriptManager.LUA_EXTENSIONS.concat(ScriptManager.HSCRIPT_EXTENSIONS))
-            scripts.loadFromFile("scripts/play/notetypes/" + type + "." + ext, this, true, false);
+        scripts.loadFromName("scripts/play/notetypes/" + type, this, true, false);
         scripts.call("onLoad");
     }
 
