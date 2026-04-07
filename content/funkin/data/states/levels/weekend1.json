@@ -1,0 +1,18 @@
+{
+    "name": "DUE DEBTS",
+    "titleAssetPath": "story/titles/weekend1",
+    "characters": [
+        {"id": "gf", "scale": 1.0, "offsets": [200, 80]},
+        {"id": "dad", "scale": 1.0, "offsets": [100, 60]},
+        {"id": "bf", "scale": 1.0, "offsets": [150, 80]}
+    ],
+    "bgColor": "413CAE",
+    "bgImage": null,
+    "allDifficulties": ["easy", "normal", "hard"],
+    "songs": [
+        {"songName": "darnell", "visibleFirst": true, "canPlay": ["easy", "normal", "hard"]},
+        {"songName": "lit-up", "visibleFirst": true, "canPlay": ["easy", "normal", "hard"]},
+        {"songName": "2hot", "visibleFirst": true, "canPlay": ["easy", "normal", "hard"]},
+        {"songName": "blazin", "visibleFirst": false, "canPlay": ["hard"]}
+    ]
+}

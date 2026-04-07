@@ -1,0 +1,13 @@
+{
+    "levels": [
+        {
+            "capsule": "WEEKEND 1",
+            "songs": [
+                {"name": "darnell"},
+                {"name": "lit-up"},
+                {"name": "2hot"},
+                {"name": "blazin", "shouldLock": true}
+            ]
+        }
+    ]
+}

@@ -1,8 +1,8 @@
 package notes;
 
-import funkin.play.ui.notes.types.ScriptedNote;
+import funkin.play.ui.notes.types.ScriptedNoteType;
 
-class BlazinPunchHighNote extends ScriptedNote
+class BlazinPunchHighNote extends ScriptedNoteType
 {
 	public function new()
     {
@@ -10,7 +10,7 @@ class BlazinPunchHighNote extends ScriptedNote
     }
 }
 
-class BlazinPunchHighDodgedNote extends ScriptedNote
+class BlazinPunchHighDodgedNote extends ScriptedNoteType
 {
 	public function new()
     {

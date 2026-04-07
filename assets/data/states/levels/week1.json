@@ -7,8 +7,9 @@
         {"id": "bf", "scale": 1.0, "offsets": [150, 80]}
     ],
     "bgColor": "F9CF51",
+    "bgImage": null,
     "allDifficulties": ["easy", "normal", "hard"],
     "songs": [
-        {"songName": "Test", "secret": false, "difficulties": ["normal"]}
+        {"songName": "test", "visibleFirst": true, "canPlay": ["normal"]}
     ]
 }

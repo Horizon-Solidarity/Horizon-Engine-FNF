@@ -3,7 +3,7 @@
     "assetPath": "gfDanceTitle",
     "animation": [
         {
-            "name": "danceLeft", // idle, danceLeft/Right, confirmがある。
+            "name": "danceLeft",
             "prefix": "gfDance",
             "indices": [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29],
             "frameRate": 24
