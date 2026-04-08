@@ -1,6 +1,6 @@
 package funkin.ui.debug;
 
-class NewsSubstate
+class EngineNewsSubstate
 {
     public function new(value)
     {
