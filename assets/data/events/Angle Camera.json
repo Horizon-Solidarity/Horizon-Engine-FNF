@@ -1,0 +1,36 @@
+{
+    "script": "AngleCameraEvent",
+    "author": "Youbadao",
+    "args": [
+        {
+            "id": "angle",
+            "name": "Change Angle",
+            "type": "float(0, 180, 1, 0)",
+            "defaultValue": "0"
+        },
+        {
+            "id": "speed",
+            "name": "Set Speed",
+            "type":"float(null, null, 10, 2)",
+            "defaultValue": "1.0"
+        },
+        {
+            "id": "ease",
+            "name": "Set Ease Type",
+            "type":"string",
+            "defaultValue": "expo"
+        },
+        {
+            "id": "dir",
+            "name": "Set Ease Direction",
+            "type":"string",
+            "defaultValue": "Out"
+        },
+        {
+            "id": "ease",
+            "name": "Ease",
+            "type":"string",
+            "defaultValue": "expoOut"
+        }
+    ]
+}
