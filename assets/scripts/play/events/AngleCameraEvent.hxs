@@ -1,0 +1,23 @@
+var tween:FlxTween;
+
+function onCall()
+{
+  var angle = getArgValue('angle');
+  var speed = getArgValue('speed');
+  
+  var type = getArgValue('ease');
+  var dir = getArgValue('dir');
+
+  var ease = '$type$dir';
+
+  angleCam(angle, speed, ease);
+}
+
+function angleCam(_angle:Float = 0, _speed:Float = 1.0, _ease:flixel.tweens.EaseFunction)
+{
+  if (_ease == null)
+    ease == FlxEase.expoOut;
+
+  tween?.cancel();
+  tween = FlxTween.tween(game.camGame, {angle: _angle}, _speed, {ease: _ease});
+}
